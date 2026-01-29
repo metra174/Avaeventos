@@ -1,0 +1,134 @@
+
+import React, { useState, useEffect } from 'react';
+import Navbar from './components/Navbar';
+import Hero from './components/Hero';
+import About from './components/About';
+import Gallery from './components/Gallery';
+import Packages from './components/Packages';
+import AIAssistant from './components/AIAssistant';
+import CheckoutModal from './components/CheckoutModal';
+import Footer from './components/Footer';
+import { Package } from './types';
+
+const App: React.FC = () => {
+  const [selectedPackage, setSelectedPackage] = useState<Package | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(true);
+
+  useEffect(() => {
+    if (isDarkMode) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, [isDarkMode]);
+
+  const handlePackageSelect = (pkg: Package) => {
+    setSelectedPackage(pkg);
+    setIsModalOpen(true);
+  };
+
+  const toggleTheme = () => setIsDarkMode(!isDarkMode);
+
+  return (
+    <div className={`relative min-h-screen selection:bg-gold/30 transition-colors duration-1000 ${isDarkMode ? 'selection:text-white' : 'selection:text-gray-900'}`}>
+      
+      {/* Background Overlays & Glows */}
+      <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
+        <div className={`absolute inset-0 transition-colors duration-1000 ${isDarkMode ? 'bg-[#080808]/80' : 'bg-[#FDFBF7]/70'}`}></div>
+        <div className="ethereal-glow bg-gold/15 w-[800px] h-[800px] top-[-300px] left-[-200px] animate-float"></div>
+        <div className={`ethereal-glow ${isDarkMode ? 'bg-indigo-900/10' : 'bg-white/20'} w-[600px] h-[600px] bottom-[5%] right-[-100px] animate-float`} style={{ animationDelay: '-7s' }}></div>
+      </div>
+      
+      <Navbar isDarkMode={isDarkMode} toggleTheme={toggleTheme} />
+      
+      <main className="relative z-10">
+        <Hero isDarkMode={isDarkMode} />
+        
+        {/* Brand Strip Section */}
+        <section className="py-24 relative">
+          <div className="container mx-auto px-6 text-center">
+            <div className={`flex flex-wrap justify-center items-center gap-12 md:gap-32 transition-all duration-1000 ${isDarkMode ? 'opacity-40 hover:opacity-100' : 'opacity-20 hover:opacity-100'}`}>
+              <span className="font-serif text-2xl md:text-3xl font-bold tracking-[0.5em]">VOGUE</span>
+              <span className="font-serif text-2xl md:text-3xl font-bold tracking-[0.5em]">LUXURY</span>
+              <span className="font-serif text-2xl md:text-3xl font-bold tracking-[0.5em]">ELEGANCE</span>
+              <span className="font-serif text-2xl md:text-3xl font-bold tracking-[0.5em]">CLASSIC</span>
+            </div>
+          </div>
+        </section>
+
+        <About isDarkMode={isDarkMode} />
+        <Gallery isDarkMode={isDarkMode} />
+        
+        {/* Separation Divider */}
+        <div className="container mx-auto px-6">
+          <div className={`h-[1px] w-full ${isDarkMode ? 'bg-white/5' : 'bg-black/5'}`}></div>
+        </div>
+
+        <AIAssistant isDarkMode={isDarkMode} />
+        <Packages onSelect={handlePackageSelect} isDarkMode={isDarkMode} />
+
+        {/* Final CTA Section with blurred background */}
+        <section id="orcamento" className="py-56 relative overflow-hidden">
+          <div className="absolute inset-0 z-0">
+             <img 
+               src="https://i.imgur.com/scHAorL.png" 
+               className={`w-full h-full object-cover transition-all duration-1000 transform scale-110 ${isDarkMode ? 'opacity-[0.25] blur-[2px]' : 'opacity-[0.15] blur-[1px]'}`} 
+             />
+             <div className={`absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-current transition-colors duration-1000 ${isDarkMode ? 'text-[#080808]' : 'text-[#FDFBF7]'}`}></div>
+          </div>
+          <div className="container mx-auto px-6 relative z-10 text-center">
+            <h2 className={`text-6xl md:text-9xl font-bold mb-14 leading-tight opacity-0 animate-reveal ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
+              O seu momento, <br />
+              <span className="italic font-serif text-gold">nossa arte</span>
+            </h2>
+            <p className={`text-2xl mb-20 max-w-3xl mx-auto font-light leading-relaxed opacity-0 animate-reveal stagger-1 ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>
+              Cada evento é uma tela em branco. Deixe que a transparência dos nossos serviços e a sofisticação da Avaeventos pintem o seu sonho com as cores do luxo eterno.
+            </p>
+            <div className="flex flex-col md:flex-row gap-8 justify-center items-center opacity-0 animate-reveal stagger-2">
+              <a 
+                href="https://wa.me/244924294406" 
+                className="group relative bg-gold text-white px-16 py-7 rounded-full text-xl font-bold hover:bg-white hover:text-gold transition-all duration-700 shadow-[0_20px_50px_rgba(197,160,89,0.3)] active:scale-95"
+              >
+                Solicitar Orçamento
+                <div className="absolute inset-0 rounded-full border border-gold opacity-0 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700"></div>
+              </a>
+              <a 
+                href="#pacotes" 
+                className="glass-panel px-16 py-7 rounded-full text-xl font-bold hover:bg-gold/10 transition-all duration-700 backdrop-blur-3xl"
+              >
+                Ver Pacotes
+              </a>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <Footer isDarkMode={isDarkMode} />
+
+      <CheckoutModal 
+        pkg={selectedPackage} 
+        isOpen={isModalOpen} 
+        onClose={() => setIsModalOpen(false)} 
+        isDarkMode={isDarkMode}
+      />
+      
+      {/* Floating Action Button */}
+      <a 
+        href="https://wa.me/244924294406" 
+        target="_blank" 
+        className="fixed bottom-12 right-12 z-50 bg-green-500 text-white p-6 rounded-full shadow-2xl hover:scale-110 hover:rotate-6 transition-all duration-500 active:scale-90 flex items-center justify-center group"
+      >
+        <div className="absolute inset-0 bg-green-500 rounded-full animate-ping opacity-20"></div>
+        <span className={`absolute right-full mr-6 glass-panel py-3 px-8 rounded-full text-sm font-bold opacity-0 group-hover:opacity-100 transition-all duration-500 pointer-events-none whitespace-nowrap shadow-2xl transform translate-x-8 group-hover:translate-x-0 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
+          Falar no WhatsApp
+        </span>
+        <svg className="w-10 h-10" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+        </svg>
+      </a>
+    </div>
+  );
+};
+
+export default App;
