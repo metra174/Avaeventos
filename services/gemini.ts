@@ -1,10 +1,9 @@
 
-import { GoogleGenAI, Type } from "@google/genai";
-
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+import { GoogleGenAI } from "@google/genai";
 
 export async function getAiEventSuggestion(eventType: string, guestCount: number, preferences: string) {
   try {
+    const ai = new GoogleGenAI({ apiKey: process.env.API_KEY || "" });
     const response = await ai.models.generateContent({
       model: "gemini-3-flash-preview",
       contents: `Sugira um conceito de decoração de luxo para um evento de ${eventType} para ${guestCount} pessoas. Preferências do cliente: ${preferences}. Foque em tons elegantes (dourado, nude, branco). Retorne uma sugestão curta e inspiradora.`,

@@ -9,22 +9,24 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script>
+        // Previne o erro "process is not defined" que causa tela branca no Vercel
+        window.process = { env: { API_KEY: "" } };
+    </script>
     <style>
         :root {
             --gold: #C5A059;
             --bg-page: #FDFBF7;
             --text-main: #2D2D2D;
-            --glass-panel: rgba(255, 255, 255, 0.35);
-            --glass-border: rgba(255, 255, 255, 0.4);
-            --ethereal-glow-1: rgba(197, 160, 89, 0.1);
+            --glass-panel: rgba(255, 255, 255, 0.4);
+            --glass-border: rgba(255, 255, 255, 0.5);
         }
 
         .dark {
             --bg-page: #080808;
             --text-main: #FDFBF7;
-            --glass-panel: rgba(15, 15, 15, 0.55);
+            --glass-panel: rgba(10, 10, 10, 0.6);
             --glass-border: rgba(255, 255, 255, 0.08);
-            --ethereal-glow-1: rgba(197, 160, 89, 0.05);
         }
 
         body {
@@ -33,6 +35,8 @@
             background-color: var(--bg-page);
             color: var(--text-main);
             transition: background-color 0.8s ease;
+            margin: 0;
+            padding: 0;
         }
 
         h1, h2, h3, .font-serif {
@@ -45,24 +49,16 @@
 
         .glass-panel {
             background: var(--glass-panel);
-            backdrop-filter: blur(20px) saturate(180%);
-            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            backdrop-filter: blur(25px) saturate(160%);
+            -webkit-backdrop-filter: blur(25px) saturate(160%);
             border: 1px solid var(--glass-border);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
-        }
-
-        .glass-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 10px 40px 0 rgba(0, 0, 0, 0.05);
         }
 
         @keyframes float {
           0% { transform: translate(0, 0) scale(1); }
-          33% { transform: translate(20px, -30px) scale(1.05); }
-          66% { transform: translate(-20px, 15px) scale(0.95); }
+          33% { transform: translate(30px, -40px) scale(1.05); }
+          66% { transform: translate(-30px, 20px) scale(0.95); }
           100% { transform: translate(0, 0) scale(1); }
         }
         .animate-float {
@@ -70,26 +66,26 @@
         }
 
         @keyframes reveal {
-          from { opacity: 0; transform: translateY(30px); filter: blur(10px); }
+          from { opacity: 0; transform: translateY(40px); filter: blur(10px); }
           to { opacity: 1; transform: translateY(0); filter: blur(0); }
         }
         .animate-reveal {
-          animation: reveal 1.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+          animation: reveal 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
-        .stagger-1 { animation-delay: 0.15s; }
-        .stagger-2 { animation-delay: 0.3s; }
-        .stagger-3 { animation-delay: 0.45s; }
+        .stagger-1 { animation-delay: 0.2s; }
+        .stagger-2 { animation-delay: 0.4s; }
+        .stagger-3 { animation-delay: 0.6s; }
 
         .ethereal-glow {
             position: absolute;
             border-radius: 50%;
-            filter: blur(100px);
+            filter: blur(120px);
             pointer-events: none;
             z-index: -1;
         }
 
-        /* Fixed Background setup */
+        /* Imagem de Fundo Fixa com transparência controlada */
         .site-background {
             position: fixed;
             top: 0;
@@ -101,16 +97,17 @@
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
-            opacity: 0.15;
-            transition: opacity 1s ease;
+            background-repeat: no-repeat;
+            opacity: 0.12;
+            transition: opacity 1.5s ease;
         }
 
         .dark .site-background {
-            opacity: 0.1;
-            filter: contrast(1.1) brightness(0.8);
+            opacity: 0.08;
+            filter: grayscale(30%) contrast(1.1);
         }
 
-        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 10px; }
     </style>
@@ -118,9 +115,11 @@
 {
   "imports": {
     "@google/genai": "https://esm.sh/@google/genai@^1.38.0",
-    "react/": "https://esm.sh/react@^19.2.4/",
     "react": "https://esm.sh/react@^19.2.4",
-    "react-dom/": "https://esm.sh/react-dom@^19.2.4/"
+    "react-dom": "https://esm.sh/react-dom@^19.2.4",
+    "react-dom/client": "https://esm.sh/react-dom@^19.2.4/client",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.4/",
+    "react/": "https://esm.sh/react@^19.2.4/"
   }
 }
 </script>
@@ -128,5 +127,6 @@
 <body class="antialiased overflow-x-hidden">
     <div class="site-background"></div>
     <div id="root"></div>
+    <script type="module" src="./index.tsx"></script>
 </body>
 </html>
