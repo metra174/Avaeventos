@@ -26,11 +26,41 @@ const Footer: React.FC<FooterProps> = ({ isDarkMode }) => {
             A curadoria definitiva para eventos que exigem alma, transparência e um toque inesquecível de sofisticação.
           </p>
           <div className="flex space-x-6">
-            <a href={SOCIAL_LINKS.instagram} target="_blank" className={`w-14 h-14 flex items-center justify-center rounded-full transition-all duration-500 transform hover:-translate-y-2 glass-panel hover:bg-gold hover:text-white`}>
-              <img src="https://www.svgrepo.com/show/365479/instagram-logo-thin.svg" alt="Instagram" className={`w-6 h-6 transition-all duration-500 ${isDarkMode ? 'invert opacity-70' : 'opacity-70'}`} />
+            <a 
+              href={SOCIAL_LINKS.instagram} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className={`w-14 h-14 flex items-center justify-center rounded-full transition-all duration-500 transform hover:-translate-y-2 glass-panel hover:bg-gold hover:text-white group`}
+              aria-label="Instagram"
+            >
+              <svg 
+                className={`w-6 h-6 transition-all duration-500 ${isDarkMode ? 'text-white/70 group-hover:text-white' : 'text-gray-600 group-hover:text-white'}`} 
+                fill="none" 
+                stroke="currentColor" 
+                strokeWidth="1.5" 
+                viewBox="0 0 24 24"
+              >
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"></path>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+              </svg>
             </a>
-            <a href={SOCIAL_LINKS.facebook} target="_blank" className={`w-14 h-14 flex items-center justify-center rounded-full transition-all duration-500 transform hover:-translate-y-2 glass-panel hover:bg-gold hover:text-white`}>
-               <img src="https://www.svgrepo.com/show/448224/facebook.svg" alt="Facebook" className={`w-6 h-6 transition-all duration-500 ${isDarkMode ? 'invert opacity-70' : 'opacity-70'}`} />
+            <a 
+              href={SOCIAL_LINKS.facebook} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className={`w-14 h-14 flex items-center justify-center rounded-full transition-all duration-500 transform hover:-translate-y-2 glass-panel hover:bg-gold hover:text-white group`}
+              aria-label="Facebook"
+            >
+              <svg 
+                className={`w-6 h-6 transition-all duration-500 ${isDarkMode ? 'text-white/70 group-hover:text-white' : 'text-gray-600 group-hover:text-white'}`} 
+                fill="none" 
+                stroke="currentColor" 
+                strokeWidth="1.5" 
+                viewBox="0 0 24 24"
+              >
+                <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
+              </svg>
             </a>
           </div>
         </div>
