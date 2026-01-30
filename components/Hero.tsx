@@ -37,7 +37,7 @@ const Hero: React.FC<HeroProps> = ({ isDarkMode }) => {
           Cuidamos de cada detalhe para que seu evento seja um reflexo impecável da sua história, envolto em luxo e clareza.
         </p>
         
-        <div className="flex flex-col md:flex-row gap-4 md:gap-8 justify-center items-center opacity-0 animate-reveal stagger-3">
+        <div className="flex flex-col md:flex-row gap-4 md:gap-6 justify-center items-center opacity-0 animate-reveal stagger-3">
           <a 
             href="#pacotes" 
             className="w-full md:w-auto bg-gold text-white px-8 md:px-14 py-4 md:py-6 rounded-full text-sm md:text-lg font-bold hover:bg-white hover:text-gold transition-all duration-700 transform hover:scale-105 shadow-xl active:scale-95 text-center"
@@ -45,8 +45,14 @@ const Hero: React.FC<HeroProps> = ({ isDarkMode }) => {
             Encomendar agora
           </a>
           <a 
+            href="#duvidas" 
+            className="w-full md:w-auto glass-panel px-8 md:px-14 py-4 md:py-6 rounded-full text-sm md:text-lg font-bold hover:bg-gold/20 transition-all duration-700 shadow-sm text-center border-gold/20"
+          >
+            Mais Informações
+          </a>
+          <a 
             href="#galeria" 
-            className="w-full md:w-auto glass-panel px-8 md:px-14 py-4 md:py-6 rounded-full text-sm md:text-lg font-bold hover:bg-gold/20 transition-all duration-700 shadow-sm text-center"
+            className="w-full md:w-auto text-xs md:text-sm font-bold tracking-widest uppercase hover:text-gold transition-colors duration-500 py-4 underline underline-offset-8"
           >
             Ver portfólio
           </a>

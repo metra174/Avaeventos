@@ -15,7 +15,7 @@ const App: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(true);
   
-  // State for the new inquiry form
+  // State for the inquiry form
   const [inquirySent, setInquirySent] = useState(false);
   const [inquiryData, setInquiryData] = useState({ name: '', phone: '', message: '' });
 
@@ -35,7 +35,7 @@ const App: React.FC = () => {
   const handleInquirySubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setInquirySent(true);
-    // Simulating sending - pre-filling WhatsApp link as a "next step"
+    // Simulating sending - In a real scenario this would call an API
     setTimeout(() => {
       setInquirySent(false);
       setInquiryData({ name: '', phone: '', message: '' });
@@ -44,6 +44,7 @@ const App: React.FC = () => {
 
   const toggleTheme = () => setIsDarkMode(!isDarkMode);
 
+  // Official Number updated to 948757808
   const whatsappNumber = "244948757808";
 
   return (
@@ -84,14 +85,14 @@ const App: React.FC = () => {
         <AIAssistant isDarkMode={isDarkMode} />
         <Packages onSelect={handlePackageSelect} isDarkMode={isDarkMode} />
 
-        {/* Central de Dúvidas Form - Improved for Mobile */}
+        {/* Central de Informações e Dúvidas */}
         <section id="duvidas" className="py-16 md:py-32 relative">
           <div className="container mx-auto px-4 md:px-6 max-w-4xl">
             <div className={`glass-panel p-6 md:p-16 rounded-[2rem] md:rounded-[3rem] relative overflow-hidden transition-all duration-1000 ${isDarkMode ? 'border-white/10 shadow-2xl shadow-gold/5' : 'border-black/5 shadow-xl'}`}>
               <div className="text-center mb-8 md:mb-12">
                 <span className="text-gold uppercase tracking-[0.2em] md:tracking-[0.3em] font-bold text-[8px] md:text-[10px] mb-3 md:mb-4 block">Central de Atendimento</span>
-                <h2 className={`text-2xl md:text-6xl font-bold mb-4 md:mb-6 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Dúvidas ou <span className="text-gold italic font-serif">Informações?</span></h2>
-                <p className={`text-xs md:text-lg font-light ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Envie sua mensagem abaixo. Nossa equipe de especialistas entrará em contacto para cuidar do seu sonho.</p>
+                <h2 className={`text-2xl md:text-6xl font-bold mb-4 md:mb-6 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Precisa de <span className="text-gold italic font-serif">Mais Informações?</span></h2>
+                <p className={`text-xs md:text-lg font-light ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Preencha os seus dados abaixo com a sua dúvida. Nossa equipe de especialistas entrará em contacto direto para prestar todo o apoio necessário.</p>
               </div>
 
               {inquirySent ? (
@@ -99,14 +100,14 @@ const App: React.FC = () => {
                   <div className="w-16 h-16 md:w-24 md:h-24 bg-gold/20 text-gold rounded-full flex items-center justify-center mx-auto mb-6 shadow-inner">
                     <svg className="w-8 h-8 md:w-12 md:h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
                   </div>
-                  <h3 className={`text-xl md:text-3xl font-bold mb-4 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Recebemos sua dúvida!</h3>
-                  <p className={`text-sm md:text-lg mb-8 ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Obrigado por nos contactar. Responderemos em menos de 24 horas.</p>
+                  <h3 className={`text-xl md:text-3xl font-bold mb-4 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Pedido de Informação Enviado!</h3>
+                  <p className={`text-sm md:text-lg mb-8 ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Obrigado. Um consultor Avaeventos irá contactá-lo muito em breve pelo WhatsApp ou chamada.</p>
                   <a 
-                    href={`https://wa.me/${whatsappNumber}?text=Olá! Preenchi o formulário no site e tenho uma dúvida urgente.`}
+                    href={`https://wa.me/${whatsappNumber}?text=Olá! Acabei de enviar uma dúvida pelo formulário e gostaria de um atendimento prioritário.`}
                     target="_blank"
-                    className="inline-block bg-green-500 text-white px-8 py-4 rounded-full font-bold text-xs uppercase tracking-widest shadow-lg hover:bg-green-600 transition-all"
+                    className="inline-block bg-green-500 text-white px-8 py-4 rounded-full font-bold text-xs uppercase tracking-widest shadow-lg hover:bg-green-600 transition-all transform hover:scale-105"
                   >
-                    Falar agora no WhatsApp
+                    Falar agora via WhatsApp
                   </a>
                 </div>
               ) : (
@@ -124,7 +125,7 @@ const App: React.FC = () => {
                       />
                     </div>
                     <div>
-                      <label className={`block text-[8px] md:text-[10px] font-bold uppercase tracking-widest mb-2 md:mb-3 ${isDarkMode ? 'text-gray-500' : 'text-gray-400'}`}>Seu WhatsApp</label>
+                      <label className={`block text-[8px] md:text-[10px] font-bold uppercase tracking-widest mb-2 md:mb-3 ${isDarkMode ? 'text-gray-500' : 'text-gray-400'}`}>WhatsApp para Contacto</label>
                       <input 
                         required 
                         type="tel" 
@@ -136,18 +137,18 @@ const App: React.FC = () => {
                     </div>
                   </div>
                   <div>
-                    <label className={`block text-[8px] md:text-[10px] font-bold uppercase tracking-widest mb-2 md:mb-3 ${isDarkMode ? 'text-gray-500' : 'text-gray-400'}`}>Sua Mensagem</label>
+                    <label className={`block text-[8px] md:text-[10px] font-bold uppercase tracking-widest mb-2 md:mb-3 ${isDarkMode ? 'text-gray-500' : 'text-gray-400'}`}>Sua Dúvida ou Detalhes</label>
                     <textarea 
                       required 
                       rows={4}
-                      placeholder="Como podemos ajudar você hoje?"
+                      placeholder="Descreva aqui o que gostaria de saber (ex: disponibilidade de datas, orçamentos personalizados, etc.)"
                       className={`w-full px-5 py-4 md:px-6 md:py-5 rounded-xl md:rounded-2xl outline-none transition-all duration-500 border resize-none text-sm ${isDarkMode ? 'bg-white/5 border-white/10 text-white focus:border-gold' : 'bg-gray-50 border-black/5 text-gray-900 focus:border-gold'}`}
                       value={inquiryData.message}
                       onChange={e => setInquiryData({...inquiryData, message: e.target.value})}
                     ></textarea>
                   </div>
                   <button type="submit" className="w-full bg-gold text-white py-5 md:py-6 rounded-xl md:rounded-2xl font-bold uppercase tracking-widest text-[10px] md:text-[11px] hover:bg-gray-900 transition-all duration-700 shadow-xl active:scale-95">
-                    Enviar para Especialistas
+                    Solicitar Contacto da Equipa
                   </button>
                 </form>
               )}
@@ -199,7 +200,7 @@ const App: React.FC = () => {
         isDarkMode={isDarkMode}
       />
       
-      {/* Floating Action Button - Optimized Size for Mobile */}
+      {/* Floating Action Button - Official Number 948757808 */}
       <a 
         href={`https://wa.me/${whatsappNumber}`} 
         target="_blank" 
@@ -207,7 +208,7 @@ const App: React.FC = () => {
       >
         <div className="absolute inset-0 bg-green-500 rounded-full animate-ping opacity-20"></div>
         <span className={`absolute right-full mr-4 glass-panel py-2 px-6 rounded-full text-[10px] font-bold opacity-0 group-hover:opacity-100 transition-all duration-500 pointer-events-none whitespace-nowrap shadow-2xl transform translate-x-8 group-hover:translate-x-0 hidden md:block ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
-          WhatsApp Oficial
+          WhatsApp 948 757 808
         </span>
         <svg className="w-6 h-6 md:w-8 md:h-8" fill="currentColor" viewBox="0 0 24 24">
           <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />

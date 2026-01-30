@@ -107,7 +107,7 @@ const Packages: React.FC<PackagesProps> = ({ onSelect, isDarkMode }) => {
                   </div>
                 </div>
 
-                <div className="flex-grow space-y-5 mb-12 relative z-10 text-left">
+                <div className="flex-grow space-y-5 mb-10 relative z-10 text-left">
                   {pkg.features.map((feat, i) => (
                     <div key={i} className="flex items-start gap-3 group/item">
                       <div className={`mt-1 flex-shrink-0 w-4 h-4 rounded-full flex items-center justify-center border transition-colors duration-500 ${isDarkMode ? 'border-white/20 group-hover/item:border-gold' : 'border-black/10 group-hover/item:border-gold'}`}>
@@ -120,16 +120,24 @@ const Packages: React.FC<PackagesProps> = ({ onSelect, isDarkMode }) => {
                   ))}
                 </div>
 
-                <button 
-                  onClick={() => onSelect(pkg)}
-                  className={`relative z-10 w-full border-2 py-5 rounded-2xl font-bold uppercase tracking-[0.25em] text-[10px] transition-all duration-500 shadow-lg transform active:scale-95 overflow-hidden group/btn ${
-                    isDarkMode 
-                      ? `bg-transparent text-white border-white/10 ${styles.btn}` 
-                      : `bg-white text-gray-900 border-black/5 ${styles.btn} hover:text-white`
-                  }`}
-                >
-                  <span className="relative z-10">Solicitar Encomenda</span>
-                </button>
+                <div className="space-y-4 relative z-10">
+                  <button 
+                    onClick={() => onSelect(pkg)}
+                    className={`w-full border-2 py-5 rounded-2xl font-bold uppercase tracking-[0.25em] text-[10px] transition-all duration-500 shadow-lg transform active:scale-95 overflow-hidden group/btn ${
+                      isDarkMode 
+                        ? `bg-transparent text-white border-white/10 ${styles.btn}` 
+                        : `bg-white text-gray-900 border-black/5 ${styles.btn} hover:text-white`
+                    }`}
+                  >
+                    <span className="relative z-10">Solicitar Encomenda</span>
+                  </button>
+                  <a 
+                    href="#duvidas"
+                    className={`block text-[9px] font-bold uppercase tracking-widest transition-colors duration-500 hover:text-gold ${isDarkMode ? 'text-gray-500' : 'text-gray-400'}`}
+                  >
+                    Dúvida sobre este plano? Mais informações
+                  </a>
+                </div>
               </div>
             );
           })}
