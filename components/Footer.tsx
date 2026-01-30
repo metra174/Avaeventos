@@ -81,8 +81,8 @@ const Footer: React.FC<FooterProps> = ({ isDarkMode }) => {
             Projeto do Nando, por detrás do Banco BIC,<br />
             Luanda, Angola
           </p>
-          <a href="tel:+244924294406" className="font-bold hover:text-gold transition-colors text-xl">
-            +244 924 294 406
+          <a href="tel:+244948757808" className="font-bold hover:text-gold transition-colors text-xl">
+            +244 948 757 808
           </a>
         </div>
       </div>

@@ -109,5 +109,5 @@ export const GALLERY_IMAGES = [
 export const SOCIAL_LINKS = {
   instagram: 'https://www.instagram.com/avaeventos.s',
   facebook: 'https://www.facebook.com/share/1FdLjBMALU/',
-  whatsapp: 'https://wa.me/244924294406'
+  whatsapp: 'https://wa.me/244948757808'
 };

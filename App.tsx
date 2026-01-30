@@ -14,6 +14,10 @@ const App: React.FC = () => {
   const [selectedPackage, setSelectedPackage] = useState<Package | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(true);
+  
+  // State for the new inquiry form
+  const [inquirySent, setInquirySent] = useState(false);
+  const [inquiryData, setInquiryData] = useState({ name: '', phone: '', message: '' });
 
   useEffect(() => {
     if (isDarkMode) {
@@ -28,7 +32,19 @@ const App: React.FC = () => {
     setIsModalOpen(true);
   };
 
+  const handleInquirySubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setInquirySent(true);
+    // Simulating sending - in real world this could go to an API or WhatsApp
+    setTimeout(() => {
+      setInquirySent(false);
+      setInquiryData({ name: '', phone: '', message: '' });
+    }, 5000);
+  };
+
   const toggleTheme = () => setIsDarkMode(!isDarkMode);
+
+  const whatsappNumber = "244948757808";
 
   return (
     <div className={`relative min-h-screen selection:bg-gold/30 transition-colors duration-1000 ${isDarkMode ? 'selection:text-white' : 'selection:text-gray-900'}`}>
@@ -68,6 +84,70 @@ const App: React.FC = () => {
         <AIAssistant isDarkMode={isDarkMode} />
         <Packages onSelect={handlePackageSelect} isDarkMode={isDarkMode} />
 
+        {/* New Functionality: Central de Dúvidas Form */}
+        <section id="duvidas" className="py-24 md:py-32 relative">
+          <div className="container mx-auto px-6 max-w-4xl">
+            <div className={`glass-panel p-10 md:p-16 rounded-[3rem] relative overflow-hidden transition-all duration-1000 ${isDarkMode ? 'border-white/10' : 'border-black/5'}`}>
+              <div className="text-center mb-12">
+                <span className="text-gold uppercase tracking-[0.3em] font-bold text-[10px] mb-4 block">Central de Atendimento</span>
+                <h2 className={`text-3xl md:text-6xl font-bold mb-6 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Ficou com <span className="text-gold italic font-serif">alguma dúvida?</span></h2>
+                <p className={`text-base md:text-lg font-light ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Preencha o formulário abaixo e nossa equipe entrará em contato para prestar todo o suporte necessário.</p>
+              </div>
+
+              {inquirySent ? (
+                <div className="text-center py-10 animate-reveal">
+                  <div className="w-20 h-20 bg-gold/20 text-gold rounded-full flex items-center justify-center mx-auto mb-6">
+                    <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
+                  </div>
+                  <h3 className={`text-2xl font-bold mb-4 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Mensagem Enviada!</h3>
+                  <p className={isDarkMode ? 'text-gray-400' : 'text-gray-600'}>Obrigado por nos contactar. Responderemos o mais breve possível.</p>
+                </div>
+              ) : (
+                <form onSubmit={handleInquirySubmit} className="space-y-6">
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div>
+                      <label className={`block text-[10px] font-bold uppercase tracking-widest mb-3 ${isDarkMode ? 'text-gray-500' : 'text-gray-400'}`}>Seu Nome</label>
+                      <input 
+                        required 
+                        type="text" 
+                        placeholder="Ex: Pedro Santos"
+                        className={`w-full px-6 py-5 rounded-2xl outline-none transition-all duration-500 border ${isDarkMode ? 'bg-white/5 border-white/10 text-white focus:border-gold' : 'bg-gray-50 border-black/5 text-gray-900 focus:border-gold'}`}
+                        value={inquiryData.name}
+                        onChange={e => setInquiryData({...inquiryData, name: e.target.value})}
+                      />
+                    </div>
+                    <div>
+                      <label className={`block text-[10px] font-bold uppercase tracking-widest mb-3 ${isDarkMode ? 'text-gray-500' : 'text-gray-400'}`}>Seu WhatsApp</label>
+                      <input 
+                        required 
+                        type="tel" 
+                        placeholder="+244"
+                        className={`w-full px-6 py-5 rounded-2xl outline-none transition-all duration-500 border ${isDarkMode ? 'bg-white/5 border-white/10 text-white focus:border-gold' : 'bg-gray-50 border-black/5 text-gray-900 focus:border-gold'}`}
+                        value={inquiryData.phone}
+                        onChange={e => setInquiryData({...inquiryData, phone: e.target.value})}
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <label className={`block text-[10px] font-bold uppercase tracking-widest mb-3 ${isDarkMode ? 'text-gray-500' : 'text-gray-400'}`}>Qual sua dúvida?</label>
+                    <textarea 
+                      required 
+                      rows={4}
+                      placeholder="Escreva aqui sua pergunta..."
+                      className={`w-full px-6 py-5 rounded-2xl outline-none transition-all duration-500 border resize-none ${isDarkMode ? 'bg-white/5 border-white/10 text-white focus:border-gold' : 'bg-gray-50 border-black/5 text-gray-900 focus:border-gold'}`}
+                      value={inquiryData.message}
+                      onChange={e => setInquiryData({...inquiryData, message: e.target.value})}
+                    ></textarea>
+                  </div>
+                  <button type="submit" className="w-full bg-gold text-white py-6 rounded-2xl font-bold uppercase tracking-widest text-[11px] hover:bg-gray-900 transition-all duration-700 shadow-xl active:scale-95">
+                    Enviar Solicitação de Informação
+                  </button>
+                </form>
+              )}
+            </div>
+          </div>
+        </section>
+
         {/* Final CTA Section with blurred background */}
         <section id="orcamento" className="py-32 md:py-56 relative overflow-hidden">
           <div className="absolute inset-0 z-0">
@@ -87,7 +167,7 @@ const App: React.FC = () => {
             </p>
             <div className="flex flex-col md:flex-row gap-6 md:gap-8 justify-center items-center opacity-0 animate-reveal stagger-2">
               <a 
-                href="https://wa.me/244924294406" 
+                href={`https://wa.me/${whatsappNumber}`} 
                 className="w-full md:w-auto group relative bg-gold text-white px-10 md:px-16 py-5 md:py-7 rounded-full text-lg md:text-xl font-bold hover:bg-white hover:text-gold transition-all duration-700 shadow-[0_20px_50px_rgba(197,160,89,0.3)] active:scale-95 text-center"
               >
                 Solicitar Orçamento
@@ -115,7 +195,7 @@ const App: React.FC = () => {
       
       {/* Floating Action Button - Optimized for Mobile */}
       <a 
-        href="https://wa.me/244924294406" 
+        href={`https://wa.me/${whatsappNumber}`} 
         target="_blank" 
         className="fixed bottom-6 right-6 md:bottom-12 md:right-12 z-50 bg-green-500 text-white p-4 md:p-6 rounded-full shadow-2xl hover:scale-110 hover:rotate-6 transition-all duration-500 active:scale-90 flex items-center justify-center group"
       >
