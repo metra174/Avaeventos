@@ -1,8 +1,5 @@
 {
   "name": "Avaeventos - Landing Page Premium",
   "description": "Uma landing page luxuosa e moderna para a Avaeventos, focada em conversão e organização de eventos premium com automação de pacotes.",
-  "requestFramePermissions": [
-    "camera",
-    "microphone"
-  ]
+  "requestFramePermissions": []
 }

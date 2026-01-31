@@ -16,7 +16,7 @@ export const PACKAGES: Package[] = [
     currency: 'AKZ',
     color: 'bg-stone-100',
     tagline: 'Essencial & Elegante',
-    image: 'https://i.imgur.com/uqMWmbx.png',
+    image: 'https://i.imgur.com/Q8RBZGK.png',
     features: [
       'Cadeiras almofadas baixas',
       'Mesas com toalhas (duas familiares especiais)',
@@ -35,7 +35,7 @@ export const PACKAGES: Package[] = [
     currency: 'AKZ',
     color: 'bg-orange-50',
     tagline: 'Sofisticação & Conforto',
-    image: 'https://i.imgur.com/DIWLQrO.png',
+    image: 'https://i.imgur.com/Jjok3Pi.png',
     features: [
       'Cadeiras brancas almofadas ripadas ou algodão doce',
       'Mesas especiais',
@@ -55,7 +55,7 @@ export const PACKAGES: Package[] = [
     currency: 'AKZ',
     color: 'bg-red-50',
     tagline: 'A Experiência Premium Definitiva',
-    image: 'https://i.imgur.com/LmutJhO.png',
+    image: 'https://i.imgur.com/E7KmVmg.png',
     features: [
       'Cadeiras brancas poltronas',
       'Mesas especiais',

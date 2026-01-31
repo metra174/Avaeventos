@@ -25,7 +25,7 @@ const Packages: React.FC<PackagesProps> = ({ onSelect, isDarkMode }) => {
   };
 
   return (
-    <section id="pacotes" className="py-20 md:py-32 relative z-10">
+    <section id="pacotes" className="py-20 md:py-32 relative z-10 overflow-hidden">
       <div className="container mx-auto px-4 md:px-6">
         <div className="text-center mb-16 md:mb-24 animate-reveal">
           <span className="text-gold uppercase tracking-[0.3em] font-bold mb-4 block text-xs">Curadoria Exclusiva</span>
@@ -37,21 +37,22 @@ const Packages: React.FC<PackagesProps> = ({ onSelect, isDarkMode }) => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-10">
+        {/* Horizontal Container on Mobile, Grid on Desktop */}
+        <div className="flex overflow-x-auto pb-12 gap-8 md:grid md:grid-cols-2 lg:grid-cols-4 md:overflow-x-visible md:pb-0 scrollbar-hide snap-x snap-mandatory">
           {PACKAGES.map((pkg) => {
             const styles = getPackageStyles(pkg.id);
             return (
               <div 
                 key={pkg.id} 
-                className={`flex flex-col rounded-[2.5rem] border shadow-2xl transition-all duration-700 hover:-translate-y-3 glass-panel text-center border-t-[8px] ${styles.border} ${styles.bg} ${isDarkMode ? 'border-white/5' : 'border-black/5'} overflow-hidden group`}
+                className={`flex-shrink-0 w-[85vw] md:w-auto snap-center flex flex-col rounded-[2.5rem] border shadow-2xl transition-all duration-700 hover:-translate-y-3 glass-panel text-center border-t-[8px] ${styles.border} ${styles.bg} ${isDarkMode ? 'border-white/5' : 'border-black/5'} overflow-hidden group`}
               >
-                {/* Header Image for the package */}
+                {/* Header Image forced to Horizontal Aspect Ratio (16:9) */}
                 {pkg.image && (
-                  <div className="h-40 md:h-48 relative overflow-hidden">
+                  <div className="aspect-video w-full relative overflow-hidden bg-black/20">
                     <img 
                       src={pkg.image} 
                       alt={pkg.name} 
-                      className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                      className="w-full h-full object-cover object-center transition-transform duration-1000 group-hover:scale-110"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
                     <div className="absolute bottom-4 left-0 w-full text-center">
@@ -63,14 +64,14 @@ const Packages: React.FC<PackagesProps> = ({ onSelect, isDarkMode }) => {
                 )}
 
                 <div className="p-8 md:p-10 flex flex-col flex-grow">
-                  <div className="mb-8">
+                  <div className="mb-6">
                     <h3 className={`text-2xl font-serif font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>{pkg.name}</h3>
                   </div>
                   
-                  <div className="mb-10">
+                  <div className="mb-8">
                     <div className="flex items-baseline justify-center gap-1">
                       <span className="text-gold text-sm font-bold">{pkg.currency}</span>
-                      <span className={`text-5xl font-black ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>{pkg.price}</span>
+                      <span className={`text-4xl md:text-5xl font-black ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>{pkg.price}</span>
                     </div>
                     <span className="text-[10px] uppercase tracking-widest font-bold text-gray-500 mt-2 block">Por Pessoa</span>
                   </div>
