@@ -1,6 +1,13 @@
 
 import { Package } from './types';
 
+export const ANGOLA_PROVINCES = [
+  'Bengo', 'Benguela', 'Bié', 'Cabinda', 'Cuando Cubango', 
+  'Cuanza Norte', 'Cuanza Sul', 'Cunene', 'Huambo', 'Huíla', 
+  'Luanda', 'Lunda Norte', 'Lunda Sul', 'Malanje', 'Moxico', 
+  'Namibe', 'Uíge', 'Zaire'
+];
+
 export const PACKAGES: Package[] = [
   {
     id: 'damasco',
@@ -95,7 +102,6 @@ export const GALLERY_IMAGES = [
   { url: 'https://i.imgur.com/qM3JIw0.png', category: 'Corporativo', title: 'Banquete de Gala' },
   { url: 'https://i.imgur.com/SJ3u2eu.png', category: 'Festas', title: 'Mesas Familiares Sofisticadas' },
   { url: 'https://i.imgur.com/U1FRqX5.png', category: 'Casamentos', title: 'Teto Floral de Luxo' },
-  // Imagens de buffet posicionadas no final conforme solicitado
   { url: 'https://i.imgur.com/hCRpZcq.png', category: 'Gastronomia', title: 'Apresentação de Pratos Quentes' },
   { url: 'https://i.imgur.com/ilVfZFK.png', category: 'Gastronomia', title: 'Buffet de Doces & Sobremesas' },
   { url: 'https://i.imgur.com/VYPtZXG.png', category: 'Gastronomia', title: 'Entradas Gourmet Ava' },

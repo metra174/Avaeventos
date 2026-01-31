@@ -5,10 +5,10 @@ import Hero from './components/Hero';
 import About from './components/About';
 import Gallery from './components/Gallery';
 import Packages from './components/Packages';
-import AIAssistant from './components/AIAssistant';
 import CheckoutModal from './components/CheckoutModal';
 import Footer from './components/Footer';
 import { Package } from './types';
+import { ANGOLA_PROVINCES } from './constants';
 
 const App: React.FC = () => {
   const [selectedPackage, setSelectedPackage] = useState<Package | null>(null);
@@ -16,7 +16,13 @@ const App: React.FC = () => {
   const [isDarkMode, setIsDarkMode] = useState(true);
   
   const [inquirySent, setInquirySent] = useState(false);
-  const [inquiryData, setInquiryData] = useState({ name: '', phone: '', message: '' });
+  const [inquiryData, setInquiryData] = useState({ 
+    name: '', 
+    phone: '', 
+    location: 'Luanda', 
+    exactAddress: '',
+    message: '' 
+  });
 
   useEffect(() => {
     if (isDarkMode) {
@@ -31,23 +37,35 @@ const App: React.FC = () => {
     setIsModalOpen(true);
   };
 
+  const whatsappNumber = "244948757808";
+
   const handleInquirySubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    
+    const text = `Olá Avaeventos! Tenho uma dúvida sobre um evento:
+    
+👤 *Nome:* ${inquiryData.name}
+📱 *WhatsApp:* ${inquiryData.phone}
+📍 *Província:* ${inquiryData.location}
+🏠 *Endereço Exato:* ${inquiryData.exactAddress}
+💬 *Mensagem / Perguntas:* 
+${inquiryData.message}`;
+
+    const encodedText = encodeURIComponent(text);
+    window.open(`https://wa.me/${whatsappNumber}?text=${encodedText}`, '_blank');
+    
     setInquirySent(true);
     setTimeout(() => {
       setInquirySent(false);
-      setInquiryData({ name: '', phone: '', message: '' });
-    }, 8000);
+      setInquiryData({ name: '', phone: '', location: 'Luanda', exactAddress: '', message: '' });
+    }, 5000);
   };
 
   const toggleTheme = () => setIsDarkMode(!isDarkMode);
 
-  const whatsappNumber = "244948757808";
-
   return (
     <div className={`relative min-h-screen selection:bg-gold/30 transition-colors duration-1000 ${isDarkMode ? 'selection:text-white' : 'selection:text-gray-900'}`}>
       
-      {/* Background Overlays & Glows */}
       <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
         <div className={`absolute inset-0 transition-colors duration-1000 ${isDarkMode ? 'bg-[#080808]/80' : 'bg-[#FDFBF7]/70'}`}></div>
         <div className="ethereal-glow bg-gold/15 w-[250px] md:w-[800px] h-[250px] md:h-[800px] top-[-50px] left-[-50px] animate-float"></div>
@@ -59,7 +77,6 @@ const App: React.FC = () => {
       <main className="relative z-10">
         <Hero isDarkMode={isDarkMode} />
         
-        {/* Brand Strip Section - Mobile Optimized Scale */}
         <section className="py-10 md:py-20 relative overflow-hidden border-y border-gold/5 bg-white/5 backdrop-blur-sm">
           <div className="container mx-auto px-4 text-center">
             <div className={`flex flex-wrap justify-center items-center gap-x-12 gap-y-6 md:gap-32 transition-all duration-1000 ${isDarkMode ? 'opacity-60' : 'opacity-40'}`}>
@@ -78,17 +95,15 @@ const App: React.FC = () => {
           <div className={`h-[1px] w-full ${isDarkMode ? 'bg-white/5' : 'bg-black/5'}`}></div>
         </div>
 
-        <AIAssistant isDarkMode={isDarkMode} />
         <Packages onSelect={handlePackageSelect} isDarkMode={isDarkMode} />
 
-        {/* Central de Informações e Dúvidas - Mobile Normal Scale */}
         <section id="duvidas" className="py-16 md:py-32 relative">
           <div className="container mx-auto px-4 md:px-6 max-w-4xl">
             <div className={`glass-panel p-8 md:p-16 rounded-[2.5rem] relative overflow-hidden transition-all duration-1000 ${isDarkMode ? 'border-white/10 shadow-2xl shadow-gold/5' : 'border-black/5 shadow-xl'}`}>
               <div className="text-center mb-10 md:mb-12">
                 <span className="text-gold uppercase tracking-[0.3em] font-bold text-[10px] md:text-xs mb-3 block">Central de Atendimento</span>
-                <h2 className={`text-3xl md:text-6xl font-bold mb-4 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Alguma <span className="text-gold italic font-serif">Dúvida?</span></h2>
-                <p className={`text-base md:text-lg font-light leading-relaxed ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Envie sua mensagem. Nossa equipe de curadoria entrará em contacto direto pelo WhatsApp.</p>
+                <h2 className={`text-3xl md:text-6xl font-bold mb-4 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Fale com a <span className="text-gold italic font-serif">Curadoria</span></h2>
+                <p className={`text-base md:text-lg font-light leading-relaxed ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Receba suporte personalizado e tire todas as suas dúvidas diretamente pelo WhatsApp.</p>
               </div>
 
               {inquirySent ? (
@@ -96,39 +111,77 @@ const App: React.FC = () => {
                   <div className="w-16 h-16 bg-gold/20 text-gold rounded-full flex items-center justify-center mx-auto mb-6">
                     <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
                   </div>
-                  <h3 className={`text-2xl font-bold mb-3 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Pedido Enviado!</h3>
-                  <p className={`text-lg ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Responderemos em instantes.</p>
+                  <h3 className={`text-2xl font-bold mb-3 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Redirecionando...</h3>
+                  <p className={`text-lg ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>A abrir o WhatsApp para o seu atendimento exclusivo.</p>
                 </div>
               ) : (
-                <form onSubmit={handleInquirySubmit} className="space-y-5 md:space-y-6">
-                  <div className="grid md:grid-cols-2 gap-5 md:gap-6">
-                    <input 
-                      required 
-                      type="text" 
-                      placeholder="Nome Completo"
-                      className={`w-full px-6 py-5 rounded-2xl outline-none transition-all duration-500 border text-base ${isDarkMode ? 'bg-white/5 border-white/10 text-white focus:border-gold' : 'bg-gray-50 border-black/5 text-gray-900 focus:border-gold'}`}
-                      value={inquiryData.name}
-                      onChange={e => setInquiryData({...inquiryData, name: e.target.value})}
-                    />
-                    <input 
-                      required 
-                      type="tel" 
-                      placeholder="WhatsApp (Ex: +244...)"
-                      className={`w-full px-6 py-5 rounded-2xl outline-none transition-all duration-500 border text-base ${isDarkMode ? 'bg-white/5 border-white/10 text-white focus:border-gold' : 'bg-gray-50 border-black/5 text-gray-900 focus:border-gold'}`}
-                      value={inquiryData.phone}
-                      onChange={e => setInquiryData({...inquiryData, phone: e.target.value})}
-                    />
+                <form onSubmit={handleInquirySubmit} className="space-y-6">
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div className="space-y-2">
+                       <label className={`text-[10px] font-bold uppercase tracking-widest ${isDarkMode ? 'text-gray-500' : 'text-gray-400'}`}>Nome Completo</label>
+                       <input 
+                        required 
+                        type="text" 
+                        placeholder="Ana Silva"
+                        className={`w-full px-6 py-5 rounded-2xl outline-none transition-all duration-500 border text-base ${isDarkMode ? 'bg-white/5 border-white/10 text-white focus:border-gold' : 'bg-gray-50 border-black/5 text-gray-900 focus:border-gold shadow-sm'}`}
+                        value={inquiryData.name}
+                        onChange={e => setInquiryData({...inquiryData, name: e.target.value})}
+                      />
+                    </div>
+                    <div className="space-y-2">
+                       <label className={`text-[10px] font-bold uppercase tracking-widest ${isDarkMode ? 'text-gray-500' : 'text-gray-400'}`}>WhatsApp</label>
+                       <input 
+                        required 
+                        type="tel" 
+                        placeholder="+244..."
+                        className={`w-full px-6 py-5 rounded-2xl outline-none transition-all duration-500 border text-base ${isDarkMode ? 'bg-white/5 border-white/10 text-white focus:border-gold' : 'bg-gray-50 border-black/5 text-gray-900 focus:border-gold shadow-sm'}`}
+                        value={inquiryData.phone}
+                        onChange={e => setInquiryData({...inquiryData, phone: e.target.value})}
+                      />
+                    </div>
                   </div>
-                  <textarea 
-                    required 
-                    rows={4}
-                    placeholder="Como podemos ajudar no seu evento?"
-                    className={`w-full px-6 py-5 rounded-2xl outline-none transition-all duration-500 border resize-none text-base ${isDarkMode ? 'bg-white/5 border-white/10 text-white focus:border-gold' : 'bg-gray-50 border-black/5 text-gray-900 focus:border-gold'}`}
-                    value={inquiryData.message}
-                    onChange={e => setInquiryData({...inquiryData, message: e.target.value})}
-                  ></textarea>
-                  <button type="submit" className="w-full bg-gold text-white py-5 md:py-7 rounded-2xl font-bold uppercase tracking-[0.2em] text-sm hover:bg-gray-900 transition-all duration-700 shadow-2xl active:scale-95">
-                    Solicitar Contacto Consultor
+                  
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div className="space-y-2">
+                      <label className={`text-[10px] font-bold uppercase tracking-widest ${isDarkMode ? 'text-gray-500' : 'text-gray-400'}`}>Província de Angola</label>
+                      <select 
+                        required
+                        className={`w-full px-6 py-5 rounded-2xl outline-none transition-all duration-500 border text-base ${isDarkMode ? 'bg-white/5 border-white/10 text-white focus:border-gold' : 'bg-gray-50 border-black/5 text-gray-900 focus:border-gold shadow-sm'}`}
+                        value={inquiryData.location}
+                        onChange={e => setInquiryData({...inquiryData, location: e.target.value})}
+                      >
+                        {ANGOLA_PROVINCES.map(prov => (
+                          <option key={prov} value={prov} className={isDarkMode ? 'bg-neutral-900 text-white' : 'bg-white text-gray-900'}>{prov}</option>
+                        ))}
+                      </select>
+                    </div>
+                    <div className="space-y-2">
+                       <label className={`text-[10px] font-bold uppercase tracking-widest ${isDarkMode ? 'text-gray-500' : 'text-gray-400'}`}>Endereço Exato / Bairro</label>
+                       <input 
+                        required 
+                        type="text" 
+                        placeholder="Rua, Bairro, Ponto de ref."
+                        className={`w-full px-6 py-5 rounded-2xl outline-none transition-all duration-500 border text-base ${isDarkMode ? 'bg-white/5 border-white/10 text-white focus:border-gold' : 'bg-gray-50 border-black/5 text-gray-900 focus:border-gold shadow-sm'}`}
+                        value={inquiryData.exactAddress}
+                        onChange={e => setInquiryData({...inquiryData, exactAddress: e.target.value})}
+                      />
+                    </div>
+                  </div>
+
+                  <div className="space-y-2">
+                    <label className={`text-[10px] font-bold uppercase tracking-widest ${isDarkMode ? 'text-gray-500' : 'text-gray-400'}`}>O que pretende fazer? / Dúvidas</label>
+                    <textarea 
+                      required 
+                      rows={4}
+                      placeholder="Descreva o que deseja para o seu evento ou deixe sua pergunta..."
+                      className={`w-full px-6 py-5 rounded-2xl outline-none transition-all duration-500 border resize-none text-base ${isDarkMode ? 'bg-white/5 border-white/10 text-white focus:border-gold' : 'bg-gray-50 border-black/5 text-gray-900 focus:border-gold shadow-sm'}`}
+                      value={inquiryData.message}
+                      onChange={e => setInquiryData({...inquiryData, message: e.target.value})}
+                    ></textarea>
+                  </div>
+
+                  <button type="submit" className="w-full bg-gold text-white py-5 md:py-7 rounded-2xl font-bold uppercase tracking-[0.2em] text-sm hover:bg-black transition-all duration-700 shadow-xl active:scale-95 flex items-center justify-center gap-3">
+                    Falar com Consultor Agora
                   </button>
                 </form>
               )}
@@ -136,7 +189,6 @@ const App: React.FC = () => {
           </div>
         </section>
 
-        {/* Final CTA - Mobile Optimized Text Scale */}
         <section id="orcamento" className="py-24 md:py-56 relative overflow-hidden">
           <div className="absolute inset-0 z-0">
              <img 
@@ -177,7 +229,6 @@ const App: React.FC = () => {
         isDarkMode={isDarkMode}
       />
       
-      {/* WhatsApp Button - COMPACT & OPTIMIZED POSITION */}
       <a 
         href={`https://wa.me/${whatsappNumber}`} 
         target="_blank" 

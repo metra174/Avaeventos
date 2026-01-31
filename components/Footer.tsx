@@ -71,7 +71,7 @@ const Footer: React.FC<FooterProps> = ({ isDarkMode }) => {
             <li><a href="#sobre" className="hover:text-gold transition-colors">A Marca</a></li>
             <li><a href="#galeria" className="hover:text-gold transition-colors">O Portfólio</a></li>
             <li><a href="#pacotes" className="hover:text-gold transition-colors">Pacotes & Preços</a></li>
-            <li><a href="#ai-assistant" className="hover:text-gold transition-colors">Consultoria IA</a></li>
+            <li><a href="#duvidas" className="hover:text-gold transition-colors">Atendimento WhatsApp</a></li>
           </ul>
         </div>
 
