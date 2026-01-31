@@ -37,16 +37,16 @@ const Packages: React.FC<PackagesProps> = ({ onSelect, isDarkMode }) => {
           </p>
         </div>
 
-        {/* Horizontal Container on Mobile, Grid on Desktop */}
-        <div className="flex overflow-x-auto pb-12 gap-8 md:grid md:grid-cols-2 lg:grid-cols-4 md:overflow-x-visible md:pb-0 scrollbar-hide snap-x snap-mandatory">
+        {/* Optimized for Mobile: Vertical List instead of horizontal scroll */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-10">
           {PACKAGES.map((pkg) => {
             const styles = getPackageStyles(pkg.id);
             return (
               <div 
                 key={pkg.id} 
-                className={`flex-shrink-0 w-[85vw] md:w-auto snap-center flex flex-col rounded-[2.5rem] border shadow-2xl transition-all duration-700 hover:-translate-y-3 glass-panel text-center border-t-[8px] ${styles.border} ${styles.bg} ${isDarkMode ? 'border-white/5' : 'border-black/5'} overflow-hidden group`}
+                className={`flex flex-col rounded-[2.5rem] border shadow-2xl transition-all duration-700 hover:-translate-y-3 glass-panel text-center border-t-[8px] ${styles.border} ${styles.bg} ${isDarkMode ? 'border-white/5' : 'border-black/5'} overflow-hidden group`}
               >
-                {/* Header Image forced to Horizontal Aspect Ratio (16:9) */}
+                {/* Header Image with fixed horizontal aspect ratio */}
                 {pkg.image && (
                   <div className="aspect-video w-full relative overflow-hidden bg-black/20">
                     <img 
@@ -55,7 +55,7 @@ const Packages: React.FC<PackagesProps> = ({ onSelect, isDarkMode }) => {
                       className="w-full h-full object-cover object-center transition-transform duration-1000 group-hover:scale-110"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
-                    <div className="absolute bottom-4 left-0 w-full text-center">
+                    <div className="absolute bottom-4 left-0 w-full text-center px-4">
                        <span className={`inline-block px-3 py-1 rounded-full text-[8px] font-bold uppercase tracking-[0.2em] shadow-lg ${styles.label}`}>
                         {pkg.tagline}
                       </span>

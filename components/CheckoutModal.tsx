@@ -68,7 +68,7 @@ ${formData.notes || 'Sem observações adicionais.'}
     setStep(2);
   };
 
-  const inputStyles = `w-full px-4 py-4 border rounded-2xl outline-none text-sm transition-all duration-500 ${
+  const inputStyles = `w-full px-4 py-4 border rounded-2xl outline-none text-base md:text-sm transition-all duration-500 ${
     isDarkMode 
       ? 'bg-white/5 border-white/10 text-white focus:border-gold focus:bg-white/10' 
       : 'bg-gray-50 border-gray-100 text-gray-900 focus:border-gold focus:bg-white shadow-sm'
@@ -77,24 +77,24 @@ ${formData.notes || 'Sem observações adicionais.'}
   const labelStyles = `block text-[10px] font-bold uppercase tracking-widest mb-2 ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`;
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-0 md:p-4">
       <div className="absolute inset-0 bg-black/80 backdrop-blur-md" onClick={onClose}></div>
       
-      <div className={`relative w-full max-w-2xl rounded-[2.5rem] shadow-2xl overflow-hidden animate-reveal border-t-8 border-gold transition-colors duration-1000 max-h-[90vh] overflow-y-auto ${isDarkMode ? 'bg-[#121212]' : 'bg-white'}`}>
-        <button onClick={onClose} className="absolute top-6 right-6 z-10 text-gray-400 hover:text-gold transition-colors">
+      <div className={`relative w-full max-w-2xl md:rounded-[2.5rem] shadow-2xl overflow-hidden animate-reveal border-t-8 border-gold transition-colors duration-1000 h-full md:h-auto md:max-h-[90vh] overflow-y-auto ${isDarkMode ? 'bg-[#121212]' : 'bg-white'}`}>
+        <button onClick={onClose} className="absolute top-6 right-6 z-10 text-gray-400 hover:text-gold transition-colors p-2">
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
           </svg>
         </button>
 
         {step === 1 ? (
-          <form onSubmit={handleSubmit} className="p-8 md:p-12">
+          <form onSubmit={handleSubmit} className="p-6 md:p-12 pt-16 md:pt-12">
             <div className="mb-8">
-              <h2 className={`text-3xl md:text-4xl font-serif font-bold mb-2 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>{pkg.name}</h2>
-              <p className="text-gold font-medium text-xs uppercase tracking-widest">Complete os detalhes para o seu orçamento no WhatsApp</p>
+              <h2 className={`text-2xl md:text-4xl font-serif font-bold mb-2 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>{pkg.name}</h2>
+              <p className="text-gold font-medium text-[10px] uppercase tracking-widest">Complete os detalhes para o seu orçamento</p>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6 mb-8">
               <div className="md:col-span-2">
                 <label className={labelStyles}>Nome Completo</label>
                 <input required type="text" placeholder="Ex: Ana Silva" className={inputStyles} value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} />
@@ -128,7 +128,7 @@ ${formData.notes || 'Sem observações adicionais.'}
                 <label className={labelStyles}>Endereço Exato do Local</label>
                 <textarea 
                   required 
-                  placeholder="Descreva a localização exata (Rua, bairro, pontos de referência...)" 
+                  placeholder="Descreva a localização exata..." 
                   className={`${inputStyles} h-24 resize-none`} 
                   value={formData.exactAddress} 
                   onChange={e => setFormData({...formData, exactAddress: e.target.value})} 
@@ -136,9 +136,9 @@ ${formData.notes || 'Sem observações adicionais.'}
               </div>
 
               <div className="md:col-span-2">
-                <label className={labelStyles}>O que pretende fazer? / Suas perguntas</label>
+                <label className={labelStyles}>O que pretende fazer? / Desejos</label>
                 <textarea 
-                  placeholder="Descreva o que deseja para o evento ou tire suas dúvidas sobre este pacote..." 
+                  placeholder="Descreva o que deseja para o evento..." 
                   className={`${inputStyles} h-32 resize-none`} 
                   value={formData.notes} 
                   onChange={e => setFormData({...formData, notes: e.target.value})} 
@@ -146,7 +146,7 @@ ${formData.notes || 'Sem observações adicionais.'}
               </div>
 
               <div className="md:col-span-2">
-                <label className={labelStyles}>Método de Pagamento Preferido</label>
+                <label className={labelStyles}>Método de Pagamento</label>
                 <select className={inputStyles} value={formData.paymentMethod} onChange={e => setFormData({...formData, paymentMethod: e.target.value})}>
                   <option>Transferência</option>
                   <option>Multicaixa Express</option>
@@ -157,33 +157,32 @@ ${formData.notes || 'Sem observações adicionais.'}
             </div>
 
             <div className={`p-6 rounded-[2rem] border mb-8 transition-all duration-700 ${isDarkMode ? 'bg-white/5 border-white/5' : 'bg-gray-50 border-gray-100 shadow-inner'}`}>
-              <div className="flex justify-between items-center mb-4 pb-4 border-b border-gold/10">
-                <span className={`text-[10px] font-bold uppercase tracking-wider ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>Preço p/ Pessoa</span>
-                <span className={`text-sm font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>{pkg.currency} {pkg.price}</span>
+              <div className="flex justify-between items-center mb-4 pb-4 border-b border-gold/10 text-xs">
+                <span className={`font-bold uppercase tracking-wider ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>Preço p/ Pessoa</span>
+                <span className={`font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>{pkg.currency} {pkg.price}</span>
               </div>
               <div className="flex justify-between items-center">
                 <span className={`text-[10px] font-bold uppercase tracking-wider ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>Total Estimado</span>
-                <span className="text-gold text-2xl font-black">
+                <span className="text-gold text-xl md:text-2xl font-black">
                   {pkg.currency} {formatCurrency(totalInvestment)}
                 </span>
               </div>
             </div>
 
-            <button type="submit" className="w-full bg-gold text-white py-6 rounded-2xl font-bold hover:bg-black hover:border-black transition-all shadow-xl active:scale-95 text-[11px] uppercase tracking-[0.2em] flex items-center justify-center gap-3">
-              Confirmar & Falar no WhatsApp
+            <button type="submit" className="w-full bg-gold text-white py-5 md:py-6 rounded-2xl font-bold hover:bg-black transition-all shadow-xl active:scale-95 text-[11px] uppercase tracking-[0.2em] flex items-center justify-center gap-3">
+              Confirmar Reserva no WhatsApp
             </button>
           </form>
         ) : (
-          <div className="p-16 text-center">
-            <div className="w-24 h-24 bg-gold/10 text-gold rounded-full flex items-center justify-center mx-auto mb-8 shadow-inner animate-pulse">
-              <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div className="p-10 md:p-16 text-center h-full flex flex-col justify-center">
+            <div className="w-20 h-20 bg-gold/10 text-gold rounded-full flex items-center justify-center mx-auto mb-8 animate-pulse">
+              <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
               </svg>
             </div>
-            <h2 className={`text-4xl font-serif font-bold mb-6 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Solicitação Enviada!</h2>
-            <p className={`mb-10 text-lg font-light leading-relaxed ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-              Estamos prontos para atender você no WhatsApp.<br />
-              Um consultor responderá em breve com a sua proposta personalizada.
+            <h2 className={`text-3xl md:text-4xl font-serif font-bold mb-6 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Solicitação Enviada!</h2>
+            <p className={`mb-10 text-base md:text-lg font-light leading-relaxed ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>
+              Abra seu WhatsApp para concluir o atendimento exclusivo com nossa equipe.
             </p>
             <button onClick={onClose} className="w-full bg-gold text-white py-5 rounded-2xl font-bold uppercase tracking-widest text-[10px] hover:bg-gray-900 transition-all duration-700">
               Voltar ao Site

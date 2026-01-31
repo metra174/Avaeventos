@@ -95,18 +95,28 @@ export const HERO_IMAGES = [
 
 export const GALLERY_IMAGES = [
   { url: 'https://i.imgur.com/XMykzEf.png', category: 'Casamentos', title: 'Decoração Clássica de Casamento' },
-  { url: 'https://i.imgur.com/BAKqGSG.png', category: 'Festas', title: 'Mesa de Doces Sofisticada' },
   { url: 'https://i.imgur.com/nLxHquT.png', category: 'Especiais', title: 'Cenário de Entrada Monumental' },
   { url: 'https://i.imgur.com/LmutJhO.png', category: 'Corporativo', title: 'Detalhes em Cristais e Ouro' },
   { url: 'https://i.imgur.com/uqMWmbx.png', category: 'Casamentos', title: 'Ambiente de Recepção Premium' },
   { url: 'https://i.imgur.com/qM3JIw0.png', category: 'Corporativo', title: 'Banquete de Gala' },
-  { url: 'https://i.imgur.com/SJ3u2eu.png', category: 'Festas', title: 'Mesas Familiares Sofisticadas' },
   { url: 'https://i.imgur.com/U1FRqX5.png', category: 'Casamentos', title: 'Teto Floral de Luxo' },
+  
+  { url: 'https://i.imgur.com/kWySv7R.png', category: 'Especiais', title: 'Arte em Detalhes' },
+  { url: 'https://i.imgur.com/sinppBQ.png', category: 'Casamentos', title: 'Cerimonial de Luxo' },
+  { url: 'https://i.imgur.com/LfzqD2U.png', category: 'Festas', title: 'Ambiente Festivo Ava' },
+  { url: 'https://i.imgur.com/mrkRvmo.png', category: 'Especiais', title: 'Curadoria de Cenários' },
+  { url: 'https://i.imgur.com/51XbGRs.png', category: 'Casamentos', title: 'Altar Monumental' },
+  { url: 'https://i.imgur.com/ukMjTPt.png', category: 'Corporativo', title: 'Recepção Executiva' },
+  { url: 'https://i.imgur.com/wY7xj4F.png', category: 'Festas', title: 'Noite de Gala Ava' },
+  
   { url: 'https://i.imgur.com/hCRpZcq.png', category: 'Gastronomia', title: 'Apresentação de Pratos Quentes' },
   { url: 'https://i.imgur.com/ilVfZFK.png', category: 'Gastronomia', title: 'Buffet de Doces & Sobremesas' },
   { url: 'https://i.imgur.com/VYPtZXG.png', category: 'Gastronomia', title: 'Entradas Gourmet Ava' },
   { url: 'https://i.imgur.com/xo2cSQz.png', category: 'Gastronomia', title: 'Serviço de Banquetes Luxo' },
-  { url: 'https://i.imgur.com/tZNLdZc.png', category: 'Gastronomia', title: 'Experiência Gastronômica Ava' }
+  { url: 'https://i.imgur.com/tZNLdZc.png', category: 'Gastronomia', title: 'Experiência Gastronômica Ava' },
+
+  { url: 'https://i.imgur.com/scHAorL.png', category: 'Especiais', title: 'Arte Visual Ava' },
+  { url: 'https://i.imgur.com/HLBViFX.png', category: 'Corporativo', title: 'Espaço de Eventos' }
 ];
 
 export const SOCIAL_LINKS = {
