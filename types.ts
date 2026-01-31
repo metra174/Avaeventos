@@ -14,6 +14,7 @@ export interface Package {
   features: string[];
   color: string;
   tagline: string;
+  image?: string;
 }
 
 export interface CustomerOrder {

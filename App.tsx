@@ -60,13 +60,13 @@ const App: React.FC = () => {
         <Hero isDarkMode={isDarkMode} />
         
         {/* Brand Strip Section - Mobile Optimized Scale */}
-        <section className="py-6 md:py-20 relative overflow-hidden border-y border-gold/5 bg-white/5 backdrop-blur-sm">
+        <section className="py-10 md:py-20 relative overflow-hidden border-y border-gold/5 bg-white/5 backdrop-blur-sm">
           <div className="container mx-auto px-4 text-center">
-            <div className={`flex flex-wrap justify-center items-center gap-x-8 gap-y-4 md:gap-32 transition-all duration-1000 ${isDarkMode ? 'opacity-50' : 'opacity-30'}`}>
-              <span className="font-serif text-sm md:text-3xl font-bold tracking-[0.3em]">VOGUE</span>
-              <span className="font-serif text-sm md:text-3xl font-bold tracking-[0.3em]">LUXURY</span>
-              <span className="font-serif text-sm md:text-3xl font-bold tracking-[0.3em]">ELEGANCE</span>
-              <span className="font-serif text-sm md:text-3xl font-bold tracking-[0.3em]">CLASSIC</span>
+            <div className={`flex flex-wrap justify-center items-center gap-x-12 gap-y-6 md:gap-32 transition-all duration-1000 ${isDarkMode ? 'opacity-60' : 'opacity-40'}`}>
+              <span className="font-serif text-lg md:text-3xl font-bold tracking-[0.2em]">VOGUE</span>
+              <span className="font-serif text-lg md:text-3xl font-bold tracking-[0.2em]">LUXURY</span>
+              <span className="font-serif text-lg md:text-3xl font-bold tracking-[0.2em]">ELEGANCE</span>
+              <span className="font-serif text-lg md:text-3xl font-bold tracking-[0.2em]">CLASSIC</span>
             </div>
           </div>
         </section>
@@ -81,40 +81,40 @@ const App: React.FC = () => {
         <AIAssistant isDarkMode={isDarkMode} />
         <Packages onSelect={handlePackageSelect} isDarkMode={isDarkMode} />
 
-        {/* Central de Informações e Dúvidas - Improved Layout */}
-        <section id="duvidas" className="py-12 md:py-32 relative">
+        {/* Central de Informações e Dúvidas - Mobile Normal Scale */}
+        <section id="duvidas" className="py-16 md:py-32 relative">
           <div className="container mx-auto px-4 md:px-6 max-w-4xl">
-            <div className={`glass-panel p-6 md:p-16 rounded-[2rem] relative overflow-hidden transition-all duration-1000 ${isDarkMode ? 'border-white/10 shadow-2xl' : 'border-black/5 shadow-xl'}`}>
-              <div className="text-center mb-8 md:mb-12">
-                <span className="text-gold uppercase tracking-[0.2em] font-bold text-[8px] md:text-[10px] mb-3 block">Suporte Personalizado</span>
+            <div className={`glass-panel p-8 md:p-16 rounded-[2.5rem] relative overflow-hidden transition-all duration-1000 ${isDarkMode ? 'border-white/10 shadow-2xl shadow-gold/5' : 'border-black/5 shadow-xl'}`}>
+              <div className="text-center mb-10 md:mb-12">
+                <span className="text-gold uppercase tracking-[0.3em] font-bold text-[10px] md:text-xs mb-3 block">Central de Atendimento</span>
                 <h2 className={`text-3xl md:text-6xl font-bold mb-4 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Alguma <span className="text-gold italic font-serif">Dúvida?</span></h2>
-                <p className={`text-sm md:text-lg font-light leading-relaxed ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Envie sua mensagem. Nossa equipe de curadoria entrará em contacto para prestar todo o apoio.</p>
+                <p className={`text-base md:text-lg font-light leading-relaxed ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Envie sua mensagem. Nossa equipe de curadoria entrará em contacto direto pelo WhatsApp.</p>
               </div>
 
               {inquirySent ? (
-                <div className="text-center py-10 animate-reveal">
+                <div className="text-center py-12 animate-reveal">
                   <div className="w-16 h-16 bg-gold/20 text-gold rounded-full flex items-center justify-center mx-auto mb-6">
                     <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
                   </div>
-                  <h3 className={`text-xl font-bold mb-3 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Pedido Recebido!</h3>
-                  <p className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Responderemos em breve através do número indicado.</p>
+                  <h3 className={`text-2xl font-bold mb-3 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Pedido Enviado!</h3>
+                  <p className={`text-lg ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Responderemos em instantes.</p>
                 </div>
               ) : (
-                <form onSubmit={handleInquirySubmit} className="space-y-4 md:space-y-6">
-                  <div className="grid md:grid-cols-2 gap-4 md:gap-6">
+                <form onSubmit={handleInquirySubmit} className="space-y-5 md:space-y-6">
+                  <div className="grid md:grid-cols-2 gap-5 md:gap-6">
                     <input 
                       required 
                       type="text" 
-                      placeholder="Seu Nome"
-                      className={`w-full px-5 py-4 rounded-xl outline-none transition-all duration-500 border text-sm ${isDarkMode ? 'bg-white/5 border-white/10 text-white focus:border-gold' : 'bg-gray-50 border-black/5 text-gray-900 focus:border-gold'}`}
+                      placeholder="Nome Completo"
+                      className={`w-full px-6 py-5 rounded-2xl outline-none transition-all duration-500 border text-base ${isDarkMode ? 'bg-white/5 border-white/10 text-white focus:border-gold' : 'bg-gray-50 border-black/5 text-gray-900 focus:border-gold'}`}
                       value={inquiryData.name}
                       onChange={e => setInquiryData({...inquiryData, name: e.target.value})}
                     />
                     <input 
                       required 
                       type="tel" 
-                      placeholder="WhatsApp (+244)"
-                      className={`w-full px-5 py-4 rounded-xl outline-none transition-all duration-500 border text-sm ${isDarkMode ? 'bg-white/5 border-white/10 text-white focus:border-gold' : 'bg-gray-50 border-black/5 text-gray-900 focus:border-gold'}`}
+                      placeholder="WhatsApp (Ex: +244...)"
+                      className={`w-full px-6 py-5 rounded-2xl outline-none transition-all duration-500 border text-base ${isDarkMode ? 'bg-white/5 border-white/10 text-white focus:border-gold' : 'bg-gray-50 border-black/5 text-gray-900 focus:border-gold'}`}
                       value={inquiryData.phone}
                       onChange={e => setInquiryData({...inquiryData, phone: e.target.value})}
                     />
@@ -122,13 +122,13 @@ const App: React.FC = () => {
                   <textarea 
                     required 
                     rows={4}
-                    placeholder="Em que podemos ajudar?"
-                    className={`w-full px-5 py-4 rounded-xl outline-none transition-all duration-500 border resize-none text-sm ${isDarkMode ? 'bg-white/5 border-white/10 text-white focus:border-gold' : 'bg-gray-50 border-black/5 text-gray-900 focus:border-gold'}`}
+                    placeholder="Como podemos ajudar no seu evento?"
+                    className={`w-full px-6 py-5 rounded-2xl outline-none transition-all duration-500 border resize-none text-base ${isDarkMode ? 'bg-white/5 border-white/10 text-white focus:border-gold' : 'bg-gray-50 border-black/5 text-gray-900 focus:border-gold'}`}
                     value={inquiryData.message}
                     onChange={e => setInquiryData({...inquiryData, message: e.target.value})}
                   ></textarea>
-                  <button type="submit" className="w-full bg-gold text-white py-4 md:py-6 rounded-xl font-bold uppercase tracking-widest text-[10px] md:text-[11px] hover:bg-gray-900 transition-all duration-700 shadow-xl active:scale-95">
-                    Enviar Dúvida agora
+                  <button type="submit" className="w-full bg-gold text-white py-5 md:py-7 rounded-2xl font-bold uppercase tracking-[0.2em] text-sm hover:bg-gray-900 transition-all duration-700 shadow-2xl active:scale-95">
+                    Solicitar Contacto Consultor
                   </button>
                 </form>
               )}
@@ -136,30 +136,30 @@ const App: React.FC = () => {
           </div>
         </section>
 
-        {/* Final CTA - Mobile Optimized Text */}
-        <section id="orcamento" className="py-20 md:py-56 relative overflow-hidden">
+        {/* Final CTA - Mobile Optimized Text Scale */}
+        <section id="orcamento" className="py-24 md:py-56 relative overflow-hidden">
           <div className="absolute inset-0 z-0">
              <img 
                src="https://i.imgur.com/scHAorL.png" 
-               className={`w-full h-full object-cover transition-all duration-1000 transform scale-110 ${isDarkMode ? 'opacity-[0.25]' : 'opacity-[0.15]'} blur-[2px]`} 
+               className={`w-full h-full object-cover transition-all duration-1000 transform scale-110 ${isDarkMode ? 'opacity-[0.3]' : 'opacity-[0.2]'} blur-[2px]`} 
              />
              <div className={`absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-current transition-colors duration-1000 ${isDarkMode ? 'text-[#080808]' : 'text-[#FDFBF7]'}`}></div>
           </div>
           <div className="container mx-auto px-6 relative z-10 text-center">
-            <h2 className={`text-4xl md:text-9xl font-bold mb-6 md:mb-14 leading-tight ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
+            <h2 className={`text-5xl md:text-9xl font-bold mb-8 md:mb-14 leading-tight ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
               Seu momento, <br />
               <span className="italic font-serif text-gold">nossa arte</span>
             </h2>
-            <div className="flex flex-col md:flex-row gap-4 md:gap-8 justify-center items-center">
+            <div className="flex flex-col md:flex-row gap-5 md:gap-8 justify-center items-center">
               <a 
                 href={`https://wa.me/${whatsappNumber}`} 
-                className="w-full md:w-auto bg-gold text-white px-10 md:px-16 py-4 md:py-7 rounded-full text-base md:text-xl font-bold hover:bg-white hover:text-gold transition-all duration-700 shadow-2xl active:scale-95"
+                className="w-full md:w-auto bg-gold text-white px-12 md:px-16 py-5 md:py-7 rounded-full text-lg md:text-xl font-bold hover:bg-white hover:text-gold transition-all duration-700 shadow-2xl active:scale-95"
               >
                 Orçamento WhatsApp
               </a>
               <a 
                 href="#pacotes" 
-                className="w-full md:w-auto glass-panel px-10 md:px-16 py-4 md:py-7 rounded-full text-base md:text-xl font-bold hover:bg-gold/10 transition-all duration-700 backdrop-blur-3xl"
+                className="w-full md:w-auto glass-panel px-12 md:px-16 py-5 md:py-7 rounded-full text-lg md:text-xl font-bold hover:bg-gold/10 transition-all duration-700 backdrop-blur-3xl"
               >
                 Ver Pacotes
               </a>
@@ -177,12 +177,12 @@ const App: React.FC = () => {
         isDarkMode={isDarkMode}
       />
       
-      {/* WhatsApp Button - COMPACT & REFINED FOR MOBILE */}
+      {/* WhatsApp Button - COMPACT & OPTIMIZED POSITION */}
       <a 
         href={`https://wa.me/${whatsappNumber}`} 
         target="_blank" 
-        className="fixed bottom-6 right-6 z-50 bg-green-500 text-white w-12 h-12 md:w-16 md:h-16 rounded-full shadow-[0_10px_30px_rgba(34,197,94,0.4)] hover:scale-110 transition-all duration-500 active:scale-90 flex items-center justify-center group"
-        aria-label="Falar no WhatsApp"
+        className="fixed bottom-6 right-6 z-50 bg-green-500 text-white w-12 h-12 md:w-16 md:h-16 rounded-full shadow-[0_10px_30px_rgba(34,197,94,0.5)] hover:scale-110 transition-all duration-500 active:scale-90 flex items-center justify-center group"
+        aria-label="WhatsApp Avaeventos"
       >
         <div className="absolute inset-0 bg-green-500 rounded-full animate-ping opacity-20 group-hover:hidden"></div>
         <svg className="w-6 h-6 md:w-8 md:h-8" fill="currentColor" viewBox="0 0 24 24">

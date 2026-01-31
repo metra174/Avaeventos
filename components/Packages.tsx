@@ -29,53 +29,69 @@ const Packages: React.FC<PackagesProps> = ({ onSelect, isDarkMode }) => {
       <div className="container mx-auto px-4 md:px-6">
         <div className="text-center mb-16 md:mb-24 animate-reveal">
           <span className="text-gold uppercase tracking-[0.3em] font-bold mb-4 block text-xs">Curadoria Exclusiva</span>
-          <h2 className={`text-4xl md:text-8xl font-bold mb-6 transition-colors duration-1000 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
+          <h2 className={`text-5xl md:text-8xl font-bold mb-6 transition-colors duration-1000 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
             Planos de <span className="italic font-serif text-gold">Luxo</span>
           </h2>
-          <p className={`max-w-2xl mx-auto text-base md:text-xl font-light leading-relaxed ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+          <p className={`max-w-2xl mx-auto text-lg md:text-xl font-light leading-relaxed ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>
             Base de alta qualidade para sua celebração, com a sofisticação inegociável da Avaeventos.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-10">
           {PACKAGES.map((pkg) => {
             const styles = getPackageStyles(pkg.id);
             return (
               <div 
                 key={pkg.id} 
-                className={`flex flex-col rounded-[2rem] p-8 md:p-12 border shadow-lg transition-all duration-700 hover:-translate-y-2 glass-panel text-center border-t-[8px] ${styles.border} ${styles.bg} ${isDarkMode ? 'border-white/5' : 'border-black/5'}`}
+                className={`flex flex-col rounded-[2.5rem] border shadow-2xl transition-all duration-700 hover:-translate-y-3 glass-panel text-center border-t-[8px] ${styles.border} ${styles.bg} ${isDarkMode ? 'border-white/5' : 'border-black/5'} overflow-hidden group`}
               >
-                <div className="mb-8">
-                  <span className={`inline-block px-3 py-1 rounded-full text-[8px] font-bold uppercase tracking-[0.2em] mb-4 ${styles.label}`}>
-                    {pkg.tagline}
-                  </span>
-                  <h3 className={`text-2xl font-serif font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>{pkg.name}</h3>
-                </div>
-                
-                <div className="mb-10">
-                  <div className="flex items-baseline justify-center gap-1">
-                    <span className="text-gold text-sm font-bold">{pkg.currency}</span>
-                    <span className={`text-4xl font-black ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>{pkg.price}</span>
-                  </div>
-                  <span className="text-[9px] uppercase tracking-widest font-bold text-gray-500 mt-2 block">Por Pessoa</span>
-                </div>
-
-                <div className="flex-grow space-y-4 mb-10 text-left">
-                  {pkg.features.slice(0, 6).map((feat, i) => (
-                    <div key={i} className="flex items-start gap-3">
-                      <svg className={`w-3 h-3 mt-0.5 flex-shrink-0 ${styles.accent}`} fill="currentColor" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>
-                      <span className={`text-[11px] leading-relaxed ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>{feat}</span>
+                {/* Header Image for the package */}
+                {pkg.image && (
+                  <div className="h-40 md:h-48 relative overflow-hidden">
+                    <img 
+                      src={pkg.image} 
+                      alt={pkg.name} 
+                      className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+                    <div className="absolute bottom-4 left-0 w-full text-center">
+                       <span className={`inline-block px-3 py-1 rounded-full text-[8px] font-bold uppercase tracking-[0.2em] shadow-lg ${styles.label}`}>
+                        {pkg.tagline}
+                      </span>
                     </div>
-                  ))}
-                  {pkg.features.length > 6 && <p className="text-[10px] text-gold italic">+ Itens exclusivos inclusos</p>}
-                </div>
+                  </div>
+                )}
 
-                <button 
-                  onClick={() => onSelect(pkg)}
-                  className={`w-full border-2 py-4 rounded-xl font-bold uppercase tracking-widest text-[10px] transition-all duration-500 ${isDarkMode ? 'border-white/10 text-white hover:bg-gold hover:border-gold' : 'border-black/5 text-gray-900 hover:bg-gold hover:text-white'}`}
-                >
-                  Solicitar Reserva
-                </button>
+                <div className="p-8 md:p-10 flex flex-col flex-grow">
+                  <div className="mb-8">
+                    <h3 className={`text-2xl font-serif font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>{pkg.name}</h3>
+                  </div>
+                  
+                  <div className="mb-10">
+                    <div className="flex items-baseline justify-center gap-1">
+                      <span className="text-gold text-sm font-bold">{pkg.currency}</span>
+                      <span className={`text-5xl font-black ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>{pkg.price}</span>
+                    </div>
+                    <span className="text-[10px] uppercase tracking-widest font-bold text-gray-500 mt-2 block">Por Pessoa</span>
+                  </div>
+
+                  <div className="flex-grow space-y-4 mb-10 text-left">
+                    {pkg.features.slice(0, 7).map((feat, i) => (
+                      <div key={i} className="flex items-start gap-3 group/item">
+                        <svg className={`w-3 h-3 mt-1 flex-shrink-0 transition-transform group-hover/item:scale-125 ${styles.accent}`} fill="currentColor" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>
+                        <span className={`text-[12px] leading-relaxed transition-colors ${isDarkMode ? 'text-gray-400 group-hover/item:text-white' : 'text-gray-600 group-hover/item:text-black'}`}>{feat}</span>
+                      </div>
+                    ))}
+                    {pkg.features.length > 7 && <p className="text-[10px] text-gold italic pt-2">+ Extras incluídos no plano</p>}
+                  </div>
+
+                  <button 
+                    onClick={() => onSelect(pkg)}
+                    className={`w-full border-2 py-5 rounded-2xl font-bold uppercase tracking-widest text-[11px] transition-all duration-500 active:scale-95 shadow-lg ${isDarkMode ? 'border-white/10 text-white hover:bg-gold hover:border-gold' : 'border-black/5 text-gray-900 hover:bg-gold hover:text-white'}`}
+                  >
+                    Solicitar Reserva
+                  </button>
+                </div>
               </div>
             );
           })}

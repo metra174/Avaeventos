@@ -9,6 +9,7 @@ export const PACKAGES: Package[] = [
     currency: 'AKZ',
     color: 'bg-stone-100',
     tagline: 'Essencial & Elegante',
+    image: 'https://i.imgur.com/uqMWmbx.png',
     features: [
       'Cadeiras almofadas baixas',
       'Mesas com toalhas (duas familiares especiais)',
@@ -27,6 +28,7 @@ export const PACKAGES: Package[] = [
     currency: 'AKZ',
     color: 'bg-orange-50',
     tagline: 'Sofisticação & Conforto',
+    image: 'https://i.imgur.com/DIWLQrO.png',
     features: [
       'Cadeiras brancas almofadas ripadas ou algodão doce',
       'Mesas especiais',
@@ -46,6 +48,7 @@ export const PACKAGES: Package[] = [
     currency: 'AKZ',
     color: 'bg-red-50',
     tagline: 'A Experiência Premium Definitiva',
+    image: 'https://i.imgur.com/LmutJhO.png',
     features: [
       'Cadeiras brancas poltronas',
       'Mesas especiais',
@@ -67,6 +70,7 @@ export const PACKAGES: Package[] = [
     currency: 'AKZ',
     color: 'bg-amber-50',
     tagline: 'Gastronomia & Banquete',
+    image: 'https://i.imgur.com/hCRpZcq.png',
     features: [
       'Pratos quentes e frios',
       'Doces e salgados',
@@ -87,23 +91,16 @@ export const GALLERY_IMAGES = [
   { url: 'https://i.imgur.com/BAKqGSG.png', category: 'Festas', title: 'Mesa de Doces Sofisticada' },
   { url: 'https://i.imgur.com/nLxHquT.png', category: 'Especiais', title: 'Cenário de Entrada Monumental' },
   { url: 'https://i.imgur.com/LmutJhO.png', category: 'Corporativo', title: 'Detalhes em Cristais e Ouro' },
-  { url: 'https://i.imgur.com/gI4Jhg5.png', category: 'Festas', title: 'Lounge Externo Luxuoso' },
-  { url: 'https://i.imgur.com/3seNSZj.png', category: 'Casamentos', title: 'Arranjos de Flores Naturais' },
-  { url: 'https://i.imgur.com/Q2EJEbg.png', category: 'Especiais', title: 'Iluminação Cênica de Luxo' },
   { url: 'https://i.imgur.com/uqMWmbx.png', category: 'Casamentos', title: 'Ambiente de Recepção Premium' },
   { url: 'https://i.imgur.com/qM3JIw0.png', category: 'Corporativo', title: 'Banquete de Gala' },
-  { url: 'https://i.imgur.com/NhKkarE.png', category: 'Casamentos', title: 'Cenário para Cerimônia' },
-  { url: 'https://i.imgur.com/Gheasx4.png', category: 'Festas', title: 'Detalhes de Mesa Ava' },
-  { url: 'https://i.imgur.com/7LXYCRA.png', category: 'Especiais', title: 'Backdrop Criativo para Fotos' },
-  { url: 'https://i.imgur.com/HLBViFX.png', category: 'Corporativo', title: 'Salão de Eventos Principal' },
-  { url: 'https://i.imgur.com/DIWLQrO.png', category: 'Casamentos', title: 'Paleta de Cores Nude & Ouro' },
-  { url: 'https://i.imgur.com/woHp9rA.png', category: 'Festas', title: 'Mobiliário de Design Exclusivo' },
-  { url: 'https://i.imgur.com/DjrBsSh.png', category: 'Especiais', title: 'Cenário do Bolo Artístico' },
-  { url: 'https://i.imgur.com/tCJ2QGp.png', category: 'Corporativo', title: 'Estrutura de Luzes 5x5' },
-  { url: 'https://i.imgur.com/eCu3v6C.png', category: 'Casamentos', title: 'Atenção aos Mínimos Detalhes' },
   { url: 'https://i.imgur.com/SJ3u2eu.png', category: 'Festas', title: 'Mesas Familiares Sofisticadas' },
   { url: 'https://i.imgur.com/U1FRqX5.png', category: 'Casamentos', title: 'Teto Floral de Luxo' },
-  { url: 'https://i.imgur.com/scHAorL.png', category: 'Especiais', title: 'Ambiente Acolhedor e Chique' }
+  // Imagens de buffet posicionadas no final conforme solicitado
+  { url: 'https://i.imgur.com/hCRpZcq.png', category: 'Gastronomia', title: 'Apresentação de Pratos Quentes' },
+  { url: 'https://i.imgur.com/ilVfZFK.png', category: 'Gastronomia', title: 'Buffet de Doces & Sobremesas' },
+  { url: 'https://i.imgur.com/VYPtZXG.png', category: 'Gastronomia', title: 'Entradas Gourmet Ava' },
+  { url: 'https://i.imgur.com/xo2cSQz.png', category: 'Gastronomia', title: 'Serviço de Banquetes Luxo' },
+  { url: 'https://i.imgur.com/tZNLdZc.png', category: 'Gastronomia', title: 'Experiência Gastronômica Ava' }
 ];
 
 export const SOCIAL_LINKS = {
