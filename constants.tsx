@@ -19,13 +19,13 @@ export const PACKAGES: Package[] = [
     image: 'https://i.imgur.com/Q8RBZGK.png',
     features: [
       'Cadeiras almofadas baixas',
-      'Mesas com toalhas (duas familiares especiais)',
+      'Mesas com toalhas apenas duas familiares especiais',
       'Loiça branca',
-      'Senhoras para lavar a loiça',
+      'Senhoras para lavarem a loiça',
       'Cenário para os noivos',
       'Cenário para entrada',
       'Cenário da foto',
-      'Cenário do bolo'
+      'Cenário do bolo.'
     ]
   },
   {
@@ -41,11 +41,11 @@ export const PACKAGES: Package[] = [
       'Mesas especiais',
       'Loiça',
       'Cenário dos noivos',
-      'Cenário do bolo',
-      'Cenário para entrada',
+      'Cenário do Bolo',
+      'Cenário para Entrada',
       'Cenário para foto',
-      'Senhoras para lavar a loiça',
-      'Vinil 5/5'
+      'Senhoras para lavarem a loiça',
+      'Um vinil de 5/5'
     ]
   },
   {
@@ -59,15 +59,15 @@ export const PACKAGES: Package[] = [
     features: [
       'Cadeiras brancas poltronas',
       'Mesas especiais',
-      'Loiça especial',
+      'Loiça especiais',
       'Cenário para os noivos',
-      'Cenário para fotos',
+      'Cenário para foto',
       'Cenário para o bolo',
       'Cenário para entrada',
-      'Decoração da estrutura de luzes (5/5)',
-      'Vinil 5/5',
+      'Decoração da estrutura das luzes de 5/5',
+      'Um vinil de 5/5',
       'Luz ambiente',
-      'Senhoras para lavar a loiça'
+      'Senhoras para lavarem a loiça'
     ]
   },
   {
@@ -120,6 +120,11 @@ export const GALLERY_IMAGES = [
 ];
 
 export const SOCIAL_LINKS = {
+  instagram: 'https://www.instagram.com/avaeventos.s',
+  facebook: 'https://www.facebook.com/share/1FdLjBMALU/',
+  whatsapp: 'https://wa.me/244948757808'
+};
+
   instagram: 'https://www.instagram.com/avaeventos.s',
   facebook: 'https://www.facebook.com/share/1FdLjBMALU/',
   whatsapp: 'https://wa.me/244948757808'
