@@ -77,13 +77,12 @@ const Packages: React.FC<PackagesProps> = ({ onSelect, isDarkMode }) => {
                   </div>
 
                   <div className="flex-grow space-y-4 mb-10 text-left">
-                    {pkg.features.slice(0, 7).map((feat, i) => (
+                    {pkg.features.map((feat, i) => (
                       <div key={i} className="flex items-start gap-3 group/item">
                         <svg className={`w-3 h-3 mt-1 flex-shrink-0 transition-transform group-hover/item:scale-125 ${styles.accent}`} fill="currentColor" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>
                         <span className={`text-[12px] leading-relaxed transition-colors ${isDarkMode ? 'text-gray-400 group-hover/item:text-white' : 'text-gray-600 group-hover/item:text-black'}`}>{feat}</span>
                       </div>
                     ))}
-                    {pkg.features.length > 7 && <p className="text-[10px] text-gold italic pt-2">+ Extras incluídos no plano</p>}
                   </div>
 
                   <button 
