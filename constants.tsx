@@ -1,4 +1,5 @@
 
+
 import { Package } from './types';
 
 export const ANGOLA_PROVINCES = [
@@ -25,7 +26,7 @@ export const PACKAGES: Package[] = [
       'Cenário para os noivos',
       'Cenário para entrada',
       'Cenário da foto',
-      'Cenário do bolo.'
+      'Cenário do bolo'
     ]
   },
   {
