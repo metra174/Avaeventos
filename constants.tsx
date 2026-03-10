@@ -17,7 +17,9 @@ export const PACKAGES: Package[] = [
     color: 'bg-stone-100',
     tagline: 'Essencial & Elegante',
     image: 'https://i.imgur.com/Q8RBZGK.png',
+    location: 'Projeto do Nando, por detrás do Banco BIC',
     features: [
+      'Realização de eventos com toda a estrutura necessária para festas e celebrações especiais',
       'Cadeiras almofadas baixas',
       'Mesas com toalhas apenas duas familiares especiais',
       'Loiça branca',
@@ -36,7 +38,9 @@ export const PACKAGES: Package[] = [
     color: 'bg-orange-50',
     tagline: 'Sofisticação & Conforto',
     image: 'https://i.imgur.com/Jjok3Pi.png',
+    location: 'Projeto do Nando, por detrás do Banco BIC',
     features: [
+      'Realização de eventos com toda a estrutura necessária para festas e celebrações especiais',
       'Cadeiras brancas almofadas ripadas ou algodão doce',
       'Mesas especiais',
       'Loiça',
@@ -51,12 +55,14 @@ export const PACKAGES: Package[] = [
   {
     id: 'rubi',
     name: 'PACOTE RUBI',
-    price: '18.000,00',
+    price: '35.000,00',
     currency: 'AKZ',
     color: 'bg-red-50',
     tagline: 'A Experiência Premium Definitiva',
     image: 'https://i.imgur.com/E7KmVmg.png',
+    location: 'Projeto do Nando, por detrás do Banco BIC',
     features: [
+      'Realização de eventos com toda a estrutura necessária para festas e celebrações especiais',
       'Cadeiras brancas poltronas',
       'Mesas especiais',
       'Loiça especiais',
@@ -64,9 +70,10 @@ export const PACKAGES: Package[] = [
       'Cenário para foto',
       'Cenário para o bolo',
       'Cenário para entrada',
-      'Decoração da estrutura das luzes de 5/5',
-      'Um vinil de 5/5',
-      'Luz ambiente',
+      'Estrutura com cristais de 10/10',
+      'Vinil de 10/10',
+      'Luzes ambiente',
+      'Luzes pista',
       'Senhoras para lavarem a loiça'
     ]
   },
@@ -77,12 +84,32 @@ export const PACKAGES: Package[] = [
     currency: 'AKZ',
     color: 'bg-amber-50',
     tagline: 'Gastronomia & Banquete',
-    image: 'https://i.imgur.com/hCRpZcq.png',
+    image: 'https://i.imgur.com/xo2cSQz.png',
+    location: 'Projeto do Nando, por detrás do Banco BIC',
     features: [
+      'Realização de eventos com toda a estrutura necessária para festas e celebrações especiais',
       'Pratos quentes e frios',
       'Doces e salgados',
       'Entradas e Quitutes',
       'Rodízio ou boi no espeto'
+    ]
+  },
+  {
+    id: 'salao',
+    name: 'PACOTE SALÃO',
+    price: '4.000.000,00',
+    currency: 'AKZ',
+    color: 'bg-blue-50',
+    tagline: 'Espaço & Infraestrutura Completa',
+    image: 'https://i.imgur.com/ukMjTPt.png',
+    location: 'Benfica – Rua da Oficina da Bosch',
+    features: [
+      'Iluminação completa',
+      'DJ e música',
+      'Suíte para os noivos',
+      'Cozinha equipada',
+      'Pista de dança em vinil 5/5',
+      '8 garçons profissionais para atendimento'
     ]
   }
 ];
@@ -109,16 +136,21 @@ export const GALLERY_IMAGES = [
   { url: 'https://i.imgur.com/ukMjTPt.png', category: 'Corporativo', title: 'Recepção Executiva' },
   { url: 'https://i.imgur.com/wY7xj4F.png', category: 'Festas', title: 'Noite de Gala Ava' },
   
-  { url: 'https://i.imgur.com/hCRpZcq.png', category: 'Gastronomia', title: 'Apresentação de Pratos Quentes' },
+  { url: 'https://i.imgur.com/tZNLdZc.png', category: 'Gastronomia', title: 'Apresentação de Pratos Quentes' },
   { url: 'https://i.imgur.com/ilVfZFK.png', category: 'Gastronomia', title: 'Buffet de Doces & Sobremesas' },
   { url: 'https://i.imgur.com/VYPtZXG.png', category: 'Gastronomia', title: 'Entradas Gourmet Ava' },
   { url: 'https://i.imgur.com/xo2cSQz.png', category: 'Gastronomia', title: 'Serviço de Banquetes Luxo' },
-  { url: 'https://i.imgur.com/tZNLdZc.png', category: 'Gastronomia', title: 'Experiência Gastronômica Ava' },
+  { url: 'https://i.imgur.com/xo2cSQz.png', category: 'Gastronomia', title: 'Experiência Gastronômica Ava' },
 
   { url: 'https://i.imgur.com/scHAorL.png', category: 'Especiais', title: 'Arte Visual Ava' },
   { url: 'https://i.imgur.com/HLBViFX.png', category: 'Corporativo', title: 'Espaço de Eventos' }
 ];
 
+export const SOCIAL_LINKS = {
+  instagram: 'https://www.instagram.com/avaeventos.s',
+  facebook: 'https://www.facebook.com/share/1FdLjBMALU/',
+  whatsapp: 'https://wa.me/244948757808'
+};
 export const SOCIAL_LINKS = {
   instagram: 'https://www.instagram.com/avaeventos.s',
   facebook: 'https://www.facebook.com/share/1FdLjBMALU/',
