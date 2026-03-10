@@ -5,6 +5,7 @@ import Hero from './components/Hero';
 import About from './components/About';
 import Gallery from './components/Gallery';
 import Packages from './components/Packages';
+import ExtraServices from './components/ExtraServices';
 import CheckoutModal from './components/CheckoutModal';
 import Footer from './components/Footer';
 import { Package } from './types';
@@ -14,6 +15,8 @@ const App: React.FC = () => {
   const [selectedPackage, setSelectedPackage] = useState<Package | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(true);
+  const [isLargeText, setIsLargeText] = useState(false);
+  const [selectedExtras, setSelectedExtras] = useState<string[]>([]);
   
   const [inquirySent, setInquirySent] = useState(false);
   const [inquiryData, setInquiryData] = useState({ 
@@ -35,6 +38,12 @@ const App: React.FC = () => {
   const handlePackageSelect = (pkg: Package) => {
     setSelectedPackage(pkg);
     setIsModalOpen(true);
+  };
+
+  const toggleExtra = (name: string) => {
+    setSelectedExtras(prev => 
+      prev.includes(name) ? prev.filter(i => i !== name) : [...prev, name]
+    );
   };
 
   const whatsappNumber = "244948757808";
@@ -62,9 +71,10 @@ ${inquiryData.message}`;
   };
 
   const toggleTheme = () => setIsDarkMode(!isDarkMode);
+  const toggleTextSize = () => setIsLargeText(!isLargeText);
 
   return (
-    <div className={`relative min-h-screen selection:bg-gold/30 transition-colors duration-1000 ${isDarkMode ? 'selection:text-white' : 'selection:text-gray-900'}`}>
+    <div className={`relative min-h-screen selection:bg-gold/30 transition-colors duration-1000 ${isDarkMode ? 'selection:text-white' : 'selection:text-gray-900'} ${isLargeText ? 'text-lg' : ''}`}>
       
       <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
         <div className={`absolute inset-0 transition-colors duration-1000 ${isDarkMode ? 'bg-[#080808]/80' : 'bg-[#FDFBF7]/70'}`}></div>
@@ -72,7 +82,7 @@ ${inquiryData.message}`;
         <div className={`ethereal-glow ${isDarkMode ? 'bg-indigo-900/10' : 'bg-white/20'} w-[200px] md:w-[600px] h-[200px] md:h-[600px] bottom-[5%] right-[-30px] animate-float`} style={{ animationDelay: '-7s' }}></div>
       </div>
       
-      <Navbar isDarkMode={isDarkMode} toggleTheme={toggleTheme} />
+      <Navbar isDarkMode={isDarkMode} toggleTheme={toggleTheme} isLargeText={isLargeText} toggleTextSize={toggleTextSize} />
       
       <main className="relative z-10">
         <Hero isDarkMode={isDarkMode} />
@@ -95,7 +105,13 @@ ${inquiryData.message}`;
           <div className={`h-[1px] w-full ${isDarkMode ? 'bg-white/5' : 'bg-black/5'}`}></div>
         </div>
 
-        <Packages onSelect={handlePackageSelect} isDarkMode={isDarkMode} />
+        <Packages onSelect={handlePackageSelect} isDarkMode={isDarkMode} isLargeText={isLargeText} />
+
+        <ExtraServices 
+          isDarkMode={isDarkMode} 
+          selectedExtras={selectedExtras}
+          onToggleExtra={toggleExtra}
+        />
 
         <section id="duvidas" className="py-16 md:py-32 relative">
           <div className="container mx-auto px-4 md:px-6 max-w-4xl">
@@ -227,6 +243,8 @@ ${inquiryData.message}`;
         isOpen={isModalOpen} 
         onClose={() => setIsModalOpen(false)} 
         isDarkMode={isDarkMode}
+        isLargeText={isLargeText}
+        selectedExtras={selectedExtras}
       />
       
       <a 
