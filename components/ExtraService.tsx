@@ -1,5 +1,7 @@
 
 import React from 'react';
+// Importando a constante centralizada para evitar erro de duplicidade no deploy
+import { WHATSAPP_CONTACT } from '../constants'; 
 
 interface ExtraServicesProps {
   isDarkMode: boolean;
@@ -28,11 +30,10 @@ const EXTRA_SERVICES = [
 ];
 
 const ExtraServices: React.FC<ExtraServicesProps> = ({ isDarkMode, selectedExtras, onToggleExtra }) => {
-  const whatsappNumber = "244948757808";
-
+  
   const handleConsult = (serviceName: string) => {
-    const text = `Olá Avaeventos! Gostaria de consultar a disponibilidade para o serviço extra: *${serviceName}*`;
-    window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}`, '_blank');
+    const text = `*Olá AVA Eventos! Gostaria de consultar a disponibilidade para o serviço extra: ${serviceName}*`;
+    window.open(`https://wa.me/${WHATSAPP_CONTACT}?text=${encodeURIComponent(text)}`, '_blank');
   };
 
   return (
@@ -52,9 +53,10 @@ const ExtraServices: React.FC<ExtraServicesProps> = ({ isDarkMode, selectedExtra
           {EXTRA_SERVICES.map((service, index) => {
             const isSelected = selectedExtras.includes(service.name);
             return (
-              <div 
+              <div
                 key={index}
-                className={`group p-8 rounded-[2.5rem] border transition-all duration-700 ${
+                onClick={() => onToggleExtra(service.name)}
+                className={`group p-8 rounded-[2.5rem] border transition-all duration-700 cursor-pointer ${
                   isDarkMode 
                     ? 'bg-white/5 border-white/10 hover:border-gold/50' 
                     : 'bg-gray-50 border-black/5 hover:border-gold/50 shadow-sm'
@@ -64,61 +66,22 @@ const ExtraServices: React.FC<ExtraServicesProps> = ({ isDarkMode, selectedExtra
                   <h3 className={`text-lg font-bold mb-2 transition-colors ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
                     {service.name}
                   </h3>
-                  <p className={`text-[10px] uppercase tracking-widest font-bold ${isDarkMode ? 'text-gray-500' : 'text-gray-400'}`}>
-                    {service.detail}
-                  </p>
+                  <p className="text-gold text-sm font-medium">{service.detail}</p>
                 </div>
-
-                <div className="flex flex-col gap-3">
-                  <button 
-                    onClick={() => onToggleExtra(service.name)}
-                    className={`w-full py-4 rounded-2xl text-[10px] font-bold uppercase tracking-widest transition-all duration-500 flex items-center justify-center gap-2 ${
-                      isSelected 
-                        ? 'bg-gold text-white shadow-lg shadow-gold/20' 
-                        : isDarkMode ? 'bg-white/5 text-white hover:bg-white/10' : 'bg-white text-gray-900 border border-black/5 hover:bg-gray-50'
-                    }`}
-                  >
-                    {isSelected ? (
-                      <>
-                        <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>
-                        Adicionado
-                      </>
-                    ) : (
-                      <>
-                        <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" /></svg>
-                        Adicionar na Reserva
-                      </>
-                    )}
-                  </button>
-
-                  <button 
-                    onClick={() => handleConsult(service.name)}
-                    className={`w-full py-4 rounded-2xl text-[10px] font-bold uppercase tracking-widest transition-all duration-500 flex items-center justify-center gap-2 border ${
-                      isDarkMode ? 'border-white/10 text-gray-400 hover:text-white hover:border-white/20' : 'border-black/5 text-gray-500 hover:text-gray-900 hover:border-black/10'
-                    }`}
-                  >
-                    <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" /></svg>
-                    Consultar Disponibilidade
-                  </button>
-                </div>
+                
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleConsult(service.name);
+                  }}
+                  className="text-xs uppercase tracking-widest font-bold text-gold hover:opacity-70 transition-opacity"
+                >
+                  Consultar via WhatsApp →
+                </button>
               </div>
             );
           })}
         </div>
-
-        {selectedExtras.length > 0 && (
-          <div className="mt-16 text-center animate-reveal">
-            <p className={`mb-6 text-sm font-medium ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>
-              Você selecionou <span className="text-gold font-bold">{selectedExtras.length}</span> serviços extras.
-            </p>
-            <a 
-              href="#pacotes" 
-              className="inline-block bg-gold text-white px-12 py-6 rounded-full font-bold uppercase tracking-widest text-xs hover:bg-black transition-all duration-700 shadow-2xl shadow-gold/20 active:scale-95"
-            >
-              Escolher Plano e Finalizar Reserva
-            </a>
-          </div>
-        )}
       </div>
     </section>
   );
