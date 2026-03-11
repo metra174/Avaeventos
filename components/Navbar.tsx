@@ -4,9 +4,11 @@ import React, { useState, useEffect } from 'react';
 interface NavbarProps {
   isDarkMode: boolean;
   toggleTheme: () => void;
+  isLargeText: boolean;
+  toggleTextSize: () => void;
 }
 
-const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleTheme }) => {
+const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleTheme, isLargeText, toggleTextSize }) => {
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
@@ -35,27 +37,37 @@ const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleTheme }) => {
         </a>
         
         <div className="hidden lg:flex space-x-10 items-center">
-          {['sobre', 'galeria', 'pacotes', 'duvidas'].map((item) => (
+          {['sobre', 'galeria', 'pacotes', 'extras', 'duvidas'].map((item) => (
             <a 
               key={item}
               href={`#${item}`} 
               className={`capitalize text-[10px] font-bold tracking-[0.3em] hover:text-gold transition-all duration-500 relative group ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}
             >
-              {item === 'sobre' ? 'A Marca' : item === 'pacotes' ? 'Pacotes' : item === 'duvidas' ? 'Dúvidas' : item}
+              {item === 'sobre' ? 'A Marca' : item === 'pacotes' ? 'Pacotes' : item === 'extras' ? 'Extras' : item === 'duvidas' ? 'Dúvidas' : item}
               <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-0 h-[1px] bg-gold transition-all duration-500 group-hover:w-8"></span>
             </a>
           ))}
           
-          <button 
-            onClick={toggleTheme}
-            className={`p-2 rounded-full transition-all duration-500 ${isDarkMode ? 'bg-white/10 text-gold hover:bg-white/20' : 'bg-black/5 text-gray-900 hover:bg-black/10'}`}
-          >
-            {isDarkMode ? (
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707-.707M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
-            ) : (
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>
-            )}
-          </button>
+          <div className="flex items-center gap-2">
+            <button 
+              onClick={toggleTextSize}
+              title="Aumentar Tamanho do Texto"
+              className={`p-2 rounded-full transition-all duration-500 flex items-center justify-center ${isLargeText ? 'bg-gold text-white' : (isDarkMode ? 'bg-white/10 text-gold hover:bg-white/20' : 'bg-black/5 text-gray-900 hover:bg-black/10')}`}
+            >
+              <span className="text-[10px] font-bold">A+</span>
+            </button>
+
+            <button 
+              onClick={toggleTheme}
+              className={`p-2 rounded-full transition-all duration-500 ${isDarkMode ? 'bg-white/10 text-gold hover:bg-white/20' : 'bg-black/5 text-gray-900 hover:bg-black/10'}`}
+            >
+              {isDarkMode ? (
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707-.707M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+              ) : (
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>
+              )}
+            </button>
+          </div>
 
           <a href="#orcamento" className="bg-gold text-white px-8 py-3 rounded-full hover:bg-white hover:text-gold border border-gold transition-all duration-700 font-bold text-[9px] tracking-[0.2em] shadow-lg">
             ORÇAMENTO
@@ -63,6 +75,12 @@ const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleTheme }) => {
         </div>
 
         <div className="lg:hidden flex items-center space-x-2">
+          <button 
+            onClick={toggleTextSize}
+            className={`p-2 rounded-full ${isLargeText ? 'text-gold' : (isDarkMode ? 'text-white' : 'text-gray-900')}`}
+          >
+            <span className="text-[10px] font-bold">A+</span>
+          </button>
           <button onClick={toggleTheme} className={`p-2 rounded-full ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
              {isDarkMode ? <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707-.707M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg> : <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>}
           </button>
@@ -76,3 +94,4 @@ const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleTheme }) => {
 };
 
 export default Navbar;
+
