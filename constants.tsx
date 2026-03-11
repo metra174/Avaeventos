@@ -147,5 +147,4 @@ export const SOCIAL_LINKS = {
   whatsapp: 'https://wa.me/244948757808'
 };
 
-// Adicionado para que o ExtraServices.tsx pare de dar erro de duplicidade
 export const WHATSAPP_CONTACT = "244948757808";
