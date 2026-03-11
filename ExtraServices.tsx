@@ -1,7 +1,6 @@
 
 import React from 'react';
-// Importando a constante centralizada para evitar erro de duplicidade no deploy
-import { WHATSAPP_CONTACT } from '../constants'; 
+import { WHATSAPP_CONTACT } from '../constants';
 
 interface ExtraServicesProps {
   isDarkMode: boolean;
