@@ -1,4 +1,3 @@
-
 import { Package } from './types';
 
 export const ANGOLA_PROVINCES = [
@@ -6,7 +5,7 @@ export const ANGOLA_PROVINCES = [
   'Cuanza Norte', 'Cuanza Sul', 'Cunene', 'Huambo', 'Huíla', 
   'Luanda', 'Lunda Norte', 'Lunda Sul', 'Malanje', 'Moxico', 
   'Namibe', 'Uíge', 'Zaire'
-];
+] as const;
 
 export const PACKAGES: Package[] = [
   {
@@ -19,15 +18,15 @@ export const PACKAGES: Package[] = [
     image: 'https://i.imgur.com/Q8RBZGK.png',
     location: 'Projeto do Nando, por detrás do Banco BIC',
     features: [
-      'Realização de eventos com toda a estrutura necessária para festas e celebrações especiais',
-      'Cadeiras almofadas baixas',
-      'Mesas com toalhas apenas duas familiares especiais',
-      'Loiça branca',
-      'Senhoras para lavarem a loiça',
+      'Estrutura completa para festas e celebrações',
+      'Cadeiras almofadadas baixas',
+      'Mesas com toalhas (inclui duas familiares especiais)',
+      'Loiça branca premium',
+      'Equipa de limpeza de loiça inclusa',
       'Cenário para os noivos',
-      'Cenário para entrada',
-      'Cenário da foto',
-      'Cenário do bolo'
+      'Cenário de entrada e receção',
+      'Cenário para fotografias',
+      'Cenário para o bolo'
     ]
   },
   {
@@ -40,16 +39,14 @@ export const PACKAGES: Package[] = [
     image: 'https://i.imgur.com/Jjok3Pi.png',
     location: 'Projeto do Nando, por detrás do Banco BIC',
     features: [
-      'Realização de eventos com toda a estrutura necessária para festas e celebrações especiais',
-      'Cadeiras brancas almofadas ripadas ou algodão doce',
-      'Mesas especiais',
-      'Loiça',
-      'Cenário dos noivos',
-      'Cenário do Bolo',
-      'Cenário para Entrada',
-      'Cenário para foto',
-      'Senhoras para lavarem a loiça',
-      'Um vinil de 5/5'
+      'Estrutura completa para eventos especiais',
+      'Cadeiras brancas (modelos ripada ou algodão doce)',
+      'Mesas especiais decoradas',
+      'Serviço de loiça completo',
+      'Cenário para noivos e bolo',
+      'Cenário para entrada e fotos',
+      'Equipa de limpeza de loiça inclusa',
+      'Painel de vinil personalizado (5x5m)'
     ]
   },
   {
@@ -62,19 +59,15 @@ export const PACKAGES: Package[] = [
     image: 'https://i.imgur.com/E7KmVmg.png',
     location: 'Projeto do Nando, por detrás do Banco BIC',
     features: [
-      'Realização de eventos com toda a estrutura necessária para festas e celebrações especiais',
-      'Cadeiras brancas poltronas',
-      'Mesas especiais',
-      'Loiça especiais',
-      'Cenário para os noivos',
-      'Cenário para foto',
-      'Cenário para o bolo',
-      'Cenário para entrada',
-      'Estrutura com cristais de 10/10',
-      'Vinil de 10/10',
-      'Luzes ambiente',
-      'Luzes pista',
-      'Senhoras para lavarem a loiça'
+      'Estrutura de luxo para celebrações especiais',
+      'Cadeiras brancas modelo poltrona',
+      'Mesas especiais de gala',
+      'Loiças especiais de luxo',
+      'Cenários completos: Noivos, Bolo, Entrada e Fotos',
+      'Estrutura com cristais (10x10m)',
+      'Painel de vinil personalizado (10x10m)',
+      'Iluminação de ambiente e pista de dança',
+      'Equipa de limpeza de loiça inclusa'
     ]
   },
   {
@@ -87,11 +80,11 @@ export const PACKAGES: Package[] = [
     image: 'https://i.imgur.com/xo2cSQz.png',
     location: 'Projeto do Nando, por detrás do Banco BIC',
     features: [
-      'Realização de eventos com toda a estrutura necessária para festas e celebrações especiais',
-      'Pratos quentes e frios',
-      'Doces e salgados',
-      'Entradas e Quitutes',
-      'Rodízio ou boi no espeto'
+      'Serviço completo de buffet para eventos',
+      'Seleção de pratos quentes e frios',
+      'Variedade de doces e salgados',
+      'Entradas e quitutes tradicionais',
+      'Opção de rodízio ou boi no espeto'
     ]
   },
   {
@@ -104,13 +97,13 @@ export const PACKAGES: Package[] = [
     image: 'https://i.imgur.com/ukMjTPt.png',
     location: 'Benfica – Rua da Oficina da Bosch',
     features: [
-      'Iluminação completa',
-      'DJ e música',
-      'Suíte para os noivos',
-      'Cozinha equipada',
-      'Pista de dança em vinil 5/5',
-      'Decoração completa para 200 convidados',
-      '8 garçons profissionais para atendimento'
+      'Iluminação profissional completa',
+      'Serviço de DJ e sonorização',
+      'Suíte privativa para os noivos',
+      'Cozinha industrial equipada',
+      'Pista de dança em vinil (5x5m)',
+      'Decoração completa para até 200 convidados',
+      'Equipa de 8 garçons profissionais'
     ]
   }
 ];
@@ -128,22 +121,18 @@ export const GALLERY_IMAGES = [
   { url: 'https://i.imgur.com/uqMWmbx.png', category: 'Casamentos', title: 'Ambiente de Recepção Premium' },
   { url: 'https://i.imgur.com/qM3JIw0.png', category: 'Corporativo', title: 'Banquete de Gala' },
   { url: 'https://i.imgur.com/U1FRqX5.png', category: 'Casamentos', title: 'Teto Floral de Luxo' },
-  
   { url: 'https://i.imgur.com/kWySv7R.png', category: 'Especiais', title: 'Arte em Detalhes' },
   { url: 'https://i.imgur.com/sinppBQ.png', category: 'Casamentos', title: 'Cerimonial de Luxo' },
-  { url: 'https://i.imgur.com/LfzqD2U.png', category: 'Festas', title: 'Ambiente Festivo Ava' },
+  { url: 'https://i.imgur.com/LfzqD2U.png', category: 'Festas', title: 'Ambiente Festivo AVA' },
   { url: 'https://i.imgur.com/mrkRvmo.png', category: 'Especiais', title: 'Curadoria de Cenários' },
   { url: 'https://i.imgur.com/51XbGRs.png', category: 'Casamentos', title: 'Altar Monumental' },
   { url: 'https://i.imgur.com/ukMjTPt.png', category: 'Corporativo', title: 'Recepção Executiva' },
-  { url: 'https://i.imgur.com/wY7xj4F.png', category: 'Festas', title: 'Noite de Gala Ava' },
-  
+  { url: 'https://i.imgur.com/wY7xj4F.png', category: 'Festas', title: 'Noite de Gala AVA' },
   { url: 'https://i.imgur.com/tZNLdZc.png', category: 'Gastronomia', title: 'Apresentação de Pratos Quentes' },
   { url: 'https://i.imgur.com/ilVfZFK.png', category: 'Gastronomia', title: 'Buffet de Doces & Sobremesas' },
-  { url: 'https://i.imgur.com/VYPtZXG.png', category: 'Gastronomia', title: 'Entradas Gourmet Ava' },
+  { url: 'https://i.imgur.com/VYPtZXG.png', category: 'Gastronomia', title: 'Entradas Gourmet AVA' },
   { url: 'https://i.imgur.com/xo2cSQz.png', category: 'Gastronomia', title: 'Serviço de Banquetes Luxo' },
-  { url: 'https://i.imgur.com/xo2cSQz.png', category: 'Gastronomia', title: 'Experiência Gastronômica Ava' },
-
-  { url: 'https://i.imgur.com/scHAorL.png', category: 'Especiais', title: 'Arte Visual Ava' },
+  { url: 'https://i.imgur.com/scHAorL.png', category: 'Especiais', title: 'Arte Visual AVA' },
   { url: 'https://i.imgur.com/HLBViFX.png', category: 'Corporativo', title: 'Espaço de Eventos' }
 ];
 
