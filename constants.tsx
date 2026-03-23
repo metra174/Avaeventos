@@ -152,7 +152,3 @@ export const SOCIAL_LINKS = {
   facebook: 'https://www.facebook.com/share/1FdLjBMALU/',
   whatsapp: 'https://wa.me/244948757808'
 };
-  instagram: 'https://www.instagram.com/avaeventos.s',
-  facebook: 'https://www.facebook.com/share/1FdLjBMALU/',
-  whatsapp: `https://wa.me/${WHATSAPP_CONTACT}`
-};
