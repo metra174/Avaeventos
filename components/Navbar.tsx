@@ -10,6 +10,7 @@ interface NavbarProps {
 
 const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleTheme, isLargeText, toggleTextSize }) => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -19,8 +20,16 @@ const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleTheme, isLargeText, t
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const navItems = [
+    { id: 'sobre', label: 'A Marca' },
+    { id: 'galeria', label: 'Galeria' },
+    { id: 'pacotes', label: 'Pacotes' },
+    { id: 'extras', label: 'Extras' },
+    { id: 'duvidas', label: 'Dúvidas' }
+  ];
+
   return (
-    <nav className={`fixed w-full z-50 transition-all duration-500 ${isScrolled ? (isDarkMode ? 'bg-black/80 border-white/10' : 'bg-white/80 border-black/5') : 'bg-transparent py-4 md:py-8'} backdrop-blur-xl py-3 border-b`}>
+    <nav className={`fixed w-full z-50 transition-all duration-500 ${isScrolled || isMenuOpen ? (isDarkMode ? 'bg-black/90 border-white/10' : 'bg-white/90 border-black/5') : 'bg-transparent py-4 md:py-8'} backdrop-blur-xl py-3 border-b`}>
       <div className="container mx-auto px-4 md:px-6 flex justify-between items-center">
         <a href="#" className="flex items-center gap-2 group transition-transform duration-500 hover:scale-105">
           <img 
@@ -36,14 +45,15 @@ const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleTheme, isLargeText, t
           </div>
         </a>
         
+        {/* Desktop Menu */}
         <div className="hidden lg:flex space-x-10 items-center">
-          {['sobre', 'galeria', 'pacotes', 'extras', 'duvidas'].map((item) => (
+          {navItems.map((item) => (
             <a 
-              key={item}
-              href={`#${item}`} 
+              key={item.id}
+              href={`#${item.id}`} 
               className={`capitalize text-[10px] font-bold tracking-[0.3em] hover:text-gold transition-all duration-500 relative group ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}
             >
-              {item === 'sobre' ? 'A Marca' : item === 'pacotes' ? 'Pacotes' : item === 'extras' ? 'Extras' : item === 'duvidas' ? 'Dúvidas' : item}
+              {item.label}
               <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-0 h-[1px] bg-gold transition-all duration-500 group-hover:w-8"></span>
             </a>
           ))}
@@ -74,19 +84,57 @@ const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleTheme, isLargeText, t
           </a>
         </div>
 
-        <div className="lg:hidden flex items-center space-x-2">
+        {/* Mobile Menu Toggle */}
+        <div className="lg:hidden flex items-center space-x-4">
           <button 
-            onClick={toggleTextSize}
-            className={`p-2 rounded-full ${isLargeText ? 'text-gold' : (isDarkMode ? 'text-white' : 'text-gray-900')}`}
+            onClick={toggleTheme} 
+            className={`p-2 rounded-full ${isDarkMode ? 'text-white' : 'text-gray-900'}`}
           >
-            <span className="text-[10px] font-bold">A+</span>
+             {isDarkMode ? <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707-.707M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg> : <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>}
           </button>
-          <button onClick={toggleTheme} className={`p-2 rounded-full ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
-             {isDarkMode ? <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707-.707M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg> : <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>}
+          
+          <button 
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className={`p-2 transition-colors ${isDarkMode ? 'text-white' : 'text-gray-900'}`}
+          >
+            {isMenuOpen ? (
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
+            ) : (
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" /></svg>
+            )}
           </button>
-          <a href="#orcamento" className="bg-gold text-white px-4 py-2 rounded-full text-[8px] font-bold tracking-widest shadow-md">
-            ORÇAMENTO
-          </a>
+        </div>
+      </div>
+
+      {/* Mobile Menu Content */}
+      <div className={`lg:hidden overflow-hidden transition-all duration-500 ease-in-out ${isMenuOpen ? 'max-h-screen opacity-100 border-t border-gold/10' : 'max-h-0 opacity-0'}`}>
+        <div className={`flex flex-col p-6 space-y-6 ${isDarkMode ? 'bg-black text-white' : 'bg-white text-gray-900'}`}>
+          {navItems.map((item) => (
+            <a 
+              key={item.id}
+              href={`#${item.id}`}
+              onClick={() => setIsMenuOpen(false)}
+              className="text-sm font-bold tracking-widest uppercase hover:text-gold transition-colors"
+            >
+              {item.label}
+            </a>
+          ))}
+          <div className="pt-4 flex flex-col space-y-4">
+            <button 
+              onClick={toggleTextSize}
+              className="flex items-center gap-3 text-sm font-bold uppercase tracking-widest"
+            >
+              <span className={`w-8 h-8 rounded-full flex items-center justify-center ${isLargeText ? 'bg-gold text-white' : 'bg-gold/10 text-gold'}`}>A+</span>
+              {isLargeText ? 'Texto Normal' : 'Aumentar Texto'}
+            </button>
+            <a 
+              href="#orcamento" 
+              onClick={() => setIsMenuOpen(false)}
+              className="bg-gold text-white text-center py-4 rounded-xl font-bold uppercase tracking-widest shadow-lg"
+            >
+              Solicitar Orçamento
+            </a>
+          </div>
         </div>
       </div>
     </nav>
@@ -94,4 +142,3 @@ const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleTheme, isLargeText, t
 };
 
 export default Navbar;
-
