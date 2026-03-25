@@ -28,25 +28,25 @@ const Hero: React.FC<HeroProps> = ({ isDarkMode }) => {
           </span>
         </div>
         
-        <h1 className={`text-6xl md:text-9xl font-bold mb-8 md:mb-10 leading-[1.1] opacity-0 animate-reveal stagger-1 drop-shadow-2xl transition-colors duration-1000 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
+        <h1 className={`text-4xl sm:text-6xl md:text-8xl lg:text-9xl font-bold mb-6 md:mb-10 leading-[1.1] opacity-0 animate-reveal stagger-1 drop-shadow-2xl transition-colors duration-1000 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
           Essência & <br />
           <span className="italic font-serif text-gold">Sofisticação</span>
         </h1>
         
-        <p className={`text-lg md:text-2xl mb-12 md:mb-16 font-light max-w-2xl mx-auto leading-relaxed opacity-0 animate-reveal stagger-2 transition-colors duration-1000 ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+        <p className={`text-base sm:text-lg md:text-2xl mb-10 md:mb-16 font-light max-w-2xl mx-auto leading-relaxed opacity-0 animate-reveal stagger-2 transition-colors duration-1000 ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
           Cuidamos de cada detalhe para que seu evento seja um reflexo impecável da sua história, envolto em puro luxo.
         </p>
         
-        <div className="flex flex-col md:flex-row gap-5 justify-center items-center opacity-0 animate-reveal stagger-3">
+        <div className="flex flex-col sm:flex-row gap-4 md:gap-5 justify-center items-center opacity-0 animate-reveal stagger-3">
           <a 
             href="#pacotes" 
-            className="w-full md:w-auto bg-gold text-white px-10 md:px-14 py-5 md:py-6 rounded-full text-lg font-bold hover:bg-white hover:text-gold transition-all duration-700 transform hover:scale-105 shadow-xl text-center active:scale-95"
+            className="w-full sm:w-auto bg-gold text-white px-8 md:px-14 py-4 md:py-6 rounded-full text-base md:text-lg font-bold hover:bg-white hover:text-gold transition-all duration-700 transform hover:scale-105 shadow-xl text-center active:scale-95"
           >
             Ver Pacotes
           </a>
           <a 
             href="#duvidas" 
-            className="w-full md:w-auto glass-panel px-10 md:px-14 py-5 md:py-6 rounded-full text-lg font-bold hover:bg-gold/20 transition-all duration-700 text-center border-gold/20 active:scale-95"
+            className="w-full sm:w-auto glass-panel px-8 md:px-14 py-4 md:py-6 rounded-full text-base md:text-lg font-bold hover:bg-gold/20 transition-all duration-700 text-center border-gold/20 active:scale-95"
           >
             Saber Mais
           </a>
