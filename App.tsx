@@ -87,13 +87,13 @@ ${inquiryData.message}`;
       <main className="relative z-10">
         <Hero isDarkMode={isDarkMode} />
         
-        <section className="py-10 md:py-20 relative overflow-hidden border-y border-gold/5 bg-white/5 backdrop-blur-sm">
+        <section className="py-8 md:py-20 relative overflow-hidden border-y border-gold/5 bg-white/5 backdrop-blur-sm">
           <div className="container mx-auto px-4 text-center">
-            <div className={`flex flex-wrap justify-center items-center gap-x-12 gap-y-6 md:gap-32 transition-all duration-1000 ${isDarkMode ? 'opacity-60' : 'opacity-40'}`}>
-              <span className="font-serif text-lg md:text-3xl font-bold tracking-[0.2em]">VOGUE</span>
-              <span className="font-serif text-lg md:text-3xl font-bold tracking-[0.2em]">LUXURY</span>
-              <span className="font-serif text-lg md:text-3xl font-bold tracking-[0.2em]">ELEGANCE</span>
-              <span className="font-serif text-lg md:text-3xl font-bold tracking-[0.2em]">CLASSIC</span>
+            <div className={`flex flex-wrap justify-center items-center gap-x-6 gap-y-4 sm:gap-x-12 sm:gap-y-6 md:gap-32 transition-all duration-1000 ${isDarkMode ? 'opacity-60' : 'opacity-40'}`}>
+              <span className="font-serif text-base sm:text-lg md:text-3xl font-bold tracking-[0.1em] sm:tracking-[0.2em]">VOGUE</span>
+              <span className="font-serif text-base sm:text-lg md:text-3xl font-bold tracking-[0.1em] sm:tracking-[0.2em]">LUXURY</span>
+              <span className="font-serif text-base sm:text-lg md:text-3xl font-bold tracking-[0.1em] sm:tracking-[0.2em]">ELEGANCE</span>
+              <span className="font-serif text-base sm:text-lg md:text-3xl font-bold tracking-[0.1em] sm:tracking-[0.2em]">CLASSIC</span>
             </div>
           </div>
         </section>
@@ -113,13 +113,13 @@ ${inquiryData.message}`;
           onToggleExtra={toggleExtra}
         />
 
-        <section id="duvidas" className="py-16 md:py-32 relative">
+        <section id="duvidas" className="py-12 md:py-32 relative">
           <div className="container mx-auto px-4 md:px-6 max-w-4xl">
-            <div className={`glass-panel p-8 md:p-16 rounded-[2.5rem] relative overflow-hidden transition-all duration-1000 ${isDarkMode ? 'border-white/10 shadow-2xl shadow-gold/5' : 'border-black/5 shadow-xl'}`}>
-              <div className="text-center mb-10 md:mb-12">
-                <span className="text-gold uppercase tracking-[0.3em] font-bold text-[10px] md:text-xs mb-3 block">Central de Atendimento</span>
-                <h2 className={`text-3xl md:text-6xl font-bold mb-4 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Fale com a <span className="text-gold italic font-serif">Curadoria</span></h2>
-                <p className={`text-base md:text-lg font-light leading-relaxed ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Receba suporte personalizado e tire todas as suas dúvidas diretamente pelo WhatsApp.</p>
+            <div className={`glass-panel p-6 sm:p-10 md:p-16 rounded-[2rem] md:rounded-[2.5rem] relative overflow-hidden transition-all duration-1000 ${isDarkMode ? 'border-white/10 shadow-2xl shadow-gold/5' : 'border-black/5 shadow-xl'}`}>
+              <div className="text-center mb-8 md:mb-12">
+                <span className="text-gold uppercase tracking-[0.2em] md:tracking-[0.3em] font-bold text-[10px] md:text-xs mb-3 block">Central de Atendimento</span>
+                <h2 className={`text-2xl sm:text-4xl md:text-6xl font-bold mb-4 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Fale com a <span className="text-gold italic font-serif">Curadoria</span></h2>
+                <p className={`text-sm md:text-lg font-light leading-relaxed ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Receba suporte personalizado e tire todas as suas dúvidas diretamente pelo WhatsApp.</p>
               </div>
 
               {inquirySent ? (
