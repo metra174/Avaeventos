@@ -8,9 +8,11 @@ interface CheckoutModalProps {
   isOpen: boolean;
   onClose: () => void;
   isDarkMode: boolean;
+  isLargeText: boolean;
+  selectedExtras?: string[];
 }
 
-const CheckoutModal: React.FC<CheckoutModalProps> = ({ pkg, isOpen, onClose, isDarkMode }) => {
+const CheckoutModal: React.FC<CheckoutModalProps> = ({ pkg, isOpen, onClose, isDarkMode, isLargeText, selectedExtras = [] }) => {
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
     name: '',
@@ -29,8 +31,9 @@ const CheckoutModal: React.FC<CheckoutModalProps> = ({ pkg, isOpen, onClose, isD
   }, [pkg]);
 
   const totalInvestment = useMemo(() => {
+    if (pkg?.id === 'salao') return numericPrice;
     return numericPrice * (formData.guests || 0);
-  }, [numericPrice, formData.guests]);
+  }, [numericPrice, formData.guests, pkg?.id]);
 
   const formatCurrency = (value: number) => {
     return new Intl.NumberFormat('pt-AO', {
@@ -46,6 +49,10 @@ const CheckoutModal: React.FC<CheckoutModalProps> = ({ pkg, isOpen, onClose, isD
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
+    const extrasText = selectedExtras.length > 0 
+      ? `\n✨ *Serviços Extras Selecionados:*\n${selectedExtras.map(ex => `• ${ex}`).join('\n')}`
+      : '';
+
     const text = `Olá Avaeventos! Gostaria de solicitar uma reserva:
 
 💎 *Plano:* ${pkg.name}
@@ -55,7 +62,7 @@ const CheckoutModal: React.FC<CheckoutModalProps> = ({ pkg, isOpen, onClose, isD
 🏠 *Endereço Exato:* ${formData.exactAddress}
 👥 *Convidados:* ${formData.guests}
 📅 *Data:* ${formData.date}
-💳 *Pagamento:* ${formData.paymentMethod}
+💳 *Pagamento:* ${formData.paymentMethod}${extrasText}
 
 📝 *Desejos e Perguntas:* 
 ${formData.notes || 'Sem observações adicionais.'}
@@ -91,7 +98,13 @@ ${formData.notes || 'Sem observações adicionais.'}
           <form onSubmit={handleSubmit} className="p-6 md:p-12 pt-16 md:pt-12">
             <div className="mb-8">
               <h2 className={`text-2xl md:text-4xl font-serif font-bold mb-2 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>{pkg.name}</h2>
-              <p className="text-gold font-medium text-[10px] uppercase tracking-widest">Complete os detalhes para o seu orçamento</p>
+              {pkg.location && (
+                <div className="flex items-center gap-2 mb-2">
+                  <svg className="w-4 h-4 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                  <span className="text-gold font-bold text-[10px] uppercase tracking-widest">{pkg.location}</span>
+                </div>
+              )}
+              <p className="text-gold font-medium text-[10px] uppercase tracking-widest opacity-70">Complete os detalhes para o seu orçamento</p>
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6 mb-8">
@@ -158,12 +171,16 @@ ${formData.notes || 'Sem observações adicionais.'}
 
             <div className={`p-6 rounded-[2rem] border mb-8 transition-all duration-700 ${isDarkMode ? 'bg-white/5 border-white/5' : 'bg-gray-50 border-gray-100 shadow-inner'}`}>
               <div className="flex justify-between items-center mb-4 pb-4 border-b border-gold/10 text-xs">
-                <span className={`font-bold uppercase tracking-wider ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>Preço p/ Pessoa</span>
-                <span className={`font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>{pkg.currency} {pkg.price}</span>
+                <span className={`font-bold uppercase tracking-wider ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+                  {pkg.id === 'salao' ? 'Valor do Aluguer' : 'Preço p/ Pessoa'}
+                </span>
+                <span className={`font-bold ${isLargeText ? 'text-lg' : ''} ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>{pkg.currency} {pkg.price}</span>
               </div>
               <div className="flex justify-between items-center">
-                <span className={`text-[10px] font-bold uppercase tracking-wider ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>Total Estimado</span>
-                <span className="text-gold text-xl md:text-2xl font-black">
+                <span className={`text-[10px] font-bold uppercase tracking-wider ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+                  {pkg.id === 'salao' ? 'Investimento Total' : 'Total Estimado'}
+                </span>
+                <span className={`text-gold font-black transition-all duration-500 ${isLargeText ? 'text-3xl md:text-4xl' : 'text-2xl md:text-3xl'}`}>
                   {pkg.currency} {formatCurrency(totalInvestment)}
                 </span>
               </div>
