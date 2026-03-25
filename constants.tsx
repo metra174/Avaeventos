@@ -5,7 +5,9 @@ export const ANGOLA_PROVINCES = [
   'Cuanza Norte', 'Cuanza Sul', 'Cunene', 'Huambo', 'Huíla', 
   'Luanda', 'Lunda Norte', 'Lunda Sul', 'Malanje', 'Moxico', 
   'Namibe', 'Uíge', 'Zaire'
-];
+] as const;
+
+export const WHATSAPP_CONTACT = "244948757808";
 
 export const PACKAGES: Package[] = [
   {
@@ -145,5 +147,5 @@ export const GALLERY_IMAGES = [
 export const SOCIAL_LINKS = {
   instagram: 'https://www.instagram.com/avaeventos.s',
   facebook: 'https://www.facebook.com/share/1FdLjBMALU/',
-  whatsapp: 'https://wa.me/244948757808'
-};
+  whatsapp: `https://wa.me/${WHATSAPP_CONTACT}`
+} as const;
