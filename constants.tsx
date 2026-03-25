@@ -1,4 +1,3 @@
-
 import { Package } from './types';
 
 export const ANGOLA_PROVINCES = [
@@ -20,7 +19,7 @@ export const PACKAGES: Package[] = [
     location: 'Projeto do Nando, por detrás do Banco BIC',
     features: [
       'Realização de eventos com toda a estrutura necessária para festas e celebrações especiais',
-      'Cadeiras almofadas baixas',
+      'Cadeiras almofadadas baixas',
       'Mesas com toalhas apenas duas familiares especiais',
       'Loiça branca',
       'Senhoras para lavarem a loiça',
@@ -69,7 +68,7 @@ export const PACKAGES: Package[] = [
       'Realização de eventos com toda a estrutura necessária para festas e celebrações especiais',
       'Cadeiras brancas poltronas',
       'Mesas especiais',
-      'Loiça especiais',
+      'Loiças especiais',
       'Cenário para os noivos',
       'Cenário para foto',
       'Cenário para o bolo',
@@ -138,7 +137,6 @@ export const GALLERY_IMAGES = [
   { url: 'https://i.imgur.com/uqMWmbx.png', category: 'Casamentos', title: 'Ambiente de Recepção Premium' },
   { url: 'https://i.imgur.com/qM3JIw0.png', category: 'Corporativo', title: 'Banquete de Gala' },
   { url: 'https://i.imgur.com/U1FRqX5.png', category: 'Casamentos', title: 'Teto Floral de Luxo' },
-  
   { url: 'https://i.imgur.com/kWySv7R.png', category: 'Especiais', title: 'Arte em Detalhes' },
   { url: 'https://i.imgur.com/sinppBQ.png', category: 'Casamentos', title: 'Cerimonial de Luxo' },
   { url: 'https://i.imgur.com/LfzqD2U.png', category: 'Festas', title: 'Ambiente Festivo Ava' },
@@ -146,13 +144,10 @@ export const GALLERY_IMAGES = [
   { url: 'https://i.imgur.com/51XbGRs.png', category: 'Casamentos', title: 'Altar Monumental' },
   { url: 'https://i.imgur.com/ukMjTPt.png', category: 'Corporativo', title: 'Recepção Executiva' },
   { url: 'https://i.imgur.com/wY7xj4F.png', category: 'Festas', title: 'Noite de Gala Ava' },
-  
   { url: 'https://i.imgur.com/tZNLdZc.png', category: 'Gastronomia', title: 'Apresentação de Pratos Quentes' },
   { url: 'https://i.imgur.com/ilVfZFK.png', category: 'Gastronomia', title: 'Buffet de Doces & Sobremesas' },
   { url: 'https://i.imgur.com/VYPtZXG.png', category: 'Gastronomia', title: 'Entradas Gourmet Ava' },
   { url: 'https://i.imgur.com/xo2cSQz.png', category: 'Gastronomia', title: 'Serviço de Banquetes Luxo' },
-  { url: 'https://i.imgur.com/xo2cSQz.png', category: 'Gastronomia', title: 'Experiência Gastronômica Ava' },
-
   { url: 'https://i.imgur.com/scHAorL.png', category: 'Especiais', title: 'Arte Visual Ava' },
   { url: 'https://i.imgur.com/HLBViFX.png', category: 'Corporativo', title: 'Espaço de Eventos' }
 ];
@@ -162,4 +157,3 @@ export const SOCIAL_LINKS = {
   facebook: 'https://www.facebook.com/share/1FdLjBMALU/',
   whatsapp: 'https://wa.me/244948757808'
 };
-} as const;
