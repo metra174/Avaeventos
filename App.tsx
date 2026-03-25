@@ -5,11 +5,11 @@ import Hero from './components/Hero';
 import About from './components/About';
 import Gallery from './components/Gallery';
 import Packages from './components/Packages';
-import ExtraServices from './components/ExtraServices'; // Nome com 's' no final
+import ExtraServices from './components/ExtraServices';
 import CheckoutModal from './components/CheckoutModal';
 import Footer from './components/Footer';
 import { Package } from './types';
-import { ANGOLA_PROVINCES, WHATSAPP_CONTACT } from './constants'; // Importando do local central
+import { ANGOLA_PROVINCES } from './constants';
 
 const App: React.FC = () => {
   const [selectedPackage, setSelectedPackage] = useState<Package | null>(null);
@@ -46,6 +46,8 @@ const App: React.FC = () => {
     );
   };
 
+  const whatsappNumber = "244948757808";
+
   const handleInquirySubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
@@ -55,10 +57,11 @@ const App: React.FC = () => {
 📱 *WhatsApp:* ${inquiryData.phone}
 📍 *Província:* ${inquiryData.location}
 🏠 *Endereço Exato:* ${inquiryData.exactAddress}
-💬 *Mensagem / Perguntas:* ${inquiryData.message}`;
+💬 *Mensagem / Perguntas:* 
+${inquiryData.message}`;
 
     const encodedText = encodeURIComponent(text);
-    window.open(`https://wa.me/${WHATSAPP_CONTACT}?text=${encodedText}`, '_blank');
+    window.open(`https://wa.me/${whatsappNumber}?text=${encodedText}`, '_blank');
     
     setInquirySent(true);
     setTimeout(() => {
@@ -217,7 +220,7 @@ const App: React.FC = () => {
             </h2>
             <div className="flex flex-col md:flex-row gap-5 md:gap-8 justify-center items-center">
               <a 
-                href={`https://wa.me/${WHATSAPP_CONTACT}`} 
+                href={`https://wa.me/${whatsappNumber}`} 
                 className="w-full md:w-auto bg-gold text-white px-12 md:px-16 py-5 md:py-7 rounded-full text-lg md:text-xl font-bold hover:bg-white hover:text-gold transition-all duration-700 shadow-2xl active:scale-95"
               >
                 Orçamento WhatsApp
@@ -245,7 +248,7 @@ const App: React.FC = () => {
       />
       
       <a 
-        href={`https://wa.me/${WHATSAPP_CONTACT}`} 
+        href={`https://wa.me/${whatsappNumber}`} 
         target="_blank" 
         className="fixed bottom-6 right-6 z-50 bg-green-500 text-white w-12 h-12 md:w-16 md:h-16 rounded-full shadow-[0_10px_30px_rgba(34,197,94,0.5)] hover:scale-110 transition-all duration-500 active:scale-90 flex items-center justify-center group"
         aria-label="WhatsApp Avaeventos"
