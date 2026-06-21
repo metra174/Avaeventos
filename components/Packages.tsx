@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { PACKAGES } from '../constants';
 import { Package } from '../types';
@@ -10,9 +9,19 @@ interface PackagesProps {
   isLargeText: boolean;
 }
 
+// Tipagem explícita e segura para o objeto de estilos dinâmicos
+interface PackageStyles {
+  border: string;
+  accent: string;
+  bg: string;
+  glow: string;
+  btn: string;
+  label: string;
+}
+
 interface PackageCardProps {
   pkg: Package;
-  styles: any;
+  styles: PackageStyles;
   isDarkMode: boolean;
   isLargeText: boolean;
   onSelect: (pkg: Package) => void;
@@ -21,7 +30,11 @@ interface PackageCardProps {
 const PackageCard: React.FC<PackageCardProps> = ({ pkg, styles, isDarkMode, isLargeText, onSelect }) => {
   const [activeImgIndex, setActiveImgIndex] = useState(0);
 
-  const imagesList = pkg.images && pkg.images.length > 0 ? pkg.images : (pkg.image ? [pkg.image] : []);
+  // Fallback seguro garantindo que seja sempre um array de strings
+  const imagesList: string[] = Array.isArray(pkg.images) && pkg.images.length > 0 
+    ? pkg.images 
+    : (pkg.image ? [pkg.image] : []);
+    
   const hasMultipleImages = imagesList.length > 1;
 
   const handlePrev = (e: React.MouseEvent) => {
@@ -36,19 +49,17 @@ const PackageCard: React.FC<PackageCardProps> = ({ pkg, styles, isDarkMode, isLa
 
   return (
     <div 
-      className={`flex flex-col rounded-[2.5rem] border shadow-2xl transition-all duration-700 hover:-translate-y-3 glass-panel text-center border-t-[8px] ${styles.border} ${styles.bg} ${isDarkMode ? 'border-white/5' : 'border-black/5'} overflow-hidden group h-full`}
+      className={`flex flex-col rounded-[2.5rem] border shadow-2xl transition-all duration-700 hover:-translate-y-3 glass-panel text-center border-t-[8px] ${styles.border || ''} ${styles.bg || ''} ${isDarkMode ? 'border-white/5' : 'border-black/5'} overflow-hidden group h-full`}
     >
-      {/* Header Image with fixed horizontal aspect ratio */}
       {imagesList.length > 0 && (
         <div className="aspect-video w-full relative overflow-hidden bg-black/20 group/slider">
           <img 
             src={imagesList[activeImgIndex]} 
-            alt={`${pkg.name} ${activeImgIndex + 1}`} 
+            alt={`${pkg.name || 'Pacote'} ${activeImgIndex + 1}`} 
             className="w-full h-full object-cover object-center transition-transform duration-1000 group-hover:scale-110"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
           
-          {/* Navigation Arrows for multiple images */}
           {hasMultipleImages && (
             <>
               <button 
@@ -68,7 +79,6 @@ const PackageCard: React.FC<PackageCardProps> = ({ pkg, styles, isDarkMode, isLa
             </>
           )}
 
-          {/* Dots Indicator */}
           {hasMultipleImages && (
             <div className="absolute bottom-11 left-0 w-full flex justify-center gap-1 z-20">
               {imagesList.map((_, i) => (
@@ -82,11 +92,13 @@ const PackageCard: React.FC<PackageCardProps> = ({ pkg, styles, isDarkMode, isLa
             </div>
           )}
 
-          <div className="absolute bottom-4 left-0 w-full text-center px-4">
-             <span className={`inline-block px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-[0.2em] shadow-lg ${styles.label}`}>
-              {pkg.tagline}
-             </span>
-          </div>
+          {pkg.tagline && (
+            <div className="absolute bottom-4 left-0 w-full text-center px-4">
+               <span className={`inline-block px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-[0.2em] shadow-lg ${styles.label || ''}`}>
+                {pkg.tagline}
+               </span>
+            </div>
+          )}
         </div>
       )}
 
@@ -110,15 +122,16 @@ const PackageCard: React.FC<PackageCardProps> = ({ pkg, styles, isDarkMode, isLa
         </div>
 
         <div className="flex-grow space-y-4 mb-10 text-left">
-          {pkg.features.map((feat, i) => (
+          {Array.isArray(pkg.features) && pkg.features.map((feat, i) => (
             <div key={i} className="flex items-start gap-4 group/item">
-              <svg className={`w-4 h-4 mt-1 flex-shrink-0 transition-transform group-hover/item:scale-125 ${styles.accent}`} fill="currentColor" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>
+              <svg className={`w-4 h-4 mt-1 flex-shrink-0 transition-transform group-hover/item:scale-125 ${styles.accent || ''}`} fill="currentColor" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>
               <span className={`leading-relaxed transition-all duration-500 ${isLargeText ? 'text-lg md:text-xl font-medium' : 'text-sm md:text-base'} ${isDarkMode ? 'text-gray-300 group-hover/item:text-white' : 'text-gray-700 group-hover/item:text-black'}`}>{feat}</span>
             </div>
           ))}
         </div>
 
         <button 
+          type="button"
           onClick={() => onSelect(pkg)}
           className={`w-full border-2 py-5 rounded-2xl font-bold uppercase tracking-widest text-[11px] transition-all duration-500 active:scale-95 shadow-lg ${isDarkMode ? 'border-white/10 text-white hover:bg-gold hover:border-gold' : 'border-black/5 text-gray-900 hover:bg-gold hover:text-white'}`}
         >
@@ -130,7 +143,7 @@ const PackageCard: React.FC<PackageCardProps> = ({ pkg, styles, isDarkMode, isLa
 };
 
 const Packages: React.FC<PackagesProps> = ({ onSelect, isDarkMode, isLargeText }) => {
-  const getPackageStyles = (id: string) => {
+  const getPackageStyles = (id: string): PackageStyles => {
     switch(id) {
       case 'rubi':
         return { border: 'border-t-red-600', accent: 'text-red-500', bg: 'hover:bg-red-500/5', glow: 'bg-red-500/10', btn: 'hover:bg-red-600 hover:border-red-600', label: 'bg-red-500/10 text-red-500' };
@@ -141,6 +154,9 @@ const Packages: React.FC<PackagesProps> = ({ onSelect, isDarkMode, isLargeText }
       case 'buffet':
         return { border: 'border-t-emerald-600', accent: 'text-emerald-500', bg: 'hover:bg-emerald-500/5', glow: 'bg-emerald-500/10', btn: 'hover:bg-emerald-600 hover:border-emerald-600', label: 'bg-emerald-500/10 text-emerald-500' };
       case 'salao':
+      case 'salao_decor':
+      case 'salao_buffet':
+      case 'salao_completo':
         return { border: 'border-t-blue-600', accent: 'text-blue-500', bg: 'hover:bg-blue-500/5', glow: 'bg-blue-500/10', btn: 'hover:bg-blue-600 hover:border-blue-600', label: 'bg-blue-500/10 text-blue-500' };
       default:
         return { border: 'border-t-gold', accent: 'text-gold', bg: 'hover:bg-gold/5', glow: 'bg-gold/10', btn: 'hover:bg-gold hover:border-gold', label: 'bg-gold/10 text-gold' };
@@ -150,7 +166,7 @@ const Packages: React.FC<PackagesProps> = ({ onSelect, isDarkMode, isLargeText }
   return (
     <section id="pacotes" className="py-20 md:py-32 relative z-10 overflow-hidden">
       <div className="container mx-auto px-4 md:px-6">
-        <div className="text-center mb-16 md:mb-24 animate-reveal">
+        <div className="text-center mb-16 md:mb-24">
           <span className="text-gold uppercase tracking-[0.3em] font-bold mb-4 block text-xs">Curadoria Exclusiva</span>
           <h2 className={`text-5xl md:text-8xl font-bold mb-6 transition-colors duration-1000 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
             Planos de <span className="italic font-serif text-gold">Luxo</span>
@@ -160,9 +176,8 @@ const Packages: React.FC<PackagesProps> = ({ onSelect, isDarkMode, isLargeText }
           </p>
         </div>
 
-        {/* Responsive Grid: 1 col on mobile, 2 on tablet, 3 on small desktop, 4 on large desktop, 5 on ultra-wide */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6 md:gap-8 lg:gap-10">
-          {PACKAGES.map((pkg) => {
+          {Array.isArray(PACKAGES) && PACKAGES.map((pkg) => {
             const styles = getPackageStyles(pkg.id);
             return (
               <PackageCard
@@ -182,4 +197,3 @@ const Packages: React.FC<PackagesProps> = ({ onSelect, isDarkMode, isLargeText }
 };
 
 export default Packages;
-
