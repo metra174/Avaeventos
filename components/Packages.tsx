@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { PACKAGES } from '../constants';
 import { Package } from '../types';
@@ -12,7 +11,14 @@ interface PackagesProps {
 
 interface PackageCardProps {
   pkg: Package;
-  styles: any;
+  styles: {
+    border: string;
+    accent: string;
+    bg: string;
+    glow: string;
+    btn: string;
+    label: string;
+  };
   isDarkMode: boolean;
   isLargeText: boolean;
   onSelect: (pkg: Package) => void;
@@ -21,7 +27,11 @@ interface PackageCardProps {
 const PackageCard: React.FC<PackageCardProps> = ({ pkg, styles, isDarkMode, isLargeText, onSelect }) => {
   const [activeImgIndex, setActiveImgIndex] = useState(0);
 
-  const imagesList = pkg.images && pkg.images.length > 0 ? pkg.images : (pkg.image ? [pkg.image] : []);
+  // Correção da tipagem explícita e fallback seguro para a lista de imagens
+  const imagesList: string[] = pkg.images && pkg.images.length > 0 
+    ? pkg.images 
+    : (pkg.image ? [pkg.image] : []);
+    
   const hasMultipleImages = imagesList.length > 1;
 
   const handlePrev = (e: React.MouseEvent) => {
@@ -82,11 +92,13 @@ const PackageCard: React.FC<PackageCardProps> = ({ pkg, styles, isDarkMode, isLa
             </div>
           )}
 
-          <div className="absolute bottom-4 left-0 w-full text-center px-4">
-             <span className={`inline-block px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-[0.2em] shadow-lg ${styles.label}`}>
-              {pkg.tagline}
-             </span>
-          </div>
+          {pkg.tagline && (
+            <div className="absolute bottom-4 left-0 w-full text-center px-4">
+               <span className={`inline-block px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-[0.2em] shadow-lg ${styles.label}`}>
+                {pkg.tagline}
+               </span>
+            </div>
+          )}
         </div>
       )}
 
@@ -110,7 +122,7 @@ const PackageCard: React.FC<PackageCardProps> = ({ pkg, styles, isDarkMode, isLa
         </div>
 
         <div className="flex-grow space-y-4 mb-10 text-left">
-          {pkg.features.map((feat, i) => (
+          {pkg.features && pkg.features.map((feat, i) => (
             <div key={i} className="flex items-start gap-4 group/item">
               <svg className={`w-4 h-4 mt-1 flex-shrink-0 transition-transform group-hover/item:scale-125 ${styles.accent}`} fill="currentColor" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>
               <span className={`leading-relaxed transition-all duration-500 ${isLargeText ? 'text-lg md:text-xl font-medium' : 'text-sm md:text-base'} ${isDarkMode ? 'text-gray-300 group-hover/item:text-white' : 'text-gray-700 group-hover/item:text-black'}`}>{feat}</span>
@@ -119,6 +131,7 @@ const PackageCard: React.FC<PackageCardProps> = ({ pkg, styles, isDarkMode, isLa
         </div>
 
         <button 
+          type="button"
           onClick={() => onSelect(pkg)}
           className={`w-full border-2 py-5 rounded-2xl font-bold uppercase tracking-widest text-[11px] transition-all duration-500 active:scale-95 shadow-lg ${isDarkMode ? 'border-white/10 text-white hover:bg-gold hover:border-gold' : 'border-black/5 text-gray-900 hover:bg-gold hover:text-white'}`}
         >
@@ -163,9 +176,8 @@ const Packages: React.FC<PackagesProps> = ({ onSelect, isDarkMode, isLargeText }
           </p>
         </div>
 
-        {/* Responsive Grid: 1 col on mobile, 2 on tablet, 3 on small desktop, 4 on large desktop, 5 on ultra-wide */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6 md:gap-8 lg:gap-10">
-          {PACKAGES.map((pkg) => {
+          {PACKAGES && PACKAGES.map((pkg) => {
             const styles = getPackageStyles(pkg.id);
             return (
               <PackageCard
@@ -185,4 +197,3 @@ const Packages: React.FC<PackagesProps> = ({ onSelect, isDarkMode, isLargeText }
 };
 
 export default Packages;
-
