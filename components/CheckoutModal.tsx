@@ -1,4 +1,3 @@
-
 import React, { useState, useMemo } from 'react';
 import { Package } from '../types';
 import { ANGOLA_PROVINCES } from '../constants';
@@ -12,7 +11,14 @@ interface CheckoutModalProps {
   selectedExtras?: string[];
 }
 
-const CheckoutModal: React.FC<CheckoutModalProps> = ({ pkg, isOpen, onClose, isDarkMode, isLargeText, selectedExtras = [] }) => {
+const CheckoutModal: React.FC<CheckoutModalProps> = ({ 
+  pkg, 
+  isOpen, 
+  onClose, 
+  isDarkMode, 
+  isLargeText, 
+  selectedExtras = [] 
+}) => {
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
     name: '',
@@ -25,8 +31,9 @@ const CheckoutModal: React.FC<CheckoutModalProps> = ({ pkg, isOpen, onClose, isD
     paymentMethod: 'Transferência'
   });
 
+  // Checagem segura caso pkg ou pkg.price venham nulos ou indefinidos
   const numericPrice = useMemo(() => {
-    if (!pkg) return 0;
+    if (!pkg || !pkg.price) return 0;
     return parseFloat(pkg.price.replace(/\./g, '').replace(',', '.'));
   }, [pkg]);
 
@@ -67,7 +74,7 @@ const CheckoutModal: React.FC<CheckoutModalProps> = ({ pkg, isOpen, onClose, isD
 📝 *Desejos e Perguntas:* 
 ${formData.notes || 'Sem observações adicionais.'}
 
-💰 *Investimento Estimado:* ${pkg.currency} ${formatCurrency(totalInvestment)}`;
+💰 *Investimento Estimado:* ${pkg.currency || 'AKZ'} ${formatCurrency(totalInvestment)}`;
 
     const encodedText = encodeURIComponent(text);
     window.open(`https://wa.me/${whatsappNumber}?text=${encodedText}`, '_blank');
@@ -162,7 +169,7 @@ ${formData.notes || 'Sem observações adicionais.'}
               <div className="md:col-span-2">
                 <label className={labelStyles}>O que pretende fazer? / Desejos</label>
                 <textarea 
-                  placeholder="Descreva o que deseja para o evento..." 
+                  placeholder="Descreva lo que deseja para o evento..." 
                   className={`${inputStyles} h-32 resize-none`} 
                   value={formData.notes} 
                   onChange={e => setFormData({...formData, notes: e.target.value})} 
@@ -185,14 +192,14 @@ ${formData.notes || 'Sem observações adicionais.'}
                 <span className={`font-bold uppercase tracking-wider ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>
                   {pkg.id === 'salao' ? 'Valor do Aluguer' : 'Preço p/ Pessoa'}
                 </span>
-                <span className={`font-bold ${isLargeText ? 'text-lg' : ''} ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>{pkg.currency} {pkg.price}</span>
+                <span className={`font-bold ${isLargeText ? 'text-lg' : ''} ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>{pkg.currency || 'AKZ'} {pkg.price}</span>
               </div>
               <div className="flex justify-between items-center">
                 <span className={`text-[10px] font-bold uppercase tracking-wider ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>
                   {pkg.id === 'salao' ? 'Investimento Total' : 'Total Estimado'}
                 </span>
                 <span className={`text-gold font-black transition-all duration-500 ${isLargeText ? 'text-3xl md:text-4xl' : 'text-2xl md:text-3xl'}`}>
-                  {pkg.currency} {formatCurrency(totalInvestment)}
+                  {pkg.currency || 'AKZ'} {formatCurrency(totalInvestment)}
                 </span>
               </div>
             </div>
