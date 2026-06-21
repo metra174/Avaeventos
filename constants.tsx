@@ -1,5 +1,9 @@
-
 import { Package } from './types';
+
+// Caso o seu types.ts não inclua 'color', estendemos localmente para garantir o deploy
+export interface PackageWithColor extends Package {
+  color?: string;
+}
 
 export const ANGOLA_PROVINCES = [
   'Bengo', 'Benguela', 'Bié', 'Cabinda', 'Cuando Cubango', 
@@ -8,7 +12,7 @@ export const ANGOLA_PROVINCES = [
   'Namibe', 'Uíge', 'Zaire'
 ];
 
-export const PACKAGES: Package[] = [
+export const PACKAGES: PackageWithColor[] = [
   {
     id: 'damasco',
     name: 'PACOTE DAMASCO',
@@ -224,14 +228,12 @@ export const GALLERY_IMAGES = [
   { url: 'https://i.imgur.com/FtlEMV2.png', category: 'Especiais', title: 'Decoração Pacote Label - Mesa Redonda' },
   { url: 'https://i.imgur.com/1Wn9Pot.png', category: 'Festas', title: 'Decoração Pacote Label - Lounge Minimalista' },
   { url: 'https://i.imgur.com/cjPUAe5.png', category: 'Gastronomia', title: 'Banquete & Buffet Estilo Ava' },
-
   { url: 'https://i.imgur.com/XMykzEf.png', category: 'Casamentos', title: 'Decoração Clássica de Casamento' },
   { url: 'https://i.imgur.com/nLxHquT.png', category: 'Especiais', title: 'Cenário de Entrada Monumental' },
   { url: 'https://i.imgur.com/LmutJhO.png', category: 'Corporativo', title: 'Detalhes em Cristais e Ouro' },
   { url: 'https://i.imgur.com/uqMWmbx.png', category: 'Casamentos', title: 'Ambiente de Recepção Premium' },
   { url: 'https://i.imgur.com/qM3JIw0.png', category: 'Corporativo', title: 'Banquete de Gala' },
   { url: 'https://i.imgur.com/U1FRqX5.png', category: 'Casamentos', title: 'Teto Floral de Luxo' },
-  
   { url: 'https://i.imgur.com/kWySv7R.png', category: 'Especiais', title: 'Arte em Detalhes' },
   { url: 'https://i.imgur.com/sinppBQ.png', category: 'Casamentos', title: 'Cerimonial de Luxo' },
   { url: 'https://i.imgur.com/LfzqD2U.png', category: 'Festas', title: 'Ambiente Festivo Ava' },
@@ -239,23 +241,16 @@ export const GALLERY_IMAGES = [
   { url: 'https://i.imgur.com/51XbGRs.png', category: 'Casamentos', title: 'Altar Monumental' },
   { url: 'https://i.imgur.com/ukMjTPt.png', category: 'Corporativo', title: 'Recepção Executiva' },
   { url: 'https://i.imgur.com/wY7xj4F.png', category: 'Festas', title: 'Noite de Gala Ava' },
-  
   { url: 'https://i.imgur.com/tZNLdZc.png', category: 'Gastronomia', title: 'Apresentação de Pratos Quentes' },
   { url: 'https://i.imgur.com/ilVfZFK.png', category: 'Gastronomia', title: 'Buffet de Doces & Sobremesas' },
   { url: 'https://i.imgur.com/VYPtZXG.png', category: 'Gastronomia', title: 'Entradas Gourmet Ava' },
   { url: 'https://i.imgur.com/xo2cSQz.png', category: 'Gastronomia', title: 'Serviço de Banquetes Luxo' },
-  { url: 'https://i.imgur.com/xo2cSQz.png', category: 'Gastronomia', title: 'Experiência Gastronômica Ava' },
-
   { url: 'https://i.imgur.com/scHAorL.png', category: 'Especiais', title: 'Arte Visual Ava' },
   { url: 'https://i.imgur.com/HLBViFX.png', category: 'Corporativo', title: 'Espaço de Eventos' }
 ];
 
 export const SOCIAL_LINKS = {
   instagram: 'https://www.instagram.com/avaeventos.s',
-  facebook: 'https://www.facebook.com/share/1FdLjBMALU/',
-  whatsapp: 'https://wa.me/244948757808'
-};
-
   facebook: 'https://www.facebook.com/share/1FdLjBMALU/',
   whatsapp: 'https://wa.me/244948757808'
 };
