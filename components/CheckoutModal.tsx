@@ -1,3 +1,4 @@
+
 import React, { useState, useMemo } from 'react';
 import { Package } from '../types';
 import { ANGOLA_PROVINCES } from '../constants';
@@ -33,8 +34,7 @@ const CheckoutModal: React.FC<CheckoutModalProps> = ({ pkg, isOpen, onClose, isD
       if (salaoSpec === 'buffet') return 45000;
       if (salaoSpec === 'completo') return 65000;
     }
-    // Tratamento seguro contra valores nulos/indefinidos em price
-    return pkg.price ? parseFloat(pkg.price.replace(/\./g, '').replace(',', '.')) : 0;
+    return parseFloat(pkg.price.replace(/\./g, '').replace(',', '.'));
   }, [pkg, salaoSpec]);
 
   const totalInvestment = useMemo(() => {
@@ -80,9 +80,10 @@ const CheckoutModal: React.FC<CheckoutModalProps> = ({ pkg, isOpen, onClose, isD
 📅 *Data:* ${formData.date}
 💳 *Pagamento:* ${formData.paymentMethod}${extrasText}
 
-📝 *Desejos e Perguntas:* ${formData.notes || 'Sem observações adicionais.'}
+📝 *Desejos e Perguntas:* 
+${formData.notes || 'Sem observações adicionais.'}
 
-💰 *Investimento Estimado:* ${pkg.currency || 'AKZ'} ${formatCurrency(totalInvestment)}`;
+💰 *Investimento Estimado:* ${pkg.currency} ${formatCurrency(totalInvestment)}`;
 
     const encodedText = encodeURIComponent(text);
     window.open(`https://wa.me/${whatsappNumber}?text=${encodedText}`, '_blank');
@@ -123,7 +124,6 @@ const CheckoutModal: React.FC<CheckoutModalProps> = ({ pkg, isOpen, onClose, isD
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6 mb-8">
-              {/* CORREÇÃO 1: Adicionado o input do nome completo que havia sumido */}
               <div className="md:col-span-2">
                 <label className={labelStyles}>Nome Completo</label>
                 <input required type="text" placeholder="Ex: Ana Silva" className={inputStyles} value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} />
@@ -276,14 +276,14 @@ const CheckoutModal: React.FC<CheckoutModalProps> = ({ pkg, isOpen, onClose, isD
                 <span className={`font-bold uppercase tracking-wider ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>
                   {(pkg.id === 'salao' && salaoSpec === 'base') ? 'Valor do Aluguer' : 'Preço p/ Pessoa'}
                 </span>
-                <span className={`font-bold ${isLargeText ? 'text-lg' : ''} ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>{pkg.currency || 'AKZ'} {formatCurrency(numericPrice)}</span>
+                <span className={`font-bold ${isLargeText ? 'text-lg' : ''} ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>{pkg.currency} {formatCurrency(numericPrice)}</span>
               </div>
               <div className="flex justify-between items-center">
                 <span className={`text-[10px] font-bold uppercase tracking-wider ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>
                   {(pkg.id === 'salao' && salaoSpec === 'base') ? 'Investimento Total' : 'Total Estimado'}
                 </span>
                 <span className={`text-gold font-black transition-all duration-500 ${isLargeText ? 'text-3xl md:text-4xl' : 'text-2xl md:text-3xl'}`}>
-                  {pkg.currency || 'AKZ'} {formatCurrency(totalInvestment)}
+                  {pkg.currency} {formatCurrency(totalInvestment)}
                 </span>
               </div>
             </div>
@@ -312,5 +312,8 @@ const CheckoutModal: React.FC<CheckoutModalProps> = ({ pkg, isOpen, onClose, isD
     </div>
   );
 };
+
+export default CheckoutModal;
+
 
 export default CheckoutModal;
