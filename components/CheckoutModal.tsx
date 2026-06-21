@@ -11,15 +11,9 @@ interface CheckoutModalProps {
   selectedExtras?: string[];
 }
 
-const CheckoutModal: React.FC<CheckoutModalProps> = ({ 
-  pkg, 
-  isOpen, 
-  onClose, 
-  isDarkMode, 
-  isLargeText, 
-  selectedExtras = [] 
-}) => {
+const CheckoutModal: React.FC<CheckoutModalProps> = ({ pkg, isOpen, onClose, isDarkMode, isLargeText, selectedExtras = [] }) => {
   const [step, setStep] = useState(1);
+  const [salaoSpec, setSalaoSpec] = useState<'base' | 'decor' | 'buffet' | 'completo'>('base');
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
@@ -31,16 +25,23 @@ const CheckoutModal: React.FC<CheckoutModalProps> = ({
     paymentMethod: 'Transferência'
   });
 
-  // Checagem segura caso pkg ou pkg.price venham nulos ou indefinidos
   const numericPrice = useMemo(() => {
-    if (!pkg || !pkg.price) return 0;
-    return parseFloat(pkg.price.replace(/\./g, '').replace(',', '.'));
-  }, [pkg]);
+    if (!pkg) return 0;
+    if (pkg.id === 'salao') {
+      if (salaoSpec === 'base') return 1200000;
+      if (salaoSpec === 'decor') return 25000;
+      if (salaoSpec === 'buffet') return 45000;
+      if (salaoSpec === 'completo') return 65000;
+    }
+    // Tratamento seguro contra valores nulos/indefinidos em price
+    return pkg.price ? parseFloat(pkg.price.replace(/\./g, '').replace(',', '.')) : 0;
+  }, [pkg, salaoSpec]);
 
   const totalInvestment = useMemo(() => {
-    if (pkg?.id === 'salao') return numericPrice;
+    if (!pkg) return 0;
+    if (pkg.id === 'salao' && salaoSpec === 'base') return 1200000;
     return numericPrice * (formData.guests || 0);
-  }, [numericPrice, formData.guests, pkg?.id]);
+  }, [numericPrice, formData.guests, pkg?.id, salaoSpec]);
 
   const formatCurrency = (value: number) => {
     return new Intl.NumberFormat('pt-AO', {
@@ -60,9 +61,17 @@ const CheckoutModal: React.FC<CheckoutModalProps> = ({
       ? `\n✨ *Serviços Extras Selecionados:*\n${selectedExtras.map(ex => `• ${ex}`).join('\n')}`
       : '';
 
+    let salaoSpecName = '';
+    if (pkg.id === 'salao') {
+      if (salaoSpec === 'base') salaoSpecName = ' Base (Apenas Aluguer - 1.200.000,00 AKZ)';
+      else if (salaoSpec === 'decor') salaoSpecName = ' com Decoração (25.000,00 AKZ p/ pessoa)';
+      else if (salaoSpec === 'buffet') salaoSpecName = ' com Decoração & Buffet sem bebida (45.000,00 AKZ p/ pessoa)';
+      else if (salaoSpec === 'completo') salaoSpecName = ' Completo com Decoração, Buffet & Bebida (65.000,00 AKZ p/ pessoa)';
+    }
+
     const text = `Olá Avaeventos! Gostaria de solicitar uma reserva:
 
-💎 *Plano:* ${pkg.name}
+💎 *Plano:* ${pkg.name}${salaoSpecName}
 👤 *Cliente:* ${formData.name}
 📱 *WhatsApp:* ${formData.phone}
 📍 *Província:* ${formData.location}
@@ -71,8 +80,7 @@ const CheckoutModal: React.FC<CheckoutModalProps> = ({
 📅 *Data:* ${formData.date}
 💳 *Pagamento:* ${formData.paymentMethod}${extrasText}
 
-📝 *Desejos e Perguntas:* 
-${formData.notes || 'Sem observações adicionais.'}
+📝 *Desejos e Perguntas:* ${formData.notes || 'Sem observações adicionais.'}
 
 💰 *Investimento Estimado:* ${pkg.currency || 'AKZ'} ${formatCurrency(totalInvestment)}`;
 
@@ -115,10 +123,86 @@ ${formData.notes || 'Sem observações adicionais.'}
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6 mb-8">
+              {/* CORREÇÃO 1: Adicionado o input do nome completo que havia sumido */}
               <div className="md:col-span-2">
                 <label className={labelStyles}>Nome Completo</label>
                 <input required type="text" placeholder="Ex: Ana Silva" className={inputStyles} value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} />
               </div>
+              
+              {pkg.id === 'salao' && (
+                <div className="md:col-span-2 border border-gold/20 bg-gold/5 p-5 rounded-[2rem] my-2">
+                  <label className="block text-[10px] font-bold uppercase tracking-widest mb-3 text-gold">Especificação do Aluguer / Tipo de Serviço</label>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <button
+                      type="button"
+                      onClick={() => setSalaoSpec('base')}
+                      className={`p-4 rounded-xl border text-left transition-all duration-300 cursor-pointer ${
+                        salaoSpec === 'base'
+                          ? 'border-gold bg-gold text-white shadow-md'
+                          : isDarkMode 
+                            ? 'border-white/10 bg-white/5 text-gray-300 hover:bg-white/10' 
+                            : 'border-gray-200 bg-white text-gray-700 hover:bg-gray-50 shadow-sm'
+                      }`}
+                    >
+                      <div className="font-bold text-xs uppercase tracking-wider mb-1">Apenas Salão Base</div>
+                      <div className={`text-[10px] uppercase font-mono ${salaoSpec === 'base' ? 'text-white/80' : 'text-gold'}`}>
+                        1.200.000,00 AKZ Fixo
+                      </div>
+                    </button>
+                    
+                    <button
+                      type="button"
+                      onClick={() => setSalaoSpec('decor')}
+                      className={`p-4 rounded-xl border text-left transition-all duration-300 cursor-pointer ${
+                        salaoSpec === 'decor'
+                          ? 'border-gold bg-gold text-white shadow-md'
+                          : isDarkMode 
+                            ? 'border-white/10 bg-white/5 text-gray-300 hover:bg-white/10' 
+                            : 'border-gray-200 bg-white text-gray-700 hover:bg-gray-50 shadow-sm'
+                      }`}
+                    >
+                      <div className="font-bold text-xs uppercase tracking-wider mb-1">Salão com Decoração</div>
+                      <div className={`text-[10px] uppercase font-mono ${salaoSpec === 'decor' ? 'text-white/80' : 'text-gold'}`}>
+                        25.000,00 AKZ / pessoa
+                      </div>
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => setSalaoSpec('buffet')}
+                      className={`p-4 rounded-xl border text-left transition-all duration-300 cursor-pointer ${
+                        salaoSpec === 'buffet'
+                          ? 'border-gold bg-gold text-white shadow-md'
+                          : isDarkMode 
+                            ? 'border-white/10 bg-white/5 text-gray-300 hover:bg-white/10' 
+                            : 'border-gray-200 bg-white text-gray-700 hover:bg-gray-50 shadow-sm'
+                      }`}
+                    >
+                      <div className="font-bold text-xs uppercase tracking-wider mb-1">Salão, Decor & Buffet</div>
+                      <div className={`text-[10px] uppercase font-mono ${salaoSpec === 'buffet' ? 'text-white/80' : 'text-gold'}`}>
+                        45.000,00 AKZ / pessoa (s/ bebi)
+                      </div>
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => setSalaoSpec('completo')}
+                      className={`p-4 rounded-xl border text-left transition-all duration-300 cursor-pointer ${
+                        salaoSpec === 'completo'
+                          ? 'border-gold bg-gold text-white shadow-md'
+                          : isDarkMode 
+                            ? 'border-white/10 bg-white/5 text-gray-300 hover:bg-white/10' 
+                            : 'border-gray-200 bg-white text-gray-700 hover:bg-gray-50 shadow-sm'
+                      }`}
+                    >
+                      <div className="font-bold text-xs uppercase tracking-wider mb-1">Salão Completo</div>
+                      <div className={`text-[10px] uppercase font-mono ${salaoSpec === 'completo' ? 'text-white/80' : 'text-gold'}`}>
+                        65.000,00 AKZ / pessoa (c/ bebi)
+                      </div>
+                    </button>
+                  </div>
+                </div>
+              )}
               
               <div>
                 <label className={labelStyles}>WhatsApp</label>
@@ -169,7 +253,7 @@ ${formData.notes || 'Sem observações adicionais.'}
               <div className="md:col-span-2">
                 <label className={labelStyles}>O que pretende fazer? / Desejos</label>
                 <textarea 
-                  placeholder="Descreva lo que deseja para o evento..." 
+                  placeholder="Descreva o que deseja para o evento..." 
                   className={`${inputStyles} h-32 resize-none`} 
                   value={formData.notes} 
                   onChange={e => setFormData({...formData, notes: e.target.value})} 
@@ -190,13 +274,13 @@ ${formData.notes || 'Sem observações adicionais.'}
             <div className={`p-6 rounded-[2rem] border mb-8 transition-all duration-700 ${isDarkMode ? 'bg-white/5 border-white/5' : 'bg-gray-50 border-gray-100 shadow-inner'}`}>
               <div className="flex justify-between items-center mb-4 pb-4 border-b border-gold/10 text-xs">
                 <span className={`font-bold uppercase tracking-wider ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>
-                  {pkg.id === 'salao' ? 'Valor do Aluguer' : 'Preço p/ Pessoa'}
+                  {(pkg.id === 'salao' && salaoSpec === 'base') ? 'Valor do Aluguer' : 'Preço p/ Pessoa'}
                 </span>
-                <span className={`font-bold ${isLargeText ? 'text-lg' : ''} ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>{pkg.currency || 'AKZ'} {pkg.price}</span>
+                <span className={`font-bold ${isLargeText ? 'text-lg' : ''} ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>{pkg.currency || 'AKZ'} {formatCurrency(numericPrice)}</span>
               </div>
               <div className="flex justify-between items-center">
                 <span className={`text-[10px] font-bold uppercase tracking-wider ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>
-                  {pkg.id === 'salao' ? 'Investimento Total' : 'Total Estimado'}
+                  {(pkg.id === 'salao' && salaoSpec === 'base') ? 'Investimento Total' : 'Total Estimado'}
                 </span>
                 <span className={`text-gold font-black transition-all duration-500 ${isLargeText ? 'text-3xl md:text-4xl' : 'text-2xl md:text-3xl'}`}>
                   {pkg.currency || 'AKZ'} {formatCurrency(totalInvestment)}
