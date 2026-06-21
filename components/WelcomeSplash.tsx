@@ -2,36 +2,31 @@ import React, { useState, useEffect, useRef } from 'react';
 
 interface WelcomeSplashProps {
   onEnter: () => void;
-  isDarkMode: boolean; // Mantido para consistência da interface, embora não usado diretamente aqui
+  isDarkMode: boolean;
 }
 
 const WelcomeSplash: React.FC<WelcomeSplashProps> = ({ onEnter, isDarkMode }) => {
   const [mounted, setMounted] = useState(false);
   const [isExiting, setIsExiting] = useState(false);
 
-  // Usamos referências (refs) para guardar os IDs dos timers e limpá-los em qualquer lugar
   const mountTimerRef = useRef<NodeJS.Timeout | null>(null);
   const autoExitTimerRef = useRef<NodeJS.Timeout | null>(null);
   const completionTimerRef = useRef<NodeJS.Timeout | null>(null);
   const manualExitTimerRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
-    // Trigger animated entry
     mountTimerRef.current = setTimeout(() => {
       setMounted(true);
     }, 100);
 
-    // Sequência de saída automática após 4.1s
     autoExitTimerRef.current = setTimeout(() => {
       setIsExiting(true);
     }, 4100);
 
-    // Finalização após 5s
     completionTimerRef.current = setTimeout(() => {
       onEnter();
     }, 5000);
 
-    // Limpeza padrão caso o componente seja desmontado inesperadamente
     return () => {
       if (mountTimerRef.current) clearTimeout(mountTimerRef.current);
       if (autoExitTimerRef.current) clearTimeout(autoExitTimerRef.current);
@@ -41,14 +36,13 @@ const WelcomeSplash: React.FC<WelcomeSplashProps> = ({ onEnter, isDarkMode }) =>
   }, [onEnter]);
 
   const handleEnterClick = () => {
-    // CRUCIAL: Cancela a execução automática pendente se o usuário interagiu por clique
     if (autoExitTimerRef.current) clearTimeout(autoExitTimerRef.current);
     if (completionTimerRef.current) clearTimeout(completionTimerRef.current);
 
     setIsExiting(true);
     manualExitTimerRef.current = setTimeout(() => {
       onEnter();
-    }, 900); // combina perfeitamente com a duração da transição
+    }, 900);
   };
 
   return (
@@ -62,7 +56,6 @@ const WelcomeSplash: React.FC<WelcomeSplashProps> = ({ onEnter, isDarkMode }) =>
       {/* Absolute Luxurious Design Background Elements */}
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(212,175,55,0.07)_0%,transparent_70%)] opacity-80 animate-pulse" style={{ animationDuration: '6s' }}></div>
-        {/* Subtle Luxury Floating Sparkles / Particles */}
         <div className="absolute top-[20%] left-[15%] w-1.5 h-1.5 bg-gold/50 rounded-full blur-[1px] animate-float" style={{ animationDelay: '0s' }}></div>
         <div className="absolute bottom-[25%] left-[25%] w-2 h-2 bg-gold/30 rounded-full blur-[1px] animate-float" style={{ animationDelay: '-3s' }}></div>
         <div className="absolute top-[35%] right-[20%] w-1.5 h-1.5 bg-gold/40 rounded-full blur-[1px] animate-float" style={{ animationDelay: '-5s' }}></div>
@@ -94,7 +87,6 @@ const WelcomeSplash: React.FC<WelcomeSplashProps> = ({ onEnter, isDarkMode }) =>
             AVAEVENTOS
           </h1>
           
-          {/* Progress / Timer Line instead of static center line */}
           <div className="relative h-[2px] w-32 bg-white/10 mx-auto my-6 overflow-hidden rounded-full">
             <div 
               className={`absolute top-0 left-0 h-full bg-gradient-to-r from-amber-500 via-gold to-amber-500 transition-all ease-linear ${
@@ -109,10 +101,22 @@ const WelcomeSplash: React.FC<WelcomeSplashProps> = ({ onEnter, isDarkMode }) =>
           </p>
         </div>
 
-        {/* Interactive Luxury Entry Button with dynamic timeout hint */}
+        {/* Interactive Luxury Entry Button */}
         <div 
           className={`mt-12 transition-all duration-[1200ms] delay-[700ms] transform ${
             mounted ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
           }`}
         >
-          <button
+          <button 
+            onClick={handleEnterClick}
+            className="px-8 py-3 border border-gold/50 text-gold hover:bg-gold hover:text-black transition-colors duration-300 uppercase tracking-widest text-xs font-bold rounded-full cursor-pointer"
+          >
+            Entrar
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default WelcomeSplash;
