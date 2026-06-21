@@ -40,7 +40,6 @@ const CheckoutModal: React.FC<CheckoutModalProps> = ({
       if (salaoSpec === 'buffet') return 45000;
       if (salaoSpec === 'completo') return 65000;
     }
-    // Verificação de segurança adicionada
     return pkg.price ? parseFloat(pkg.price.replace(/\./g, '').replace(',', '.')) : 0;
   }, [pkg, salaoSpec]);
 
@@ -70,10 +69,10 @@ const CheckoutModal: React.FC<CheckoutModalProps> = ({
 
     let salaoSpecName = '';
     if (pkg.id === 'salao') {
-      if (salaoSpec === 'base') salaoSpecName = ' Base (Apenas Aluguer)';
-      else if (salaoSpec === 'decor') salaoSpecName = ' com Decoração';
-      else if (salaoSpec === 'buffet') salaoSpecName = ' com Decoração & Buffet';
-      else if (salaoSpec === 'completo') salaoSpecName = ' Completo';
+      if (salaoSpec === 'base') salaoSpecName = ' - Apenas Salão Base';
+      else if (salaoSpec === 'decor') salaoSpecName = ' - Salão com Decoração';
+      else if (salaoSpec === 'buffet') salaoSpecName = ' - Salão, Decoração & Buffet';
+      else if (salaoSpec === 'completo') salaoSpecName = ' - Salão Completo';
     }
 
     const text = `Olá Avaeventos! Gostaria de solicitar uma reserva:
@@ -127,12 +126,26 @@ const CheckoutModal: React.FC<CheckoutModalProps> = ({
               </div>
               
               {pkg.id === 'salao' && (
-                <div className="md:col-span-2 border border-gold/20 p-5 rounded-[2rem]">
-                  <label className="block text-[10px] font-bold text-gold mb-3">TIPO DE SERVIÇO</label>
-                  <div className="grid grid-cols-2 gap-3">
-                    {['base', 'decor', 'buffet', 'completo'].map((s) => (
-                      <button key={s} type="button" onClick={() => setSalaoSpec(s as any)} className={`p-3 rounded-lg border ${salaoSpec === s ? 'border-gold bg-gold text-white' : 'border-gray-200'}`}>
-                        {s.toUpperCase()}
+                <div className="md:col-span-2 border border-gold/20 bg-gold/5 p-5 rounded-[2rem]">
+                  <label className="block text-[10px] font-bold text-gold mb-3 uppercase tracking-widest">Tipo de Serviço</label>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    {[
+                      {id: 'base', label: 'Apenas Salão'},
+                      {id: 'decor', label: 'Salão c/ Decoração'},
+                      {id: 'buffet', label: 'Salão, Decor & Buffet'},
+                      {id: 'completo', label: 'Salão Completo'}
+                    ].map((s) => (
+                      <button 
+                        key={s.id} 
+                        type="button" 
+                        onClick={() => setSalaoSpec(s.id as any)} 
+                        className={`p-4 rounded-xl border text-left transition-all duration-300 ${
+                          salaoSpec === s.id 
+                            ? 'border-gold bg-gold text-white shadow-md' 
+                            : isDarkMode ? 'border-white/10 bg-white/5 text-gray-300' : 'border-gray-200 bg-white'
+                        }`}
+                      >
+                        <div className="font-bold text-xs uppercase tracking-wider">{s.label}</div>
                       </button>
                     ))}
                   </div>
@@ -146,18 +159,30 @@ const CheckoutModal: React.FC<CheckoutModalProps> = ({
 
               <div>
                 <label className={labelStyles}>Nº de Convidados</label>
-                <input required type="number" className={inputStyles} value={formData.guests} onChange={e => setFormData({...formData, guests: parseInt(e.target.value) || 0})} />
+                <input required type="number" min="1" className={inputStyles} value={formData.guests} onChange={e => setFormData({...formData, guests: parseInt(e.target.value) || 0})} />
               </div>
             </div>
 
-            <button type="submit" className="w-full bg-gold text-white py-5 rounded-2xl font-bold uppercase tracking-[0.2em]">
-              Confirmar no WhatsApp
+            <div className={`p-6 rounded-[2rem] border mb-8 ${isDarkMode ? 'bg-white/5 border-white/5' : 'bg-gray-50 border-gray-100'}`}>
+              <div className="flex justify-between items-center">
+                <span className={`text-[10px] font-bold uppercase tracking-wider ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>Investimento Total</span>
+                <span className={`text-gold font-black ${isLargeText ? 'text-3xl' : 'text-2xl'}`}>
+                  {pkg.currency} {formatCurrency(totalInvestment)}
+                </span>
+              </div>
+            </div>
+
+            <button type="submit" className="w-full bg-gold text-white py-5 rounded-2xl font-bold uppercase tracking-[0.2em] hover:bg-black transition-all shadow-xl">
+              Confirmar Reserva no WhatsApp
             </button>
           </form>
         ) : (
-          <div className="p-16 text-center">
-            <h2 className="text-3xl font-bold mb-4">Solicitação Enviada!</h2>
-            <button onClick={onClose} className="text-gold font-bold underline">Voltar</button>
+          <div className="p-16 text-center h-full flex flex-col justify-center items-center">
+            <div className="w-20 h-20 bg-gold/10 text-gold rounded-full flex items-center justify-center mb-8">
+              <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
+            </div>
+            <h2 className={`text-3xl font-bold mb-4 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Solicitação Enviada!</h2>
+            <button onClick={onClose} className="text-gold font-bold underline uppercase tracking-widest text-xs mt-4">Voltar ao Site</button>
           </div>
         )}
       </div>
