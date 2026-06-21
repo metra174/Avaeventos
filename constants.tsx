@@ -18,7 +18,7 @@ export const PACKAGES: Package[] = [
     image: 'https://i.imgur.com/Q8RBZGK.png',
     location: 'Projeto do Nando, por detrás do Banco BIC',
     features: [
-      'Realização de eventos com toda a estrutura necessária para festas e celebrations especiais',
+      'Realização de eventos com toda a estrutura necessária para festas e celebrações especiais',
       'Cadeiras almofadas baixas',
       'Mesas com toalhas apenas duas familiares especiais',
       'Loiça branca',
