@@ -1,41 +1,54 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 interface WelcomeSplashProps {
   onEnter: () => void;
-  isDarkMode: boolean;
+  isDarkMode: boolean; // Mantido para consistência da interface, embora não usado diretamente aqui
 }
 
 const WelcomeSplash: React.FC<WelcomeSplashProps> = ({ onEnter, isDarkMode }) => {
   const [mounted, setMounted] = useState(false);
   const [isExiting, setIsExiting] = useState(false);
 
+  // Usamos referências (refs) para guardar os IDs dos timers e limpá-los em qualquer lugar
+  const mountTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const autoExitTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const completionTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const manualExitTimerRef = useRef<NodeJS.Timeout | null>(null);
+
   useEffect(() => {
     // Trigger animated entry
-    const mountTimer = setTimeout(() => {
+    mountTimerRef.current = setTimeout(() => {
       setMounted(true);
     }, 100);
 
-    // Automatically trigger exit sequence after 4100ms so that the whole experience lasts exactly 5000ms (5 seconds)
-    const autoExitTimer = setTimeout(() => {
+    // Sequência de saída automática após 4.1s
+    autoExitTimerRef.current = setTimeout(() => {
       setIsExiting(true);
     }, 4100);
 
-    const completionTimer = setTimeout(() => {
+    // Finalização após 5s
+    completionTimerRef.current = setTimeout(() => {
       onEnter();
     }, 5000);
 
+    // Limpeza padrão caso o componente seja desmontado inesperadamente
     return () => {
-      clearTimeout(mountTimer);
-      clearTimeout(autoExitTimer);
-      clearTimeout(completionTimer);
+      if (mountTimerRef.current) clearTimeout(mountTimerRef.current);
+      if (autoExitTimerRef.current) clearTimeout(autoExitTimerRef.current);
+      if (completionTimerRef.current) clearTimeout(completionTimerRef.current);
+      if (manualExitTimerRef.current) clearTimeout(manualExitTimerRef.current);
     };
   }, [onEnter]);
 
   const handleEnterClick = () => {
+    // CRUCIAL: Cancela a execução automática pendente se o usuário interagiu por clique
+    if (autoExitTimerRef.current) clearTimeout(autoExitTimerRef.current);
+    if (completionTimerRef.current) clearTimeout(completionTimerRef.current);
+
     setIsExiting(true);
-    setTimeout(() => {
+    manualExitTimerRef.current = setTimeout(() => {
       onEnter();
-    }, 900); // match transition duration
+    }, 900); // combina perfeitamente com a duração da transição
   };
 
   return (
@@ -91,7 +104,7 @@ const WelcomeSplash: React.FC<WelcomeSplashProps> = ({ onEnter, isDarkMode }) =>
             ></div>
           </div>
 
-          <p className="text-gray-400 font-light text-sm md:text-base max-w-sm line-clamp-2 md:line-clamp-none italic leading-relaxed">
+          <p className="text-gray-400 font-light text-sm md:text-base max-w-sm italic leading-relaxed">
             "A arte de conceber casamentos extraordinários, banquetes premium e eventos de puro luxo em Angola."
           </p>
         </div>
@@ -103,39 +116,3 @@ const WelcomeSplash: React.FC<WelcomeSplashProps> = ({ onEnter, isDarkMode }) =>
           }`}
         >
           <button
-            onClick={handleEnterClick}
-            className="group relative inline-flex items-center gap-3 px-12 py-5 overflow-hidden rounded-full font-bold uppercase text-[11px] tracking-[0.25em] text-white bg-transparent border border-gold/40 transition-all duration-500 hover:border-white shadow-[0_0_30px_rgba(212,175,55,0.15)] hover:shadow-[0_0_40px_rgba(212,175,55,0.3)] active:scale-95 cursor-pointer"
-          >
-            {/* Hover Background Spill Effect */}
-            <span className="absolute inset-0 bg-gradient-to-r from-gold via-amber-500 to-gold opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10"></span>
-            
-            <span className="relative z-10 transition-colors duration-500 group-hover:text-black font-bold">
-              Entrar Agora
-            </span>
-            <svg 
-              className="w-4 h-4 text-gold group-hover:text-black transition-all duration-500 transform group-hover:translate-x-1.5" 
-              fill="none" 
-              stroke="currentColor" 
-              viewBox="0 0 24 24"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-            </svg>
-          </button>
-        </div>
-      </div>
-
-      {/* Decorative Fine Print Edge Details */}
-      <div 
-        className={`absolute bottom-8 text-center transition-all duration-[1200ms] delay-[900ms] z-10 ${
-          mounted ? 'opacity-40' : 'opacity-0'
-        }`}
-      >
-        <span className="text-[9px] text-gray-400 tracking-[0.3em] uppercase block">
-          Luanda • Curadoria Exclusiva
-        </span>
-      </div>
-    </div>
-  );
-};
-
-export default WelcomeSplash;
