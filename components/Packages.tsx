@@ -27,7 +27,6 @@ interface PackageCardProps {
 const PackageCard: React.FC<PackageCardProps> = ({ pkg, styles, isDarkMode, isLargeText, onSelect }) => {
   const [activeImgIndex, setActiveImgIndex] = useState(0);
 
-  // Correção da tipagem explícita e fallback seguro para a lista de imagens
   const imagesList: string[] = pkg.images && pkg.images.length > 0 
     ? pkg.images 
     : (pkg.image ? [pkg.image] : []);
@@ -48,7 +47,6 @@ const PackageCard: React.FC<PackageCardProps> = ({ pkg, styles, isDarkMode, isLa
     <div 
       className={`flex flex-col rounded-[2.5rem] border shadow-2xl transition-all duration-700 hover:-translate-y-3 glass-panel text-center border-t-[8px] ${styles.border} ${styles.bg} ${isDarkMode ? 'border-white/5' : 'border-black/5'} overflow-hidden group h-full`}
     >
-      {/* Header Image with fixed horizontal aspect ratio */}
       {imagesList.length > 0 && (
         <div className="aspect-video w-full relative overflow-hidden bg-black/20 group/slider">
           <img 
@@ -58,7 +56,6 @@ const PackageCard: React.FC<PackageCardProps> = ({ pkg, styles, isDarkMode, isLa
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
           
-          {/* Navigation Arrows for multiple images */}
           {hasMultipleImages && (
             <>
               <button 
@@ -78,7 +75,6 @@ const PackageCard: React.FC<PackageCardProps> = ({ pkg, styles, isDarkMode, isLa
             </>
           )}
 
-          {/* Dots Indicator */}
           {hasMultipleImages && (
             <div className="absolute bottom-11 left-0 w-full flex justify-center gap-1 z-20">
               {imagesList.map((_, i) => (
@@ -172,7 +168,7 @@ const Packages: React.FC<PackagesProps> = ({ onSelect, isDarkMode, isLargeText }
             Planos de <span className="italic font-serif text-gold">Luxo</span>
           </h2>
           <p className={`max-w-2xl mx-auto text-lg md:text-xl font-light leading-relaxed ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>
-            Base de alta qualidade para sua celebração, com a sofisticação inegociável da Avaeventos.
+            Base de alta qualidade para sua celebration, com a sofisticação inegociável da Avaeventos.
           </p>
         </div>
 
