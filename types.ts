@@ -6,7 +6,7 @@ export interface Package {
   color: string;
   tagline: string;
   image: string;
-  images?: string[]; // O "?" torna as imagens adicionais opcionais para pacotes que não têm
+  images?: string[]; // O "?" previne erros nos pacotes que têm apenas uma imagem
   location: string;
   features: string[];
 }
