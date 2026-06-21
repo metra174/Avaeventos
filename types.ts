@@ -1,28 +1,29 @@
-
-export enum EventType {
-  CASAMENTO = 'Casamento',
-  FESTA = 'Festa',
-  CORPORATIVO = 'Corporativo',
-  OUTROS = 'Outros'
-}
-
-export interface Package {
-  id: string;
-  name: string;
-  price: string;
-  currency: string;
-  features: string[];
-  color: string;
-  tagline: string;
-  image?: string;
-  location?: string;
-}
-
-export interface CustomerOrder {
-  packageId: string;
-  date: string;
-  name: string;
-  email: string;
-  phone: string;
-  notes?: string;
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "experimentalDecorators": true,
+    "useDefineForClassFields": false,
+    "module": "ESNext",
+    "lib": [
+      "ES2022",
+      "DOM",
+      "DOM.Iterable"
+    ],
+    "skipLibCheck": true,
+    "types": [
+      "node"
+    ],
+    "moduleResolution": "bundler",
+    "isolatedModules": true,
+    "moduleDetection": "force",
+    "allowJs": true,
+    "jsx": "react-jsx",
+    "paths": {
+      "@/*": [
+        "./*"
+      ]
+    },
+    "allowImportingTsExtensions": true,
+    "noEmit": true
+  }
 }
