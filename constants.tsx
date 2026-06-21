@@ -39,7 +39,6 @@ export const PACKAGES: Package[] = [
     color: 'bg-orange-50',
     tagline: 'Sofisticação & Conforto',
     image: 'https://i.imgur.com/N9i13N5.png',
-    // NOTA: Certifique-se de que "images?: string[]" esteja na sua interface Package em ./types.ts se for usar esta propriedade
     images: [
       'https://i.imgur.com/N9i13N5.png',
       'https://i.imgur.com/3NKWiT8.png',
@@ -175,7 +174,7 @@ export const GALLERY_IMAGES = [
   { url: 'https://i.imgur.com/tZNLdZc.png', category: 'Gastronomia', title: 'Apresentação de Pratos Quentes' },
   { url: 'https://i.imgur.com/ilVfZFK.png', category: 'Gastronomia', title: 'Buffet de Doces & Sobremesas' },
   { url: 'https://i.imgur.com/VYPtZXG.png', category: 'Gastronomia', title: 'Entradas Gourmet Ava' },
-  { url: 'https://i.imgur.com/xo2cSQz.png', category: 'Gastronomia', title: 'Serviço de Banquetes Luxo' }, // CORREÇÃO: Linha duplicada removida aqui!
+  { url: 'https://i.imgur.com/xo2cSQz.png', category: 'Gastronomia', title: 'Serviço de Banquetes Luxo' },
 
   { url: 'https://i.imgur.com/scHAorL.png', category: 'Especiais', title: 'Arte Visual Ava' },
   { url: 'https://i.imgur.com/HLBViFX.png', category: 'Corporativo', title: 'Espaço de Eventos' }
