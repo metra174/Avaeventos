@@ -88,3 +88,4 @@ const Hero: React.FC<HeroProps> = ({ isDarkMode }) => {
 
 export default Hero;
 
+
