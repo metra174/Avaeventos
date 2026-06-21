@@ -17,7 +17,7 @@ const WelcomeSplash: React.FC<WelcomeSplashProps> = ({ onEnter, isDarkMode }) =>
   useEffect(() => {
     mountTimerRef.current = setTimeout(() => {
       setMounted(true);
-    }, 100);
+    }, 20000);
 
     autoExitTimerRef.current = setTimeout(() => {
       setIsExiting(true);
@@ -25,7 +25,7 @@ const WelcomeSplash: React.FC<WelcomeSplashProps> = ({ onEnter, isDarkMode }) =>
 
     completionTimerRef.current = setTimeout(() => {
       onEnter();
-    }, 5000);
+    }, 21000);
 
     return () => {
       if (mountTimerRef.current) clearTimeout(mountTimerRef.current);
