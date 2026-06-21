@@ -1,4 +1,3 @@
-
 import React, { useState, useMemo } from 'react';
 import { Package } from '../types';
 import { ANGOLA_PROVINCES } from '../constants';
@@ -18,7 +17,7 @@ const CheckoutModal: React.FC<CheckoutModalProps> = ({ pkg, isOpen, onClose, isD
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
-    date: '2026-06-20', // Default pre-set date representing June 20, 2026
+    date: '2026-06-20', 
     guests: 50,
     location: 'Luanda',
     exactAddress: '',
@@ -80,8 +79,7 @@ const CheckoutModal: React.FC<CheckoutModalProps> = ({ pkg, isOpen, onClose, isD
 📅 *Data:* ${formData.date}
 💳 *Pagamento:* ${formData.paymentMethod}${extrasText}
 
-📝 *Desejos e Perguntas:* 
-${formData.notes || 'Sem observações adicionais.'}
+📝 *Desejos e Perguntas:* ${formData.notes || 'Sem observações adicionais.'}
 
 💰 *Investimento Estimado:* ${pkg.currency} ${formatCurrency(totalInvestment)}`;
 
