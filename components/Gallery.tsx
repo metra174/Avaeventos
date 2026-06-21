@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { GALLERY_IMAGES } from '../constants';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
@@ -13,6 +12,7 @@ const Gallery: React.FC<GalleryProps> = ({ isDarkMode }) => {
   
   const categories = ['Todos', 'Casamentos', 'Festas', 'Corporativo', 'Gastronomia', 'Especiais'];
 
+  // Mantém a lista filtrada sincronizada
   const filteredImages = filter === 'Todos' 
     ? GALLERY_IMAGES 
     : GALLERY_IMAGES.filter(img => img.category === filter);
@@ -28,14 +28,20 @@ const Gallery: React.FC<GalleryProps> = ({ isDarkMode }) => {
   const nextImage = (e?: React.MouseEvent) => {
     if (e) e.stopPropagation();
     if (lightboxIndex !== null) {
-      setLightboxIndex((prev) => (prev === filteredImages.length - 1 ? 0 : prev! + 1));
+      setLightboxIndex((prev) => {
+        if (prev === null) return 0;
+        return prev === filteredImages.length - 1 ? 0 : prev + 1;
+      });
     }
   };
 
   const prevImage = (e?: React.MouseEvent) => {
     if (e) e.stopPropagation();
     if (lightboxIndex !== null) {
-      setLightboxIndex((prev) => (prev === 0 ? filteredImages.length - 1 : prev! - 1));
+      setLightboxIndex((prev) => {
+        if (prev === null) return 0;
+        return prev === 0 ? filteredImages.length - 1 : prev - 1;
+      });
     }
   };
 
@@ -53,10 +59,12 @@ const Gallery: React.FC<GalleryProps> = ({ isDarkMode }) => {
           </p>
         </div>
 
+        {/* Filtros */}
         <div className="flex flex-wrap justify-center gap-3 md:gap-4 mb-16 opacity-0 animate-reveal stagger-1">
           {categories.map(cat => (
             <button
               key={cat}
+              type="button"
               onClick={() => { setFilter(cat); setLightboxIndex(null); }}
               className={`px-6 md:px-10 py-3 rounded-full transition-all duration-700 text-[10px] font-bold uppercase tracking-[0.2em] md:tracking-[0.3em] border cursor-pointer ${
                 filter === cat 
@@ -71,10 +79,11 @@ const Gallery: React.FC<GalleryProps> = ({ isDarkMode }) => {
           ))}
         </div>
 
+        {/* Grid de Imagens */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
           {filteredImages.map((img, idx) => (
             <div 
-              key={idx} 
+              key={`${img.url}-${idx}`} 
               onClick={() => openLightbox(idx)}
               className="group relative overflow-hidden rounded-[2.5rem] shadow-xl aspect-[4/5] bg-gray-900/10 border border-white/10 cursor-pointer transform transition-all duration-1000 hover:shadow-[0_30px_60px_-15px_rgba(197,160,89,0.3)] hover:-translate-y-2"
             >
@@ -105,12 +114,12 @@ const Gallery: React.FC<GalleryProps> = ({ isDarkMode }) => {
       </div>
 
       {/* Lightbox Modal */}
-      {lightboxIndex !== null && (
+      {lightboxIndex !== null && filteredImages[lightboxIndex] && (
         <div 
           className="fixed inset-0 z-[2000] flex items-center justify-center bg-black/95 backdrop-blur-xl transition-all duration-500"
           onClick={closeLightbox}
         >
-          {/* Controls */}
+          {/* Controles */}
           <button 
             type="button"
             onClick={closeLightbox}
@@ -138,7 +147,7 @@ const Gallery: React.FC<GalleryProps> = ({ isDarkMode }) => {
             <ChevronRight className="w-6 h-6 md:w-8 md:h-8" />
           </button>
 
-          {/* Main Visual Frame */}
+          {/* Moldura Principal */}
           <div 
             className="max-w-5xl max-h-[85vh] px-4 md:px-0 flex flex-col items-center justify-center animate-scale-in"
             onClick={(e) => e.stopPropagation()}
@@ -148,7 +157,7 @@ const Gallery: React.FC<GalleryProps> = ({ isDarkMode }) => {
               alt={filteredImages[lightboxIndex].title}
               className="max-w-full max-h-[75vh] object-contain rounded-2xl shadow-2xl border border-white/10" 
             />
-            {/* Legend */}
+            {/* Legenda */}
             <div className="mt-4 md:mt-6 text-center max-w-xl">
               <span className="text-gold text-[10px] md:text-xs font-bold uppercase tracking-[0.3em] block mb-1">
                 {filteredImages[lightboxIndex].category}
