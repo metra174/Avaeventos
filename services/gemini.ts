@@ -1,6 +1,4 @@
-
-import { GoogleGenAI } from "@google/genai";
-
+import { GoogleGenerativeAI } from "@google/generative-ai";
 export async function getAiEventSuggestion(eventType: string, guestCount: number, preferences: string) {
   try {
     const ai = new GoogleGenAI({ apiKey: process.env.API_KEY || "" });
