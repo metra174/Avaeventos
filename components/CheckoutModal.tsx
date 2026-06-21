@@ -314,6 +314,3 @@ ${formData.notes || 'Sem observações adicionais.'}
 };
 
 export default CheckoutModal;
-
-
-export default CheckoutModal;
