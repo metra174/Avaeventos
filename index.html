@@ -107,6 +107,39 @@
             filter: grayscale(30%) contrast(1.1);
         }
 
+        /* Continuous Luxury Marquee Animation */
+        @keyframes marquee {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+        .luxury-marquee {
+          display: flex;
+          overflow: hidden;
+          user-select: none;
+          width: 100%;
+          position: relative;
+        }
+        .luxury-marquee-content {
+          display: flex;
+          flex-shrink: 0;
+          align-items: center;
+          justify-content: space-around;
+          min-width: 100%;
+          animation: marquee 30s linear infinite;
+        }
+        .luxury-marquee:hover .luxury-marquee-content {
+          animation-play-state: paused;
+        }
+
+        /* Lightbox modal animation */
+        @keyframes scaleIn {
+          from { opacity: 0; transform: scale(0.95); }
+          to { opacity: 1; transform: scale(1); }
+        }
+        .animate-scale-in {
+          animation: scaleIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 10px; }
@@ -123,10 +156,12 @@
   }
 }
 </script>
+<link rel="stylesheet" href="/index.css">
 </head>
 <body class="antialiased overflow-x-hidden">
     <div class="site-background"></div>
     <div id="root"></div>
     <script type="module" src="./index.tsx"></script>
+<script type="module" src="/index.tsx"></script>
 </body>
 </html>
