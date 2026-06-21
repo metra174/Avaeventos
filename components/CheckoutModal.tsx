@@ -17,7 +17,7 @@ const CheckoutModal: React.FC<CheckoutModalProps> = ({ pkg, isOpen, onClose, isD
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
-    date: '',
+    date: '2026-06-20', // Default pre-set date representing June 20, 2026
     guests: 50,
     location: 'Luanda',
     exactAddress: '',
@@ -133,8 +133,19 @@ ${formData.notes || 'Sem observações adicionais.'}
               </div>
 
               <div>
-                <label className={labelStyles}>Data do Evento</label>
-                <input required type="date" className={inputStyles} value={formData.date} onChange={e => setFormData({...formData, date: e.target.value})} />
+                <label className={labelStyles}>Data do Evento (Temporada de Junho)</label>
+                <input 
+                  required 
+                  type="date" 
+                  min="2026-06-01" 
+                  max="2026-06-30" 
+                  className={inputStyles} 
+                  value={formData.date} 
+                  onChange={e => setFormData({...formData, date: e.target.value})} 
+                />
+                <span className="text-[9px] md:text-[10px] text-amber-500 mt-1.5 block font-bold tracking-wider uppercase">
+                  ✨ Curadoria Ativa • Junho de 2026
+                </span>
               </div>
 
               <div className="md:col-span-2">
