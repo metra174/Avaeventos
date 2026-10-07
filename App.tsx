@@ -1,10 +1,8 @@
-
 import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
 import Gallery from './components/Gallery';
-import PackageButler from './components/PackageButler';
 import Packages from './components/Packages';
 import ExtraServices from './components/ExtraServices';
 import CheckoutModal from './components/CheckoutModal';
@@ -141,15 +139,13 @@ ${inquiryData.message}`;
         </section>
 
         <About isDarkMode={isDarkMode} />
+        <Gallery isDarkMode={isDarkMode} />
         
-        <PackageButler isDarkMode={isDarkMode} onSelectPackage={handlePackageSelect} />
-
         <div className="container mx-auto px-6">
           <div className={`h-[1px] w-full ${isDarkMode ? 'bg-white/5' : 'bg-black/5'}`}></div>
         </div>
 
         <Packages onSelect={handlePackageSelect} isDarkMode={isDarkMode} isLargeText={isLargeText} />
-        <Gallery isDarkMode={isDarkMode} />
 
         <ExtraServices 
           isDarkMode={isDarkMode} 
