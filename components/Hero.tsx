@@ -25,6 +25,8 @@ const Hero: React.FC<HeroProps> = ({ isDarkMode }) => {
             key={img}
             src={img} 
             alt={`Evento de Luxo Avaeventos ${index + 1}`} 
+            decoding="async"
+            loading={index === 0 ? "eager" : "lazy"}
             className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${
               index === activeImageIndex ? 'opacity-100 scale-100' : 'opacity-0 scale-105 pointer-events-none'
             }`}
@@ -69,16 +71,17 @@ const Hero: React.FC<HeroProps> = ({ isDarkMode }) => {
         
         <div className="flex flex-col sm:flex-row gap-4 md:gap-5 justify-center items-center opacity-0 animate-reveal stagger-3">
           <a 
-            href="#pacotes" 
-            className="w-full sm:w-auto bg-gold text-white px-8 md:px-14 py-4 md:py-6 rounded-full text-base md:text-lg font-bold hover:bg-white hover:text-gold transition-all duration-700 transform hover:scale-105 shadow-xl text-center active:scale-95"
+            href="#mordomo" 
+            className="w-full sm:w-auto bg-gold text-white px-8 md:px-12 py-4 md:py-6 rounded-full text-base md:text-lg font-bold hover:bg-black transition-all duration-700 transform hover:scale-105 shadow-xl text-center active:scale-95 flex items-center justify-center gap-2"
           >
-            Ver Pacotes de Luxo
+            <span>Guia do Mordomo</span>
+            <span className="text-xs bg-white/20 px-2 py-0.5 rounded-full font-mono">Sugestão</span>
           </a>
           <a 
-            href="#duvidas" 
-            className="w-full sm:w-auto glass-panel px-8 md:px-14 py-4 md:py-6 rounded-full text-base md:text-lg font-bold hover:bg-gold/20 transition-all duration-700 text-center border-gold/20 active:scale-95"
+            href="#pacotes" 
+            className="w-full sm:w-auto glass-panel px-8 md:px-12 py-4 md:py-6 rounded-full text-base md:text-lg font-bold hover:bg-gold hover:text-white transition-all duration-700 text-center border-gold/30 active:scale-95"
           >
-            Saber Mais
+            Ver Pacotes
           </a>
         </div>
       </div>
@@ -87,5 +90,3 @@ const Hero: React.FC<HeroProps> = ({ isDarkMode }) => {
 };
 
 export default Hero;
-
-

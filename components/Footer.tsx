@@ -69,8 +69,9 @@ const Footer: React.FC<FooterProps> = ({ isDarkMode }) => {
           <h4 className="text-gold font-bold mb-6 md:mb-10 uppercase tracking-[0.3em] text-[10px]">Navegação</h4>
           <ul className={`space-y-3 md:space-y-5 font-light transition-colors duration-1000 ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>
             <li><a href="#sobre" className="hover:text-gold transition-colors text-sm md:text-base">A Marca</a></li>
-            <li><a href="#galeria" className="hover:text-gold transition-colors text-sm md:text-base">O Portfólio</a></li>
+            <li><a href="#mordomo" className="hover:text-gold transition-colors text-sm md:text-base">Mordomo (Guia)</a></li>
             <li><a href="#pacotes" className="hover:text-gold transition-colors text-sm md:text-base">Pacotes & Preços</a></li>
+            <li><a href="#galeria" className="hover:text-gold transition-colors text-sm md:text-base">O Portfólio</a></li>
             <li><a href="#duvidas" className="hover:text-gold transition-colors text-sm md:text-base">Atendimento WhatsApp</a></li>
           </ul>
         </div>

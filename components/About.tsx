@@ -15,6 +15,8 @@ const About: React.FC<AboutProps> = ({ isDarkMode }) => {
               <img 
                 src="https://i.imgur.com/uqMWmbx.png" 
                 alt="Detalhes Avaeventos" 
+                loading="lazy"
+                decoding="async"
                 className="w-full h-full object-cover rounded-[1.2rem] md:rounded-[2.2rem] hover:scale-110 transition-transform duration-[2s] cubic-bezier(0.16, 1, 0.3, 1)"
               />
             </div>
