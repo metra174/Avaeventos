@@ -1,8 +1,10 @@
+
 import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
 import Gallery from './components/Gallery';
+import PackageButler from './components/PackageButler';
 import Packages from './components/Packages';
 import ExtraServices from './components/ExtraServices';
 import CheckoutModal from './components/CheckoutModal';
@@ -14,6 +16,7 @@ import { ANGOLA_PROVINCES } from './constants';
 const App: React.FC = () => {
   const [showWelcome, setShowWelcome] = useState(true);
   const [selectedPackage, setSelectedPackage] = useState<Package | null>(null);
+  const [selectedGuests, setSelectedGuests] = useState<number>(50);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(true);
   const [isLargeText, setIsLargeText] = useState(false);
@@ -24,7 +27,7 @@ const App: React.FC = () => {
     name: '', 
     phone: '', 
     location: 'Luanda', 
-    exactAddress: '',
+    exactAddress: '', 
     message: '' 
   });
 
@@ -36,8 +39,11 @@ const App: React.FC = () => {
     }
   }, [isDarkMode]);
 
-  const handlePackageSelect = (pkg: Package) => {
+  const handlePackageSelect = (pkg: Package, guestCount?: number) => {
     setSelectedPackage(pkg);
+    if (guestCount && guestCount > 0) {
+      setSelectedGuests(guestCount);
+    }
     setIsModalOpen(true);
   };
 
@@ -62,7 +68,7 @@ const App: React.FC = () => {
 ${inquiryData.message}`;
 
     const encodedText = encodeURIComponent(text);
-    window.open(`https://wa.me/${whatsappNumber}?text=${encodedText}`, '_blank', 'noopener,noreferrer');
+    window.open(`https://wa.me/${whatsappNumber}?text=${encodedText}`, '_blank');
     
     setInquirySent(true);
     setTimeout(() => {
@@ -110,6 +116,7 @@ ${inquiryData.message}`;
                 SOFISTICAÇÃO <span className="text-gold text-lg">•</span>
               </span>
             </div>
+            {/* Duplicate for seamless infinite scrolling */}
             <div className={`luxury-marquee-content transition-all duration-1000 ${isDarkMode ? 'opacity-75 text-white' : 'opacity-65 text-gray-900'}`} aria-hidden="true">
               <span className="font-serif text-lg md:text-3xl font-bold tracking-[0.2em] md:tracking-[0.3em] flex items-center gap-3">
                 VOGUE <span className="text-gold text-lg">•</span>
@@ -134,13 +141,15 @@ ${inquiryData.message}`;
         </section>
 
         <About isDarkMode={isDarkMode} />
-        <Gallery isDarkMode={isDarkMode} />
         
+        <PackageButler isDarkMode={isDarkMode} onSelectPackage={handlePackageSelect} />
+
         <div className="container mx-auto px-6">
           <div className={`h-[1px] w-full ${isDarkMode ? 'bg-white/5' : 'bg-black/5'}`}></div>
         </div>
 
         <Packages onSelect={handlePackageSelect} isDarkMode={isDarkMode} isLargeText={isLargeText} />
+        <Gallery isDarkMode={isDarkMode} />
 
         <ExtraServices 
           isDarkMode={isDarkMode} 
@@ -244,7 +253,6 @@ ${inquiryData.message}`;
           <div className="absolute inset-0 z-0">
              <img 
                src="https://i.imgur.com/scHAorL.png" 
-               alt="Decoração de Eventos Ava"
                className={`w-full h-full object-cover transition-all duration-1000 transform scale-110 ${isDarkMode ? 'opacity-[0.3]' : 'opacity-[0.2]'} blur-[2px]`} 
              />
              <div className={`absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-current transition-colors duration-1000 ${isDarkMode ? 'text-[#080808]' : 'text-[#FDFBF7]'}`}></div>
@@ -257,8 +265,6 @@ ${inquiryData.message}`;
             <div className="flex flex-col md:flex-row gap-5 md:gap-8 justify-center items-center">
               <a 
                 href={`https://wa.me/${whatsappNumber}`} 
-                target="_blank"
-                rel="noopener noreferrer"
                 className="w-full md:w-auto bg-gold text-white px-12 md:px-16 py-5 md:py-7 rounded-full text-lg md:text-xl font-bold hover:bg-white hover:text-gold transition-all duration-700 shadow-2xl active:scale-95"
               >
                 Orçamento WhatsApp
@@ -283,6 +289,7 @@ ${inquiryData.message}`;
         isDarkMode={isDarkMode}
         isLargeText={isLargeText}
         selectedExtras={selectedExtras}
+        initialGuests={selectedGuests}
       />
       
       {showWelcome && (
@@ -295,7 +302,6 @@ ${inquiryData.message}`;
       <a 
         href={`https://wa.me/${whatsappNumber}`} 
         target="_blank" 
-        rel="noopener noreferrer"
         className="fixed bottom-6 right-6 z-50 bg-green-500 text-white w-12 h-12 md:w-16 md:h-16 rounded-full shadow-[0_10px_30px_rgba(34,197,94,0.5)] hover:scale-110 transition-all duration-500 active:scale-90 flex items-center justify-center group"
         aria-label="WhatsApp Avaeventos"
       >
