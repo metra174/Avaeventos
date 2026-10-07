@@ -2,45 +2,22 @@
 import { Package } from './types';
 
 export const ANGOLA_PROVINCES = [
-  'Bengo', 'Benguela', 'Bié', 'Cabinda', 'Cuando Cubango', 
-  'Cuanza Norte', 'Cuanza Sul', 'Cunene', 'Huambo', 'Huíla', 
-  'Luanda', 'Lunda Norte', 'Lunda Sul', 'Malanje', 'Moxico', 
+  'Bengo', 'Benguela', 'Bié', 'Cabinda', 'Cuando Cubango',
+  'Cuanza Norte', 'Cuanza Sul', 'Cunene', 'Huambo', 'Huíla',
+  'Luanda', 'Lunda Norte', 'Lunda Sul', 'Malanje', 'Moxico',
   'Namibe', 'Uíge', 'Zaire'
 ];
 
 export const PACKAGES: Package[] = [
   {
-    id: 'damasco',
-    name: 'PACOTE DAMASCO',
-    price: '10.000,00',
-    currency: 'AKZ',
-    color: 'bg-stone-100',
-    tagline: 'Essencial & Elegante',
-    image: 'https://i.imgur.com/Q8RBZGK.png',
-    location: 'Projeto do Nando, por detrás do Banco BIC',
-    features: [
-      'Realização de eventos com toda a estrutura necessária para festas e celebrações especiais',
-      'Cadeiras almofadas baixas',
-      'Mesas com toalhas apenas duas familiares especiais',
-      'Loiça branca',
-      'Senhoras para lavarem a loiça',
-      'Cenário para os noivos',
-      'Cenário para entrada',
-      'Cenário da foto',
-      'Cenário do bolo',
-      'Cubas',
-      'Louça de apoio ao buffet frio'
-    ]
-  },
-  {
-    id: 'label',
-    name: 'PACOTE LABEL',
-    price: '15.000,00',
-    currency: 'AKZ',
-    color: 'bg-orange-50',
-    tagline: 'Sofisticação & Conforto',
-    image: 'https://i.imgur.com/N9i13N5.png',
-    images: [
+    id: 'rótulo',
+    Nome: 'ETIQUETA PACOTE',
+    Preço: '18.000,00',
+    moeda: 'AKZ',
+    cor: 'bg-âmbar-50',
+    slogan: 'Sofisticação & Conforto',
+    Imagem: 'https://i.imgur.com/N9i13N5.png',
+    imagens: [
       'https://i.imgur.com/N9i13N5.png',
       'https://i.imgur.com/3NKWiT8.png',
       'https://i.imgur.com/UUcSNVV.png',
@@ -55,12 +32,14 @@ export const PACKAGES: Package[] = [
       'https://i.imgur.com/FtlEMV2.png',
       'https://i.imgur.com/1Wn9Pot.png'
     ],
-    location: 'Projeto do Nando, por detrás do Banco BIC',
-    features: [
+    localização: 'Projeto do Nando, por detrás do Banco BIC',
+    características: [
       'Realização de eventos com toda a estrutura necessária para festas e celebrações especiais',
       'Cadeiras brancas almofadas ripadas ou algodão doce',
       'Mesas especiais',
       'Loiça',
+      'Luz ambiente',
+      'Cartões de boas-vindas',
       'Cenário dos noivos',
       'Cenário do Bolo',
       'Cenário para Entrada',
@@ -73,18 +52,18 @@ export const PACKAGES: Package[] = [
   },
   {
     id: 'rubi',
-    name: 'PACOTE RUBI',
-    price: '35.000,00',
-    currency: 'AKZ',
-    color: 'bg-red-50',
-    tagline: 'A Experiência Premium Definitiva',
-    image: 'https://i.imgur.com/E7KmVmg.png',
-    location: 'Projeto do Nando, por detrás do Banco BIC',
-    features: [
+    Nome: 'PACOTE RUBI',
+    Preço: '35.000,00',
+    moeda: 'AKZ',
+    cor: 'bg-red-50',
+    slogan: 'A Experiência Premium Definitiva',
+    Imagem: 'https://i.imgur.com/E7KmVmg.png',
+    localização: 'Projeto do Nando, por detrás do Banco BIC',
+    características: [
       'Realização de eventos com toda a estrutura necessária para festas e celebrações especiais',
       'Cadeiras brancas poltronas',
       'Mesas especiais',
-      'Loiça especiais',
+      'Loiças especiais',
       'Cenário para os noivos',
       'Cenário para foto',
       'Cenário para o bolo',
@@ -100,14 +79,14 @@ export const PACKAGES: Package[] = [
   },
   {
     id: 'buffet',
-    name: 'PACOTE BUFFET',
-    price: '25.000,00',
-    currency: 'AKZ',
-    color: 'bg-amber-50',
-    tagline: 'Gastronomia & Banquete',
-    image: 'https://i.imgur.com/cjPUAe5.png',
-    location: 'Projeto do Nando, por detrás do Banco BIC',
-    features: [
+    Nome: 'PACOTE BUFFET',
+    Preço: '25.000,00',
+    moeda: 'AKZ',
+    cor: 'bg-âmbar-50',
+    slogan: 'Gastronomia & Banquete',
+    Imagem: 'https://i.imgur.com/cjPUAe5.png',
+    localização: 'Projeto do Nando, por detrás do Banco BIC',
+    características: [
       'Realização de eventos com toda a estrutura necessária para festas e celebrações especiais',
       'Pratos quentes e frios',
       'Doces e salgados',
@@ -119,18 +98,18 @@ export const PACKAGES: Package[] = [
   },
   {
     id: 'salao',
-    name: 'ALUGUER DO SALÃO',
-    price: '1.200.000,00',
-    currency: 'AKZ',
-    color: 'bg-blue-50/40',
-    tagline: 'Espaço Luxury & Configurações sob Medida',
-    image: 'https://i.imgur.com/ukMjTPt.png',
-    location: 'Benfica – Rua da Oficina da Bosch',
-    features: [
+    Nome: 'ALUGUER DO SALÃO',
+    Preço: '1.200.000,00',
+    moeda: 'AKZ',
+    cor: 'bg-azul-50/40',
+    slogan: 'Espaço Luxury & Configurações sob Medida',
+    Imagem: 'https://i.imgur.com/ukMjTPt.png',
+    localização: 'Benfica – Rua da Oficina da Bosch',
+    características: [
       'Aluguer do salão base inclui: Música, Luzes de pista, DJ exclusivo, Suíte para os noivos, Cozinha equipada e Estacionamento privativo seguro',
       'Opção com Decoração: + 25.000,00 AKZ por pessoa',
       'Opção com Decoração & Buffet (sem bebida): + 45.000,00 AKZ por pessoa',
-      'Opção com Decoração, Buffet & Bebida: + 65.000,00 AKZ por pessoa'
+      'Opção com Decoração, Buffet e Bebida: + 65.000,00 AKZ por pessoa'
     ]
   }
 ];
@@ -142,48 +121,49 @@ export const HERO_IMAGES = [
 ];
 
 export const GALLERY_IMAGES = [
-  { url: 'https://i.imgur.com/N9i13N5.png', category: 'Casamentos', title: 'Decoração Pacote Label - Luxo Clássico' },
-  { url: 'https://i.imgur.com/3NKWiT8.png', category: 'Casamentos', title: 'Decoração Pacote Label - Mesa Principal' },
-  { url: 'https://i.imgur.com/UUcSNVV.png', category: 'Casamentos', title: 'Decoração Pacote Label - Cenário de Entrada' },
-  { url: 'https://i.imgur.com/frvFT54.png', category: 'Festas', title: 'Decoração Pacote Label - Ambientação' },
-  { url: 'https://i.imgur.com/tpUXVl9.png', category: 'Festas', title: 'Decoração Pacote Label - Iluminação Cênica' },
-  { url: 'https://i.imgur.com/3n3gaTp.png', category: 'Especiais', title: 'Decoração Pacote Label - Passarela de Cristal' },
-  { url: 'https://i.imgur.com/voamzPN.png', category: 'Casamentos', title: 'Decoração Pacote Label - Detalhes Florais' },
-  { url: 'https://i.imgur.com/0qSPOOO.png', category: 'Casamentos', title: 'Decoração Pacote Label - Cerimônia Premium' },
-  { url: 'https://i.imgur.com/KerTmNA.png', category: 'Especiais', title: 'Decoração Pacote Label - Lounge Clássico' },
-  { url: 'https://i.imgur.com/rMAVKle.png', category: 'Festas', title: 'Decoração Pacote Label - Detalhes de Brilho' },
-  { url: 'https://i.imgur.com/cGXKynd.png', category: 'Casamentos', title: 'Decoração Pacote Label - Gazebo dos Noivos' },
-  { url: 'https://i.imgur.com/FtlEMV2.png', category: 'Especiais', title: 'Decoração Pacote Label - Mesa Redonda' },
-  { url: 'https://i.imgur.com/1Wn9Pot.png', category: 'Festas', title: 'Decoração Pacote Label - Lounge Minimalista' },
-  { url: 'https://i.imgur.com/cjPUAe5.png', category: 'Gastronomia', title: 'Banquete & Buffet Estilo Ava' },
+  { url: 'https://i.imgur.com/N9i13N5.png', categoria: 'Casamentos', título: 'Decoração Pacote Label - Luxo Clássico' },
+  { url: 'https://i.imgur.com/3NKWiT8.png', categoria: 'Casamentos', título: 'Decoração Pacote Label - Mesa Principal' },
+  { url: 'https://i.imgur.com/UUcSNVV.png', categoria: 'Casamentos', título: 'Decoração Pacote Label - Cenário de Entrada' },
+  { url: 'https://i.imgur.com/frvFT54.png', categoria: 'Festas', título: 'Decoração Pacote Label - Ambientação' },
+  { url: 'https://i.imgur.com/tpUXVl9.png', categoria: 'Festas', título: 'Decoração Pacote Label - Iluminação Cênica' },
+  { url: 'https://i.imgur.com/3n3gaTp.png', categoria: 'Especial', título: 'Decoração Pacote Label - Passarela de Cristal' },
+  { url: 'https://i.imgur.com/voamzPN.png', categoria: 'Casamentos', título: 'Decoração Pacote Label - Detalhes Florais' },
+  { url: 'https://i.imgur.com/0qSPOOO.png', categoria: 'Casamentos', título: 'Decoração Pacote Label - Cerimônia Premium' },
+  { url: 'https://i.imgur.com/KerTmNA.png', categoria: 'Especial', título: 'Decoração Pacote Label - Lounge Clássico' },
+  { url: 'https://i.imgur.com/rMAVKle.png', categoria: 'Festas', título: 'Decoração Pacote Label - Detalhes de Brilho' },
+  { url: 'https://i.imgur.com/cGXKynd.png', categoria: 'Casamentos', título: 'Decoração Pacote Label - Gazebo dos Noivos' },
+  { url: 'https://i.imgur.com/FtlEMV2.png', categoria: 'Especial', título: 'Decoração Pacote Label - Mesa Redonda' },
+  { url: 'https://i.imgur.com/1Wn9Pot.png', categoria: 'Festas', título: 'Decoração Pacote Label - Lounge Minimalista' },
+  { url: 'https://i.imgur.com/cjPUAe5.png', categoria: 'Gastronomia', título: 'Banquete & Buffet Estilo Ava' },
 
-  { url: 'https://i.imgur.com/XMykzEf.png', category: 'Casamentos', title: 'Decoração Clássica de Casamento' },
-  { url: 'https://i.imgur.com/nLxHquT.png', category: 'Especiais', title: 'Cenário de Entrada Monumental' },
-  { url: 'https://i.imgur.com/LmutJhO.png', category: 'Corporativo', title: 'Detalhes em Cristais e Ouro' },
-  { url: 'https://i.imgur.com/uqMWmbx.png', category: 'Casamentos', title: 'Ambiente de Recepção Premium' },
-  { url: 'https://i.imgur.com/qM3JIw0.png', category: 'Corporativo', title: 'Banquete de Gala' },
-  { url: 'https://i.imgur.com/U1FRqX5.png', category: 'Casamentos', title: 'Teto Floral de Luxo' },
+  { url: 'https://i.imgur.com/XMykzEf.png', categoria: 'Casamentos', título: 'Decoração Clássica de Casamento' },
+  { url: 'https://i.imgur.com/nLxHquT.png', categoria: 'Especial', título: 'Cenário de Entrada Monumental' },
+  { url: 'https://i.imgur.com/LmutJhO.png', categoria: 'Corporativo', título: 'Detalhes em Cristais e Ouro' },
+  { url: 'https://i.imgur.com/uqMWmbx.png', categoria: 'Casamentos', título: 'Ambiente de Recepção Premium' },
+  { url: 'https://i.imgur.com/qM3JIw0.png', categoria: 'Corporativo', título: 'Banquete de Gala' },
+  { url: 'https://i.imgur.com/U1FRqX5.png', categoria: 'Casamentos', título: 'Teto Floral de Luxo' },
   
-  { url: 'https://i.imgur.com/kWySv7R.png', category: 'Especiais', title: 'Arte em Detalhes' },
-  { url: 'https://i.imgur.com/sinppBQ.png', category: 'Casamentos', title: 'Cerimonial de Luxo' },
-  { url: 'https://i.imgur.com/LfzqD2U.png', category: 'Festas', title: 'Ambiente Festivo Ava' },
-  { url: 'https://i.imgur.com/mrkRvmo.png', category: 'Especiais', title: 'Curadoria de Cenários' },
-  { url: 'https://i.imgur.com/51XbGRs.png', category: 'Casamentos', title: 'Altar Monumental' },
-  { url: 'https://i.imgur.com/ukMjTPt.png', category: 'Corporativo', title: 'Recepção Executiva' },
-  { url: 'https://i.imgur.com/wY7xj4F.png', category: 'Festas', title: 'Noite de Gala Ava' },
+  { url: 'https://i.imgur.com/kWySv7R.png', categoria: 'Especial', título: 'Arte em Detalhes' },
+  { url: 'https://i.imgur.com/sinppBQ.png', categoria: 'Casamentos', título: 'Cerimonial de Luxo' },
+  {url: 'https://i.imgur.com/LfzqD2U.png', categoria: 'Festas', título: 'Ambiente Festivo Ava' },
+  { url: 'https://i.imgur.com/mrkRvmo.png', categoria: 'Especiais', título: 'Curadoria de Cenários' },
+  { url: 'https://i.imgur.com/51XbGRs.png', categoria: 'Casamentos', título: 'Altar Monumental' },
+  { url: 'https://i.imgur.com/ukMjTPt.png', categoria: 'Corporativo', título: 'Recepção Executiva' },
+  {url: 'https://i.imgur.com/wY7xj4F.png', categoria: 'Festas', título: 'Noite de Gala Ava' },
   
-  { url: 'https://i.imgur.com/tZNLdZc.png', category: 'Gastronomia', title: 'Apresentação de Pratos Quentes' },
-  { url: 'https://i.imgur.com/ilVfZFK.png', category: 'Gastronomia', title: 'Buffet de Doces & Sobremesas' },
-  { url: 'https://i.imgur.com/VYPtZXG.png', category: 'Gastronomia', title: 'Entradas Gourmet Ava' },
-  { url: 'https://i.imgur.com/xo2cSQz.png', category: 'Gastronomia', title: 'Serviço de Banquetes Luxo' },
-  { url: 'https://i.imgur.com/xo2cSQz.png', category: 'Gastronomia', title: 'Experiência Gastronômica Ava' },
+  { url: 'https://i.imgur.com/tZNLdZc.png', categoria: 'Gastronomia', título: 'Apresentação de Pratos Quentes' },
+  { url: 'https://i.imgur.com/ilVfZFK.png', categoria: 'Gastronomia', título: 'Buffet de Doces & Sobremesas' },
+  { url: 'https://i.imgur.com/VYPtZXG.png', categoria: 'Gastronomia', título: 'Entradas Gourmet Ava' },
+  { url: 'https://i.imgur.com/xo2cSQz.png', categoria: 'Gastronomia', título: 'Serviço de Banquetes Luxo' },
+  { url: 'https://i.imgur.com/xo2cSQz.png', categoria: 'Gastronomia', título: 'Experiência Gastronômica Ava' },
 
-  { url: 'https://i.imgur.com/scHAorL.png', category: 'Especiais', title: 'Arte Visual Ava' },
-  { url: 'https://i.imgur.com/HLBViFX.png', category: 'Corporativo', title: 'Espaço de Eventos' }
+  { url: 'https://i.imgur.com/scHAorL.png', categoria: 'Especial', título: 'Arte Visual Ava' },
+  { url: 'https://i.imgur.com/HLBViFX.png', categoria: 'Corporativo', título: 'Espaço de Eventos' }
 ];
 
 export const SOCIAL_LINKS = {
-  instagram: 'https://www.instagram.com/avaeventos.s',
-  facebook: 'https://www.facebook.com/share/1FdLjBMALU/',
-  whatsapp: 'https://wa.me/244948757808'
+  Instagram: 'https://www.instagram.com/avaeventos.s'
+  Facebook: 'https://www.facebook.com/share/1FdLjBMALU/',
+  WhatsApp: 'https://wa.me/244948757808'
 };
+
