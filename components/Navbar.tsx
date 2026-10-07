@@ -22,9 +22,8 @@ const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleTheme, isLargeText, t
 
   const navItems = [
     { id: 'sobre', label: 'A Marca' },
-    { id: 'mordomo', label: 'Mordomo (Guia)' },
-    { id: 'pacotes', label: 'Pacotes' },
     { id: 'galeria', label: 'Galeria' },
+    { id: 'pacotes', label: 'Pacotes' },
     { id: 'extras', label: 'Extras' },
     { id: 'duvidas', label: 'Dúvidas' }
   ];

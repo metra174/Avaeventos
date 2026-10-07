@@ -71,17 +71,16 @@ const Hero: React.FC<HeroProps> = ({ isDarkMode }) => {
         
         <div className="flex flex-col sm:flex-row gap-4 md:gap-5 justify-center items-center opacity-0 animate-reveal stagger-3">
           <a 
-            href="#mordomo" 
-            className="w-full sm:w-auto bg-gold text-white px-8 md:px-12 py-4 md:py-6 rounded-full text-base md:text-lg font-bold hover:bg-black transition-all duration-700 transform hover:scale-105 shadow-xl text-center active:scale-95 flex items-center justify-center gap-2"
+            href="#pacotes" 
+            className="w-full sm:w-auto bg-gold text-white px-8 md:px-14 py-4 md:py-6 rounded-full text-base md:text-lg font-bold hover:bg-black transition-all duration-700 transform hover:scale-105 shadow-xl text-center active:scale-95"
           >
-            <span>Guia do Mordomo</span>
-            <span className="text-xs bg-white/20 px-2 py-0.5 rounded-full font-mono">Sugestão</span>
+            Explorar Pacotes Exclusivos
           </a>
           <a 
-            href="#pacotes" 
-            className="w-full sm:w-auto glass-panel px-8 md:px-12 py-4 md:py-6 rounded-full text-base md:text-lg font-bold hover:bg-gold hover:text-white transition-all duration-700 text-center border-gold/30 active:scale-95"
+            href="#galeria" 
+            className="w-full sm:w-auto glass-panel px-8 md:px-14 py-4 md:py-6 rounded-full text-base md:text-lg font-bold hover:bg-gold hover:text-white transition-all duration-700 text-center border-gold/30 active:scale-95"
           >
-            Ver Pacotes
+            Ver Portfólio
           </a>
         </div>
       </div>
