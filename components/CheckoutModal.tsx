@@ -24,6 +24,8 @@ const CheckoutModal: React.FC<CheckoutModalProps> = ({
 }) => {
   const [step, setStep] = useState(1);
   const [salaoSpec, setSalaoSpec] = useState<'base' | 'decor' | 'buffet' | 'completo'>('base');
+  const [tableChoice, setTableChoice] = useState<'Mesas especiais' | 'Mesas com toalhas'>('Mesas especiais');
+  const [dishwareChoice, setDishwareChoice] = useState<'Louça branca' | 'Louça de cristal'>('Louça de cristal');
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
@@ -40,6 +42,11 @@ const CheckoutModal: React.FC<CheckoutModalProps> = ({
       setFormData(prev => ({ ...prev, guests: initialGuests }));
     }
   }, [initialGuests, isOpen]);
+
+  const supportsTableAndDishwareCustomization = useMemo(() => {
+    if (!pkg) return false;
+    return ['damasco', 'label', 'rubi'].includes(pkg.id) || (pkg.id === 'salao' && salaoSpec !== 'base');
+  }, [pkg, salaoSpec]);
 
   const numericPrice = useMemo(() => {
     if (!pkg) return 0;
@@ -79,14 +86,18 @@ const CheckoutModal: React.FC<CheckoutModalProps> = ({
     let salaoSpecName = '';
     if (pkg.id === 'salao') {
       if (salaoSpec === 'base') salaoSpecName = ' - Apenas Salão Base (1.200.000,00 AKZ)';
-      else if (salaoSpec === 'decor') salaoSpecName = ' - Salão com Decoração (25.000,00 AKZ p/ pessoa)';
-      else if (salaoSpec === 'buffet') salaoSpecName = ' - Salão, Decoração & Buffet (sem bebida) (45.000,00 AKZ p/ pessoa)';
-      else if (salaoSpec === 'completo') salaoSpecName = ' - Salão Completo com Decoração, Buffet & Bebida (65.000,00 AKZ p/ pessoa)';
+      else if (salaoSpec === 'decor') salaoSpecName = ' - Salão com Decoração (25.000,00 AKZ por pessoa)';
+      else if (salaoSpec === 'buffet') salaoSpecName = ' - Salão, Decoração & Buffet (sem bebidas) (45.000,00 AKZ por pessoa)';
+      else if (salaoSpec === 'completo') salaoSpecName = ' - Salão Completo com Decoração, Buffet & Bebidas (65.000,00 AKZ por pessoa)';
     }
+
+    const customizationText = supportsTableAndDishwareCustomization
+      ? `\n🪑 *Tipo de Mesa Escolhido:* ${tableChoice}\n🍽️ *Tipo de Louça Escolhido:* ${dishwareChoice}`
+      : '';
 
     const text = `Olá Avaeventos! Gostaria de solicitar uma reserva:
 
-💎 *Plano:* ${pkg.name}${salaoSpecName}
+💎 *Plano:* ${pkg.name}${salaoSpecName}${customizationText}
 👤 *Cliente:* ${formData.name}
 📱 *WhatsApp:* ${formData.phone}
 📍 *Província:* ${formData.location}
@@ -95,7 +106,7 @@ const CheckoutModal: React.FC<CheckoutModalProps> = ({
 📅 *Data:* ${formData.date}
 💳 *Pagamento:* ${formData.paymentMethod}${extrasText}
 
-📝 *Desejos e Perguntas:* 
+📝 *Desejos e Observações:* 
 ${formData.notes || 'Sem observações adicionais.'}
 
 💰 *Investimento Estimado:* ${pkg.currency} ${formatCurrency(totalInvestment)}`;
@@ -195,7 +206,7 @@ ${formData.notes || 'Sem observações adicionais.'}
                     >
                       <div className="font-bold text-xs uppercase tracking-wider mb-1">Salão, Decor & Buffet</div>
                       <div className={`text-[10px] uppercase font-mono ${salaoSpec === 'buffet' ? 'text-white/80' : 'text-gold'}`}>
-                        45.000,00 AKZ / pessoa (s/ bebi)
+                        45.000,00 AKZ / pessoa (sem bebidas)
                       </div>
                     </button>
 
@@ -212,9 +223,129 @@ ${formData.notes || 'Sem observações adicionais.'}
                     >
                       <div className="font-bold text-xs uppercase tracking-wider mb-1">Salão Completo</div>
                       <div className={`text-[10px] uppercase font-mono ${salaoSpec === 'completo' ? 'text-white/80' : 'text-gold'}`}>
-                        65.000,00 AKZ / pessoa (c/ bebi)
+                        65.000,00 AKZ / pessoa (com bebidas)
                       </div>
                     </button>
+                  </div>
+                </div>
+              )}
+
+              {/* Personalização de Mesas e Louça */}
+              {supportsTableAndDishwareCustomization && (
+                <div className="md:col-span-2 border border-gold/30 bg-gold/[0.04] p-5 md:p-6 rounded-[2rem] my-2 space-y-6">
+                  <div className="flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-gold animate-pulse"></span>
+                    <h4 className="text-xs font-bold uppercase tracking-widest text-gold">
+                      Personalização do Pacote • Escolha de Mesas & Louça
+                    </h4>
+                  </div>
+
+                  {/* Seleção do Tipo de Mesa */}
+                  <div>
+                    <label className={labelStyles}>Tipo de Mesa Desejado</label>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      <button
+                        type="button"
+                        onClick={() => setTableChoice('Mesas especiais')}
+                        className={`p-4 rounded-2xl border text-left transition-all duration-300 cursor-pointer flex items-center justify-between ${
+                          tableChoice === 'Mesas especiais'
+                            ? 'border-gold bg-gold text-white shadow-lg'
+                            : isDarkMode 
+                              ? 'border-white/10 bg-white/5 text-gray-300 hover:bg-white/10' 
+                              : 'border-gray-200 bg-white text-gray-700 hover:bg-gray-50 shadow-sm'
+                        }`}
+                      >
+                        <div>
+                          <div className="font-bold text-xs uppercase tracking-wider mb-0.5">Mesas especiais</div>
+                          <div className={`text-[10px] ${tableChoice === 'Mesas especiais' ? 'text-white/85' : 'text-gray-400'}`}>
+                            Design exclusivo e moderno
+                          </div>
+                        </div>
+                        {tableChoice === 'Mesas especiais' && (
+                          <div className="w-5 h-5 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0">
+                            <svg className="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" /></svg>
+                          </div>
+                        )}
+                      </button>
+
+                      <button
+                        type="button"
+                        onClick={() => setTableChoice('Mesas com toalhas')}
+                        className={`p-4 rounded-2xl border text-left transition-all duration-300 cursor-pointer flex items-center justify-between ${
+                          tableChoice === 'Mesas com toalhas'
+                            ? 'border-gold bg-gold text-white shadow-lg'
+                            : isDarkMode 
+                              ? 'border-white/10 bg-white/5 text-gray-300 hover:bg-white/10' 
+                              : 'border-gray-200 bg-white text-gray-700 hover:bg-gray-50 shadow-sm'
+                        }`}
+                      >
+                        <div>
+                          <div className="font-bold text-xs uppercase tracking-wider mb-0.5">Mesas com toalhas</div>
+                          <div className={`text-[10px] ${tableChoice === 'Mesas com toalhas' ? 'text-white/85' : 'text-gray-400'}`}>
+                            Toalhas finas de alta costura
+                          </div>
+                        </div>
+                        {tableChoice === 'Mesas com toalhas' && (
+                          <div className="w-5 h-5 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0">
+                            <svg className="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" /></svg>
+                          </div>
+                        )}
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Seleção do Tipo de Louça */}
+                  <div>
+                    <label className={labelStyles}>Tipo de Louça Desejado</label>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      <button
+                        type="button"
+                        onClick={() => setDishwareChoice('Louça branca')}
+                        className={`p-4 rounded-2xl border text-left transition-all duration-300 cursor-pointer flex items-center justify-between ${
+                          dishwareChoice === 'Louça branca'
+                            ? 'border-gold bg-gold text-white shadow-lg'
+                            : isDarkMode 
+                              ? 'border-white/10 bg-white/5 text-gray-300 hover:bg-white/10' 
+                              : 'border-gray-200 bg-white text-gray-700 hover:bg-gray-50 shadow-sm'
+                        }`}
+                      >
+                        <div>
+                          <div className="font-bold text-xs uppercase tracking-wider mb-0.5">Louça branca</div>
+                          <div className={`text-[10px] ${dishwareChoice === 'Louça branca' ? 'text-white/85' : 'text-gray-400'}`}>
+                            Porcelana branca clássica e requintada
+                          </div>
+                        </div>
+                        {dishwareChoice === 'Louça branca' && (
+                          <div className="w-5 h-5 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0">
+                            <svg className="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" /></svg>
+                          </div>
+                        )}
+                      </button>
+
+                      <button
+                        type="button"
+                        onClick={() => setDishwareChoice('Louça de cristal')}
+                        className={`p-4 rounded-2xl border text-left transition-all duration-300 cursor-pointer flex items-center justify-between ${
+                          dishwareChoice === 'Louça de cristal'
+                            ? 'border-gold bg-gold text-white shadow-lg'
+                            : isDarkMode 
+                              ? 'border-white/10 bg-white/5 text-gray-300 hover:bg-white/10' 
+                              : 'border-gray-200 bg-white text-gray-700 hover:bg-gray-50 shadow-sm'
+                        }`}
+                      >
+                        <div>
+                          <div className="font-bold text-xs uppercase tracking-wider mb-0.5">Louça de cristal</div>
+                          <div className={`text-[10px] ${dishwareChoice === 'Louça de cristal' ? 'text-white/85' : 'text-gray-400'}`}>
+                            Transparência nobre & cristais de luxo
+                          </div>
+                        </div>
+                        {dishwareChoice === 'Louça de cristal' && (
+                          <div className="w-5 h-5 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0">
+                            <svg className="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" /></svg>
+                          </div>
+                        )}
+                      </button>
+                    </div>
                   </div>
                 </div>
               )}
@@ -287,9 +418,20 @@ ${formData.notes || 'Sem observações adicionais.'}
             </div>
 
             <div className={`p-6 rounded-[2rem] border mb-8 transition-all duration-700 ${isDarkMode ? 'bg-white/5 border-white/5' : 'bg-gray-50 border-gray-100 shadow-inner'}`}>
+              {supportsTableAndDishwareCustomization && (
+                <div className="flex flex-wrap items-center gap-2 mb-4 pb-4 border-b border-gold/10">
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-gray-400">Configuração:</span>
+                  <span className="text-[10px] uppercase font-bold px-3 py-1 rounded-full bg-gold/10 text-gold border border-gold/20 flex items-center gap-1">
+                    🪑 {tableChoice}
+                  </span>
+                  <span className="text-[10px] uppercase font-bold px-3 py-1 rounded-full bg-gold/10 text-gold border border-gold/20 flex items-center gap-1">
+                    🍽️ {dishwareChoice}
+                  </span>
+                </div>
+              )}
               <div className="flex justify-between items-center mb-4 pb-4 border-b border-gold/10 text-xs">
                 <span className={`font-bold uppercase tracking-wider ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>
-                  {(pkg.id === 'salao' && salaoSpec === 'base') ? 'Valor do Aluguer' : 'Preço p/ Pessoa'}
+                  {(pkg.id === 'salao' && salaoSpec === 'base') ? 'Valor do Aluguer' : 'Preço por Pessoa'}
                 </span>
                 <span className={`font-bold ${isLargeText ? 'text-lg' : ''} ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>{pkg.currency} {formatCurrency(numericPrice)}</span>
               </div>
@@ -303,7 +445,7 @@ ${formData.notes || 'Sem observações adicionais.'}
               </div>
             </div>
 
-            <button type="submit" className="w-full bg-gold text-white py-5 md:py-6 rounded-2xl font-bold hover:bg-black transition-all shadow-xl active:scale-95 text-[11px] uppercase tracking-[0.2em] flex items-center justify-center gap-3">
+            <button type="submit" className="w-full bg-gold text-white py-5 md:py-6 rounded-2xl font-bold hover:bg-black transition-all shadow-xl active:scale-95 text-[11px] uppercase tracking-[0.2em] flex items-center justify-center gap-3 cursor-pointer">
               Confirmar Reserva no WhatsApp
             </button>
           </form>
@@ -316,7 +458,7 @@ ${formData.notes || 'Sem observações adicionais.'}
             </div>
             <h2 className={`text-3xl md:text-4xl font-serif font-bold mb-6 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Solicitação Enviada!</h2>
             <p className={`mb-10 text-base md:text-lg font-light leading-relaxed ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-              Abra seu WhatsApp para concluir o atendimento exclusivo com nossa equipe.
+              Abra o seu WhatsApp para concluir o atendimento exclusivo com a nossa equipa.
             </p>
             <button onClick={onClose} className="w-full bg-gold text-white py-5 rounded-2xl font-bold uppercase tracking-widest text-[10px] hover:bg-gray-900 transition-all duration-700">
               Voltar ao Site
