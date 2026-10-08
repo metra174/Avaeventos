@@ -10,6 +10,36 @@ export const ANGOLA_PROVINCES = [
 
 export const PACKAGES: Package[] = [
   {
+    id: 'damasco',
+    name: 'PACOTE DAMASCO',
+    price: '15.000,00',
+    currency: 'AKZ',
+    color: 'bg-stone-100',
+    tagline: 'Elegância & Harmonia',
+    image: 'https://i.imgur.com/Q8RBZGK.png',
+    images: [
+      'https://i.imgur.com/Q8RBZGK.png',
+      'https://i.imgur.com/bUoyiWU.png',
+      'https://i.imgur.com/XMykzEf.png',
+      'https://i.imgur.com/sinppBQ.png'
+    ],
+    location: 'Projeto do Nando, por detrás do Banco BIC',
+    features: [
+      'Realização de eventos com toda a estrutura necessária para festas e celebrações especiais',
+      'Cadeiras brancas almofadadas, ripadas ou algodão doce',
+      'Mesas especiais ou mesas com toalhas',
+      'Louça branca ou louça de cristal',
+      'Cenário dos noivos',
+      'Cenário do Bolo',
+      'Cenário para Entrada',
+      'Cenário para foto',
+      'Senhoras para lavarem a louça',
+      'Um vinil de 5/5',
+      'Cubas',
+      'Louça de apoio ao buffet frio'
+    ]
+  },
+  {
     id: 'label',
     name: 'PACOTE LABEL',
     price: '18.000,00',
@@ -35,16 +65,16 @@ export const PACKAGES: Package[] = [
     location: 'Projeto do Nando, por detrás do Banco BIC',
     features: [
       'Realização de eventos com toda a estrutura necessária para festas e celebrações especiais',
-      'Cadeiras brancas almofadas ripadas ou algodão doce',
-      'Mesas especiais',
-      'Loiça',
+      'Cadeiras brancas almofadadas, ripadas ou algodão doce',
+      'Mesas especiais ou mesas com toalhas',
+      'Louça branca ou louça de cristal',
       'Luz ambiente',
       'Cartões de boas-vindas',
       'Cenário dos noivos',
       'Cenário do Bolo',
       'Cenário para Entrada',
       'Cenário para foto',
-      'Senhoras para lavarem a loiça',
+      'Senhoras para lavarem a louça',
       'Um vinil de 5/5',
       'Cubas',
       'Louça de apoio ao buffet frio'
@@ -62,17 +92,17 @@ export const PACKAGES: Package[] = [
     features: [
       'Realização de eventos com toda a estrutura necessária para festas e celebrações especiais',
       'Cadeiras brancas poltronas',
-      'Mesas especiais',
-      'Loiça especiais',
+      'Mesas especiais ou mesas com toalhas',
+      'Louça branca ou louça de cristal',
       'Cenário para os noivos',
       'Cenário para foto',
       'Cenário para o bolo',
       'Cenário para entrada',
       'Estrutura com cristais de 10/10',
       'Vinil de 10/10',
-      'Luzes ambiente',
-      'Luzes pista',
-      'Senhoras para lavarem a loiça',
+      'Luzes de ambiente',
+      'Luzes de pista',
+      'Senhoras para lavarem a louça',
       'Cubas',
       'Louça de apoio ao buffet frio'
     ]
@@ -108,8 +138,8 @@ export const PACKAGES: Package[] = [
     features: [
       'Aluguer do salão base inclui: Música, Luzes de pista, DJ exclusivo, Suíte para os noivos, Cozinha equipada e Estacionamento privativo seguro',
       'Opção com Decoração: + 25.000,00 AKZ por pessoa',
-      'Opção com Decoração & Buffet (sem bebida): + 45.000,00 AKZ por pessoa',
-      'Opção com Decoração, Buffet & Bebida: + 65.000,00 AKZ por pessoa'
+      'Opção com Decoração & Buffet (sem bebidas): + 45.000,00 AKZ por pessoa',
+      'Opção com Decoração, Buffet & Bebidas: + 65.000,00 AKZ por pessoa'
     ]
   }
 ];
@@ -166,4 +196,3 @@ export const SOCIAL_LINKS = {
   facebook: 'https://www.facebook.com/share/1FdLjBMALU/',
   whatsapp: 'https://wa.me/244948757808'
 };
-
