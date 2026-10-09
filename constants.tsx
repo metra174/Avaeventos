@@ -196,3 +196,4 @@ export const SOCIAL_LINKS = {
   facebook: 'https://www.facebook.com/share/1FdLjBMALU/',
   whatsapp: 'https://wa.me/244948757808'
 };
+
