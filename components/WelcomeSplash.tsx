@@ -1,21 +1,21 @@
 import React, { useState, useEffect } from 'react';
 
 interface WelcomeSplashProps {
-  onEnter: () => vazio;
-  isDarkMode: booleano;
+  onEnter: () => void;
+  isDarkMode: boolean;
 }
 
 const WelcomeSplash: React.FC<WelcomeSplashProps> = ({ onEnter, isDarkMode }) => {
-  const [montado, setMounted] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const [isExiting, setIsExiting] = useState(false);
 
   useEffect(() => {
-    // Acionar entrada animada
+    // Trigger animated entry
     const mountTimer = setTimeout(() => {
       setMounted(true);
     }, 100);
 
-    // Acionar automaticamente a sequência de saída após 4100ms para que toda a experiência dure exatamente 5000ms (5 segundos)
+    // Automatically trigger exit sequence after 4100ms so that the whole experience lasts exactly 5000ms (5 seconds)
     const autoExitTimer = setTimeout(() => {
       setIsExiting(true);
     }, 4100);
@@ -24,7 +24,7 @@ const WelcomeSplash: React.FC<WelcomeSplashProps> = ({ onEnter, isDarkMode }) =>
       onEnter();
     }, 5000);
 
-    retornar () => {
+    return () => {
       clearTimeout(mountTimer);
       clearTimeout(autoExitTimer);
       clearTimeout(completionTimer);
@@ -35,21 +35,21 @@ const WelcomeSplash: React.FC<WelcomeSplashProps> = ({ onEnter, isDarkMode }) =>
     setIsExiting(true);
     setTimeout(() => {
       onEnter();
-    }, 900); // duração da transição correspondente
+    }, 900); // match transition duration
   };
 
-  retornar (
-    <div
+  return (
+    <div 
       className={`fixed inset-0 z-[1000] flex flex-col items-center justify-center overflow-hidden transition-all duration-[900ms] cubic-bezier(0.16, 1, 0.3, 1) ${
-        está saindo
-          ? 'opacidade-0 escala-105 eventos-ponteiro-nenhum'
-          : 'opacidade-100 escala-100'
+        isExiting 
+          ? 'opacity-0 scale-105 pointer-events-none' 
+          : 'opacity-100 scale-100'
       } bg-[#080808]`}
     >
-      {/* Elementos de fundo de design absolutamente luxuosos */}
+      {/* Absolute Luxurious Design Background Elements */}
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(212,175,55,0.07)_0%,transparent_70%)] opacity-80 animate-pulse" style={{ animationDuration: '6s' }}></div>
-        {/* Brilhos/Partículas Flutuantes Luxuosas e Sutis */}
+        {/* Subtle Luxury Floating Sparkles / Particles */}
         <div className="absolute top-[20%] left-[15%] w-1.5 h-1.5 bg-gold/50 rounded-full blur-[1px] animate-float" style={{ animationDelay: '0s' }}></div>
         <div className="absolute bottom-[25%] left-[25%] w-2 h-2 bg-gold/30 rounded-full blur-[1px] animate-float" style={{ animationDelay: '-3s' }}></div>
         <div className="absolute top-[35%] right-[20%] w-1.5 h-1.5 bg-gold/40 rounded-full blur-[1px] animate-float" style={{ animationDelay: '-5s' }}></div>
@@ -57,21 +57,21 @@ const WelcomeSplash: React.FC<WelcomeSplashProps> = ({ onEnter, isDarkMode }) =>
       </div>
 
       <div className="relative z-10 text-center px-6 max-w-lg flex flex-col items-center">
-        {/* Símbolo do logotipo do brasão da marca animado */}
-        <div
+        {/* Animated Brand Crest Logo Symbol */}
+        <div 
           className={`mb-8 w-24 h-24 rounded-full border border-gold/40 flex items-center justify-center bg-black/40 backdrop-blur-md transition-all duration-[1200ms] delay-300 transform shadow-[0_0_50px_rgba(212,175,55,0.1)] ${
-            montado ? 'escala-100 opacidade-100 rotação-0' : 'escala-75 opacidade-0 rotação-12'
+            mounted ? 'scale-100 opacity-100 rotate-0' : 'scale-75 opacity-0 rotate-12'
           }`}
         >
           <span className="font-serif text-gold text-4xl font-extrabold tracking-widest pl-1 leading-none select-none">
-            UM
+            A
           </span>
         </div>
 
-        {/* Saudação Dinâmica */}
-        <div
+        {/* Dynamic Greeting */}
+        <div 
           className={`space-y-4 transition-all duration-[1200ms] delay-[500ms] transform ${
-            montado ? 'translate-y-0 opacity-100' : 'translate-y-6 opacity-0'
+            mounted ? 'translate-y-0 opacity-100' : 'translate-y-6 opacity-0'
           }`}
         >
           <span className="text-gold uppercase tracking-[0.3em] font-bold text-xs md:text-sm block">
@@ -81,13 +81,13 @@ const WelcomeSplash: React.FC<WelcomeSplashProps> = ({ onEnter, isDarkMode }) =>
             AVAEVENTOS
           </h1>
           
-          {/* Linha de progresso/cronômetro em vez de linha central estática */}
+          {/* Progress / Timer Line instead of static center line */}
           <div className="relative h-[2px] w-32 bg-white/10 mx-auto my-6 overflow-hidden rounded-full">
-            <div
+            <div 
               className={`absolute top-0 left-0 h-full bg-gradient-to-r from-amber-500 via-gold to-amber-500 transition-all ease-linear ${
-                montado? 'w-full' : 'w-0'
-              }`}
-              estilo={{ transitionDuration: '4100ms' }}
+                mounted ? 'w-full' : 'w-0'
+              }`} 
+              style={{ transitionDuration: '4100ms' }}
             ></div>
           </div>
 
@@ -96,26 +96,26 @@ const WelcomeSplash: React.FC<WelcomeSplashProps> = ({ onEnter, isDarkMode }) =>
           </p>
         </div>
 
-        {/* Botão de entrada de luxo interativo com dica de tempo limite dinâmico */}
-        <div
+        {/* Interactive Luxury Entry Button with dynamic timeout hint */}
+        <div 
           className={`mt-12 transition-all duration-[1200ms] delay-[700ms] transform ${
-            montado ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
+            mounted ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
           }`}
         >
-          <botão
+          <button
             onClick={handleEnterClick}
             className="group relative inline-flex items-center gap-3 px-12 py-5 overflow-hidden rounded-full font-bold uppercase text-[11px] tracking-[0.25em] text-white bg-transparent border border-gold/40 transition-all duration-500 hover:border-white shadow-[0_0_30px_rgba(212,175,55,0.15)] hover:shadow-[0_0_40px_rgba(212,175,55,0.3)] active:scale-95 cursor-pointer"
           >
-            {/* Efeito de derramamento ao passar o mouse sobre o fundo */}
+            {/* Hover Background Spill Effect */}
             <span className="absolute inset-0 bg-gradient-to-r from-gold via-amber-500 to-gold opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10"></span>
             
             <span className="relative z-10 transition-colors duration-500 group-hover:text-black font-bold">
               Entrar Agora
             </span>
-            <svg
-              className="w-4 h-4 text-gold group-hover:text-black transition-all duration-500 transform group-hover:translate-x-1.5"
-              preencher="nenhum"
-              traço="corAtual"
+            <svg 
+              className="w-4 h-4 text-gold group-hover:text-black transition-all duration-500 transform group-hover:translate-x-1.5" 
+              fill="none" 
+              stroke="currentColor" 
               viewBox="0 0 24 24"
             >
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M14 5l7 7m0 0l-7 7m7-7H3" />
@@ -124,10 +124,10 @@ const WelcomeSplash: React.FC<WelcomeSplashProps> = ({ onEnter, isDarkMode }) =>
         </div>
       </div>
 
-      {/* Detalhes decorativos de impressão fina nas bordas */}
-      <div
+      {/* Decorative Fine Print Edge Details */}
+      <div 
         className={`absolute bottom-8 text-center transition-all duration-[1200ms] delay-[900ms] z-10 ${
-          montado ? 'opacidade-40' : 'opacidade-0'
+          mounted ? 'opacity-40' : 'opacity-0'
         }`}
       >
         <span className="text-[9px] text-gray-400 tracking-[0.3em] uppercase block">
